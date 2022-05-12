@@ -14,11 +14,10 @@ abstract class Member {
     private ArrayList<Result> rygcrawlResults;
     private ArrayList<Result> breastStroke;
 
-    public Member(String name, Date birth, boolean competitive, boolean active) {
+    public Member(String name, Date birth, boolean competitive) {
         this.name = name;
         this.birth = birth;
         this.competitive = competitive;
-        this.active = active;
     }
 
     public void setName(String name) {
