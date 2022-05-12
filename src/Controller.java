@@ -25,7 +25,7 @@ public class Controller {
 
     public void formand() {
         while (running) {
-          boolean competition;
+          boolean competition = false;
           ui.formandUI();
             int input = sc.nextInt();
             sc.nextLine(); //Scannerbug fix
@@ -38,7 +38,7 @@ public class Controller {
                             int month = sc.nextInt();
                             ui.yearOfBirth();
                             int year = sc.nextInt();
-                            Date newDate = new Date(day, month, year);
+                            Date newDate = new Date(year, month, day);
                             ui.competetive();
                             String competetive = sc.next();
                             if(competetive.equalsIgnoreCase("ja")){
@@ -52,9 +52,9 @@ public class Controller {
                             }
                             cr.createNewMember(name, newDate, competition, true);
                 }
-                case 2 -> // delete member from list();
+/*                case 2 -> // delete member from list();
                 case 3 -> // set member to passive/active;
-                case 4 -> exit();
+                case 4 -> exit();*/
             }
         }
     }

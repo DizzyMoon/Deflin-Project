@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-abstract class Member {
+public abstract class Member {
     private String name;
     private UUID memberID;
     private final Date birth;
