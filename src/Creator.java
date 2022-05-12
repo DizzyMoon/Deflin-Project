@@ -24,7 +24,6 @@ public class Creator {
 
     if (p.getYears() >= 18) {
       Member newMemberSenior = new Senior(name, date, competition, active);
-      System.out.println(newMemberSenior.getBirth());
     } else {
       Member newMemberJunior = new Junior(name, date, competition, active);
     }
