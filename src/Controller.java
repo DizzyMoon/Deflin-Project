@@ -45,7 +45,7 @@ public class Controller {
                             ui.monthOfBirth();
                             int month = sc.nextInt() -1;
                             ui.yearOfBirth();
-                            int year = sc.nextInt() - 1900;
+                            int year = sc.nextInt() - 1900; //1900 fratrækkes da det som default lægges til det indtastede fødselsår hvilket giver problemer for fødselsdatoer efter 1999.
                             Date newDate = new Date(year, month, day);
                             ui.competetive();
                             String competetive = sc.next();
