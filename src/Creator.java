@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,13 +19,12 @@ public class Creator {
     }
 
   public void createNewMember(String name, Date date, boolean competition, boolean active) {
-    LocalDate now = LocalDate.now();
 
-    LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
-    Period p = Period.between(birthDate, now);
+    Period p = Period.between(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
 
     if (p.getYears() >= 18) {
       Member newMemberSenior = new Senior(name, date, competition, active);
+      System.out.println(newMemberSenior.getBirth());
     } else {
       Member newMemberJunior = new Junior(name, date, competition, active);
     }

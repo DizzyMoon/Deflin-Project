@@ -43,7 +43,7 @@ public class Controller {
                             ui.dayOfBirth();
                             int day = sc.nextInt();
                             ui.monthOfBirth();
-                            int month = sc.nextInt();
+                            int month = sc.nextInt() -1;
                             ui.yearOfBirth();
                             int year = sc.nextInt();
                             Date newDate = new Date(year, month, day);
@@ -58,7 +58,6 @@ public class Controller {
                             else{
 
                             }
-
                             cr.createNewMember(name, newDate, competition, true);
                 }
 /*                case 2 -> // delete member from list();
