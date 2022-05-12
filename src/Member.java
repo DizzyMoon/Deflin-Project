@@ -22,9 +22,6 @@ abstract class Member {
         this.competitive = competitive;
     }
 
-    public void setActive(boolean active){
-        this.active = active;
-    }
 
     public String getActive(){
         return this.active ? "Member is active" : "Member is not active";
@@ -64,10 +61,6 @@ abstract class Member {
 
     public double getRestance() {
         return restance;
-    }
-
-    public boolean getActive(){
-        return this.active;
     }
 
     public void setActive(boolean active){
