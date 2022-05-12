@@ -26,7 +26,7 @@ public abstract class Member {
 
 
     public String getActive(){
-        return this.active ? "members.Member is active" : "members.Member is not active";
+        return this.active ? "Member is active" : "Member is not active";
     }
 
     public void setName(String name) {
@@ -99,5 +99,9 @@ public abstract class Member {
 
     public void setBreastStroke(ArrayList<Result> breastStroke) {
         this.breastStroke = breastStroke;
+    }
+
+    public String toString (){
+        return name + ", " + birth + ", " + getCompetitive() + " - " + getActive();
     }
 }

@@ -1,4 +1,5 @@
 import UI.UserInterface;
+import members.Junior;
 
 import java.util.Date;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ public class Controller {
             ui.startupMenu();
             int input = sc.nextInt();
             sc.nextLine(); //Scannerbug fix
-            switch (input) {
+            switch (input){
                 case 1 -> formand();
                 case 2 -> kasserer();
                 case 3 -> træner();
@@ -24,6 +25,9 @@ public class Controller {
     }
 
     public void formand() {
+        cr.addMember(new Junior("Tobias", new Date(99, 7, 8), false, false));
+        cr.addMember(new Junior("Andreas", new Date(23, 2, 83), true, true));
+        System.out.println(cr.getMemberList());
         while (running) {
           boolean competition = false;
           ui.formandUI();
@@ -58,17 +62,16 @@ public class Controller {
             }
         }
     }
-            public void kasserer() {
 
-            }
+    public void kasserer(){
 
-            public void træner() {
+    }
 
-            }
+    public void træner(){
 
-            public void exit() {
-                running = false;
-            }
+    }
 
-
+    public void exit(){
+        running = false;
+    }
 }
