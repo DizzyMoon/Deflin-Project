@@ -1,10 +1,11 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 abstract class Member {
     private String name;
-    private String memberID;
+    private UUID memberID;
     private final Date birth;
     private boolean competitive;
     private double restance;
@@ -23,7 +24,7 @@ abstract class Member {
         this.name = name;
     }
 
-    public void setMemberID(String memberID) {
+    public void setMemberID(UUID memberID) {
         this.memberID = memberID;
     }
 
@@ -43,7 +44,7 @@ abstract class Member {
         return name;
     }
 
-    public String getMemberID() {
+    public UUID getMemberID() {
         return memberID;
     }
 
