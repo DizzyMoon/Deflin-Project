@@ -45,7 +45,7 @@ public class Controller {
                             ui.monthOfBirth();
                             int month = sc.nextInt() -1;
                             ui.yearOfBirth();
-                            int year = sc.nextInt();
+                            int year = sc.nextInt() - 1900;
                             Date newDate = new Date(year, month, day);
                             ui.competetive();
                             String competetive = sc.next();
