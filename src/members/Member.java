@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-abstract class Member {
+public abstract class Member {
     private String name;
     private UUID memberID;
     private final Date birth;
@@ -29,7 +29,7 @@ abstract class Member {
     }
 
     public String getActive(){
-        return this.active ? "members.Member is active" : "members.Member is not active";
+        return this.active ? "Member is active" : "Member is not active";
     }
 
     public void setName(String name) {
@@ -98,5 +98,9 @@ abstract class Member {
 
     public void setBreastStroke(ArrayList<Result> breastStroke) {
         this.breastStroke = breastStroke;
+    }
+
+    public String toString (){
+        return name + ", " + birth + ", " + getCompetitive() + " - " + getActive();
     }
 }
