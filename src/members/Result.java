@@ -1,3 +1,5 @@
+package members;
+
 import java.util.Date;
 
 public class Result {

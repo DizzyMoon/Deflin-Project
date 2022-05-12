@@ -1,3 +1,5 @@
+package members;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +26,7 @@ abstract class Member {
 
 
     public String getActive(){
-        return this.active ? "Member is active" : "Member is not active";
+        return this.active ? "members.Member is active" : "members.Member is not active";
     }
 
     public void setName(String name) {
