@@ -27,6 +27,8 @@ public class Controller {
     public void formand() {
         cr.addMember(new Junior("Tobias", new Date(99, 7, 8), false, false));
         cr.addMember(new Junior("Andreas", new Date(23, 2, 83), true, true));
+
+        System.out.println(cr.giveUserID());
         System.out.println(cr.getMemberList());
         while (running) {
           boolean competition = false;
