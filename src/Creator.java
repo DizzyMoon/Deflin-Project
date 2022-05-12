@@ -30,11 +30,6 @@ public class Creator {
   }
 
 
-  public static String giveUserID() {
-    UUID u = UUID.randomUUID();
-    return toIDString(u.getMostSignificantBits()) + toIDString(u.getLeastSignificantBits());
-  }
-
   private static String toIDString(long i) {
     char[] buf = new char[32];
     int z = 62;
