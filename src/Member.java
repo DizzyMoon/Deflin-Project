@@ -9,15 +9,25 @@ abstract class Member {
     private final Date birth;
     private boolean competitive;
     private double restance;
+    private boolean active;
     private ArrayList<Result> butterflyResults;
     private ArrayList<Result> crawlResults;
     private ArrayList<Result> rygcrawlResults;
     private ArrayList<Result> breastStroke;
 
-    public Member(String name, Date birth, boolean competitive) {
+    public Member(String name, Date birth, boolean competitive, boolean active) {
         this.name = name;
+        this.active = active;
         this.birth = birth;
         this.competitive = competitive;
+    }
+
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public String getActive(){
+        return this.active ? "Member is active" : "Member is not active";
     }
 
     public void setName(String name) {
