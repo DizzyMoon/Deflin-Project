@@ -1,6 +1,7 @@
 import UI.UserInterface;
 import members.Junior;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -9,9 +10,10 @@ public class Controller {
     Scanner sc = new Scanner(System.in);
     UserInterface ui = new UserInterface();
     Creator cr = new Creator();
-
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM-dd-YYYY");
     public void run() {
-        while (running) {
+
+      while (running) {
             ui.startupMenu();
             int input = sc.nextInt();
             sc.nextLine(); //Scannerbug fix
@@ -56,6 +58,7 @@ public class Controller {
                             else{
 
                             }
+
                             cr.createNewMember(name, newDate, competition, true);
                 }
 /*                case 2 -> // delete member from list();
