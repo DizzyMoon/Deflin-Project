@@ -1,6 +1,7 @@
 import UI.UserInterface;
 import members.Junior;
 
+import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
@@ -11,6 +12,9 @@ public class Controller {
   UserInterface ui = new UserInterface();
   Creator cr = new Creator();
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM-dd-YYYY");
+
+  public Controller() throws FileNotFoundException {
+  }
 
   public void run() {
 
@@ -28,8 +32,6 @@ public class Controller {
   }
 
   public void formand() {
-    cr.addMember(new Junior("Tobias", new Date(99, 7, 8), false, false));
-    cr.addMember(new Junior("Andreas", new Date(23, 2, 83), true, true));
 
     System.out.println(cr.giveUserID());
     System.out.println(cr.getMemberList());

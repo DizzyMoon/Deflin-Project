@@ -1,7 +1,7 @@
-import java.text.ParseException;
+import java.io.FileNotFoundException;
 
 public class Main {
-  public static void main(String[] args) throws ParseException {
+  public static void main(String[] args) throws FileNotFoundException {
     new Controller().run();
   }
 }
