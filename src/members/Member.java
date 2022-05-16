@@ -1,6 +1,5 @@
 package members;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -10,12 +9,12 @@ public abstract class Member {
     private UUID memberID;
     private final Date birth;
     private boolean competitive;
-    private double restance;
+    private double arrears;
     private boolean active;
-    private ArrayList<Result> butterflyResults;
-    private ArrayList<Result> crawlResults;
-    private ArrayList<Result> rygcrawlResults;
-    private ArrayList<Result> breastStroke;
+    private ArrayList<Achievement> butterflyResults;
+    private ArrayList<Achievement> crawlResults;
+    private ArrayList<Achievement> backstrokeResults;
+    private ArrayList<Achievement> breastStroke;
 
     public Member(String name, Date birth, boolean competitive, boolean active) {
         this.name = name;
@@ -45,8 +44,8 @@ public abstract class Member {
         this.competitive = competitive;
     }
 
-    public void setRestance(double restance) {
-        this.restance = restance;
+    public void setArrears(double arrears) {
+        this.arrears = arrears;
     }
 
     public String getName() {
@@ -61,43 +60,43 @@ public abstract class Member {
         return competitive ? "Competitive member" : "Exercise member";
     }
 
-    public double getRestance() {
-        return restance;
+    public double getArrears() {
+        return arrears;
     }
 
     public void setActive(boolean active){
         this.active = active;
     }
 
-    public ArrayList<Result> getButterflyResults() {
+    public ArrayList<Achievement> getButterflyResults() {
         return butterflyResults;
     }
 
-    public void setButterflyResults(ArrayList<Result> butterflyResults) {
+    public void setButterflyResults(ArrayList<Achievement> butterflyResults) {
         this.butterflyResults = butterflyResults;
     }
 
-    public ArrayList<Result> getCrawlResults() {
+    public ArrayList<Achievement> getCrawlResults() {
         return crawlResults;
     }
 
-    public void setCrawlResults(ArrayList<Result> crawlResults) {
+    public void setCrawlResults(ArrayList<Achievement> crawlResults) {
         this.crawlResults = crawlResults;
     }
 
-    public ArrayList<Result> getRygcrawlResults() {
-        return rygcrawlResults;
+    public ArrayList<Achievement> getBackstrokeResults() {
+        return backstrokeResults;
     }
 
-    public void setRygcrawlResults(ArrayList<Result> rygcrawlResults) {
-        this.rygcrawlResults = rygcrawlResults;
+    public void setBackstrokeResults(ArrayList<Achievement> backstrokeResults) {
+        this.backstrokeResults = backstrokeResults;
     }
 
-    public ArrayList<Result> getBreastStroke() {
+    public ArrayList<Achievement> getBreastStroke() {
         return breastStroke;
     }
 
-    public void setBreastStroke(ArrayList<Result> breastStroke) {
+    public void setBreastStroke(ArrayList<Achievement> breastStroke) {
         this.breastStroke = breastStroke;
     }
 
