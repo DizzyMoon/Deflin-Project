@@ -59,7 +59,19 @@ public class Controller {
   }
 
   public void kasserer() {
+    System.out.println(cr.getMemberList());
+    while (running) {
 
+      ui.kassererUI();
+      int input = sc.nextInt();
+      sc.nextLine(); //Scannerbug fix
+      switch (input) {
+        case 1 -> System.out.println("Not done, son");
+        case 2 -> System.out.println("Not done, son");
+        case 3 -> run();
+        case 4 -> exit();
+      }
+    }
   }
 
   public void træner() {

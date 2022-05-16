@@ -26,6 +26,15 @@ public class UserInterface {
         \n""");
   }
 
+  public void kassererUI() {
+    System.out.println("""
+        1 - Se samlet sum af medlemmers årskontingenter
+        2 - Se liste over restancer
+        3 - Tilbage til hovedmenu
+        4 - Luk
+        """);
+  }
+
   public void memberName() {
     System.out.println("Indtast navn på nyt medlem");
   }
