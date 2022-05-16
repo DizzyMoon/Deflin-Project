@@ -1,33 +1,37 @@
+package members;
+
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
-import members.Junior;
-import members.MemberList;
-import members.Member;
-import members.Senior;
 
 public class Creator {
   private MemberList ml = new MemberList();
 
-    public void giveUserID(Member member) {
+    public String giveUserID() {
       UUID u = UUID.randomUUID();
-      member.setMemberID(u);
+      return toIDString(u.getMostSignificantBits()) + toIDString(u.getLeastSignificantBits());
+    }
+
+    public void createUserID(Member member){
+      String ID = giveUserID();
+      member.setMemberID(ID);
     }
 
   public void createNewMember(String name, Date date, boolean competition, boolean active) {
+    LocalDate now = LocalDate.now();
 
-    Period p = Period.between(date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
+    LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+    Period p = Period.between(birthDate, now);
 
     if (p.getYears() >= 18) {
       Member newMemberSenior = new Senior(name, date, competition, active);
-      giveUserID(newMemberSenior);
+      createUserID(newMemberSenior);
       ml.getList().add(newMemberSenior);
     } else {
       Member newMemberJunior = new Junior(name, date, competition, active);
-      giveUserID(newMemberJunior);
+      createUserID(newMemberJunior);
       ml.getList().add(newMemberJunior);
     }
   }

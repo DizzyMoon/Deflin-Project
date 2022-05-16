@@ -51,12 +51,12 @@ public class UserInterface {
       Member print = ml.getList().get(i);
 
       System.out.printf("""
-          Medlemsnummer: %d
+          Medlemsnummer: %s
           Navn: %s
           Fødselsdato: %s/%s, %s
           Aktivt medlem: %b
           \n
-          """, toString(print.getMemberID()), print.getName(), print.getBirth().getDate(), print.getBirth().getMonth(), print.getBirth().getYear(), print.getActive());
+          """, print.getMemberID(), print.getName(), print.getBirth().getDate(), print.getBirth().getMonth(), print.getBirth().getYear(), print.getActive());
 
     }
   }

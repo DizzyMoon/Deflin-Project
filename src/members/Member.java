@@ -1,13 +1,13 @@
 package members;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
 public abstract class Member {
+
     private String name;
-    private UUID memberID;
+    private String memberID;
     private final Date birth;
     private boolean competitive;
     private double restance;
@@ -16,6 +16,7 @@ public abstract class Member {
     private ArrayList<Result> crawlResults;
     private ArrayList<Result> rygcrawlResults;
     private ArrayList<Result> breastStroke;
+
 
     public Member(String name, Date birth, boolean competitive, boolean active) {
         this.name = name;
@@ -33,7 +34,8 @@ public abstract class Member {
         this.name = name;
     }
 
-    public void setMemberID(UUID memberID) {
+    public void setMemberID(String memberID) {
+
         this.memberID = memberID;
     }
 
@@ -53,7 +55,7 @@ public abstract class Member {
         return name;
     }
 
-    public UUID getMemberID() {
+    public String getMemberID() {
         return memberID;
     }
 
