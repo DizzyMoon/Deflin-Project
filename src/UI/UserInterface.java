@@ -30,16 +30,8 @@ public class UserInterface {
     System.out.println("Indtast navn på nyt medlem");
   }
 
-  public void dayOfBirth() {
-    System.out.println("Indtast dag på måneden nyt medlem er født");
-  }
-
-  public void monthOfBirth() {
-    System.out.println("Indtast måned (tal) nyt medlem er født");
-  }
-
-  public void yearOfBirth() {
-    System.out.println("Indtast årstal nyt medlem er født");
+  public void dateOfBirth() {
+    System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.yyyy)");
   }
 
   public void competetive() {

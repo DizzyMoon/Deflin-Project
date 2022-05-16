@@ -74,13 +74,15 @@ public class Controller {
     boolean competition = false;
     ui.memberName();
     String name = sc.next();
-    ui.dayOfBirth();
-    int day = sc.nextInt();
-    ui.monthOfBirth();
-    int month = sc.nextInt();
-    ui.yearOfBirth();
-    int year = sc.nextInt() - 1900; //1900 fratrækkes da det som default lægges til det indtastede fødselsår hvilket giver problemer for fødselsdatoer efter 1999.
-    Date newDate = new Date(year, month, day);
+    ui.dateOfBirth();
+    String birthdate = sc.next();
+    int first = birthdate.indexOf(".");
+    int second = birthdate.lastIndexOf(".");
+    int date = Integer. valueOf(birthdate.substring(0, first));
+    int month = Integer. valueOf(birthdate.substring(first + 1, second));
+    //1900 fratrækkes da det som default lægges til det indtastede fødselsår hvilket giver problemer for fødselsdatoer efter 1999.
+    int year = Integer. valueOf(birthdate.substring(second + 1)) - 1900;
+    Date newDate = new Date(year, month, date);
     ui.competetive();
     String competetive = sc.next();
     if (competetive.equalsIgnoreCase("ja")) {
