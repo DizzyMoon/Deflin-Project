@@ -56,7 +56,7 @@ public class UserInterface {
           Fødselsdato: %s/%s, %s
           Aktivt medlem: %b
           \n
-          """, print.getMemberID(), print.getName(), print.getBirth().getDate(), print.getBirth().getMonth(), print.getBirth().getYear(), print.getActive());
+          """, toString(print.getMemberID()), print.getName(), print.getBirth().getDate(), print.getBirth().getMonth(), print.getBirth().getYear(), print.getActive());
 
     }
   }

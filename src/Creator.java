@@ -12,9 +12,9 @@ import members.Senior;
 public class Creator {
   private MemberList ml = new MemberList();
 
-    public String giveUserID() {
+    public void giveUserID(Member member) {
       UUID u = UUID.randomUUID();
-      return toIDString(u.getMostSignificantBits()) + toIDString(u.getLeastSignificantBits());
+      member.setMemberID(u);
     }
 
   public void createNewMember(String name, Date date, boolean competition, boolean active) {
@@ -23,9 +23,11 @@ public class Creator {
 
     if (p.getYears() >= 18) {
       Member newMemberSenior = new Senior(name, date, competition, active);
+      giveUserID(newMemberSenior);
       ml.getList().add(newMemberSenior);
     } else {
       Member newMemberJunior = new Junior(name, date, competition, active);
+      giveUserID(newMemberJunior);
       ml.getList().add(newMemberJunior);
     }
   }
