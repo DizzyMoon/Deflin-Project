@@ -66,8 +66,8 @@ public class Controller {
       int input = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       switch (input) {
-        case 1 -> System.out.println("Not done,");
-        case 2 -> System.out.println("Not done");
+        case 1 -> System.out.println("Not done, son");
+        case 2 -> System.out.println("Not done, son");
         case 3 -> run();
         case 4 -> exit();
       }
