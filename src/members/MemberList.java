@@ -17,4 +17,12 @@ public class MemberList {
     }
     return String.valueOf(sb);
   }
+
+  public Member findMember(String userID, MemberList memberList) {
+    for (int i = 0; i < memberList.getList().size(); i++) {
+      if (memberList.getList().get(i).getMemberID().equals(userID))
+        return memberList.getList().get(i);
+    }
+    return null;
+  }
 }

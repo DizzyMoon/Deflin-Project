@@ -1,8 +1,8 @@
 package members;
 
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 
 public abstract class Member {
 

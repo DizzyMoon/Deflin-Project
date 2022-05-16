@@ -1,18 +1,11 @@
 package members;
 
-import java.io.File;
+
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
-
-import members.Junior;
-import members.MemberList;
-import members.Member;
-import members.Senior;
 import filehandling.FileHandler;
 
 public class Creator {

@@ -20,8 +20,9 @@ public class UserInterface {
         1 - Opret nyt medlem
         2 - Slet medlemskab
         3 - Ændre medlemskab til passiv/aktiv
-        4 - Se medlemsliste
-        5 - Luk
+        4 - Ændre navn på medlem
+        5 - Se medlemsliste
+        6 - Luk
         \n""");
   }
 
@@ -43,6 +44,14 @@ public class UserInterface {
 
   public void competetive() {
     System.out.println("Er det nye medlem konkurrencesvømmer(ja) eller ikke(nej)");
+  }
+
+  public void typeMemberID(){
+    System.out.println("Indtast medlemsnummer på person hvis navn du vil ændre");
+  }
+
+  public void nameChange(){
+    System.out.println("Indtast det ændrede navn");
   }
 
   public void printMemberList(MemberList ml) {

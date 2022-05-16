@@ -1,6 +1,7 @@
 import UI.UserInterface;
 import members.Creator;
 import members.Junior;
+import members.MemberList;
 
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
@@ -42,10 +43,17 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> formandNewMember();
-                case 2 -> System.out.println("Not done");
-                case 3 -> System.out.println("Not done");
-                case 4 -> ui.printMemberList(cr.getMemberList());
-                case 5 -> exit();
+        case 2 -> System.out.println("Not done");
+        case 3 -> System.out.println("Not done");
+        case 4 -> {
+          ui.typeMemberID();
+          String memberID = sc.next();
+          ui.nameChange();
+          String newName = sc.next();
+          cr.getMemberList().findMember(memberID, cr.getMemberList()).setName(newName);
+        }
+        case 5 -> ui.printMemberList(cr.getMemberList());
+        case 6 -> run();
       }
     }
   }
