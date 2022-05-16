@@ -75,6 +75,7 @@ public class UserInterface {
     String underLine = "-";
     String line = "|";
     String space = " ";
+    String dot = ".";
     System.out.println("Medlemsnr. | Navn" + space.repeat(16) + "| Aktivt medlem | Fødselsdato |");
     System.out.println(underLine.repeat(65));
     for (int i = 0; i < ml.getList().size(); i++) {
@@ -88,7 +89,7 @@ public class UserInterface {
       } else if (!print.getActiveBool()) {
         System.out.print(space + print.getActive() + space.repeat(7));
       }
-      String birthday = Integer.toString(print.getBirth().getDate()) + Integer.toString(print.getBirth().getMonth()) + Integer.toString(print.getBirth().getYear());
+      String birthday = Integer.toString(print.getBirth().getDate()) + dot + Integer.toString(print.getBirth().getMonth()) + dot + Integer.toString(print.getBirth().getYear());
       System.out.print(space + birthday + space.repeat(10 - birthday.length()) + line + "\n");
       System.out.println(underLine.repeat(65));
     }
