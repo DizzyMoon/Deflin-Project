@@ -1,5 +1,10 @@
 package UI;
 
+import members.Member;
+import members.MemberList;
+
+import java.util.ArrayList;
+
 public class UserInterface {
 
   public void startupMenu(){
@@ -38,5 +43,20 @@ public class UserInterface {
 
   public void competetive(){
     System.out.println("Er det nye medlem konkurrencesvømmer(ja) eller ikke(nej)");
+  }
+
+  public void printMemberList(MemberList ml){
+
+    for (int i = 0; i < ml.getList().size(); i++) {
+      Member print = ml.getList().get(i);
+
+      System.out.printf("""
+          Medlemsnummer: %d
+          Navn: %s
+          Fødselsdato: %s/%s, %s
+          Aktivt medlem: %b
+          \n
+          """, print.getMemberID(), print.getName(), print.getBirth().getDate(), print.getBirth().getMonth(), print.getBirth().getYear(), print.getActive());
+    }
   }
 }
