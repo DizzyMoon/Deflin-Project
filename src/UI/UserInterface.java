@@ -61,5 +61,30 @@ public class UserInterface {
 
     }
   }
-}
+
+  public void printMemberListTable(MemberList ml) {
+    String underLine = "-";
+    String line = "|";
+    String space = " ";
+    System.out.println("Medlemsnr. | Navn" + space.repeat(16) + "| Aktivt medlem | Fødselsdato |");
+    System.out.println(underLine.repeat(65));
+    for (int i = 0; i < ml.getList().size(); i++) {
+      Member print = ml.getList().get(i);
+
+      System.out.print(space + print.getMemberID() + space.repeat(6) + line);
+      System.out.print(space + print.getName() + space.repeat(20 - print.getName().length()) + line);
+
+      if (print.getActiveBool()) {
+        System.out.print(space + print.getActive() + space.repeat(9) + line);
+      } else if (!print.getActiveBool()) {
+        System.out.print(space + print.getActive() + space.repeat(7));
+      }
+      String birthday = Integer.toString(print.getBirth().getDate()) + Integer.toString(print.getBirth().getMonth()) + Integer.toString(print.getBirth().getYear());
+      System.out.print(space + birthday + space.repeat(10 - birthday.length()) + line + "\n");
+      System.out.println(underLine.repeat(65));
+    }
+    }
+    }
+
+
 

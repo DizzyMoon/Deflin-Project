@@ -52,7 +52,7 @@ public class Controller {
           String newName = sc.next();
           cr.getMemberList().findMember(memberID, cr.getMemberList()).setName(newName);
         }
-        case 5 -> ui.printMemberList(cr.getMemberList());
+        case 5 -> ui.printMemberListTable(cr.getMemberList());
         case 6 -> run();
       }
     }

@@ -27,7 +27,11 @@ public abstract class Member {
 
 
     public String getActive(){
-        return this.active ? "Member is active" : "Member is not active";
+        return this.active ? "Aktivt" : "Inaktivt";
+    }
+
+    public boolean getActiveBool(){
+        return this.active;
     }
 
     public void setName(String name) {
