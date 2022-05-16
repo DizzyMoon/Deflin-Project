@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 
@@ -24,8 +23,10 @@ public class Creator {
 
     if (p.getYears() >= 18) {
       Member newMemberSenior = new Senior(name, date, competition, active);
+      ml.getList().add(newMemberSenior);
     } else {
       Member newMemberJunior = new Junior(name, date, competition, active);
+      ml.getList().add(newMemberJunior);
     }
   }
 
