@@ -21,7 +21,8 @@ public class UserInterface {
        1 - Opret nyt medlem
        2 - Slet medlemskab
        3 - Ændre medlemskab til passiv/aktiv
-       4 - Luk
+       4 - Se medlemsliste
+       5 - Luk
        \n""");
   }
 
