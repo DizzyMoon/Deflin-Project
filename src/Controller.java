@@ -95,16 +95,22 @@ public class Controller {
     //1900 fratrækkes da det som default lægges til det indtastede fødselsår hvilket giver problemer for fødselsdatoer efter 1999.
     int year = Integer. valueOf(birthdate.substring(second + 1)) - 1900;
     Date newDate = new Date(year, month, date);
+
     ui.competetive();
     String competetive = sc.next();
     if (competetive.equalsIgnoreCase("ja")) {
       competition = true;
     } else if (competetive.equalsIgnoreCase("nej")) {
       competition = false;
-    } else {
-
     }
-    cr.createNewMember(name, newDate, competition, true);
+
+    ui.phoneNumber();
+    int phoneNumber = sc.nextInt();
+
+    ui.email();
+    String email = sc.next();
+
+    cr.createNewMember(name, newDate, phoneNumber, email, competition, true);
   }
 }
 

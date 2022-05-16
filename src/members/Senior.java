@@ -3,7 +3,7 @@ package members;
 import java.util.Date;
 
 public class Senior extends Member {
-  public Senior(String name, Date birth, boolean competitive, boolean active) {
-    super(name, birth, competitive, active);
+  public Senior(String name, Date birth, int phoneNumber, String email, boolean competitive, boolean active) {
+    super(name, birth, phoneNumber, email, competitive, active);
   }
 }

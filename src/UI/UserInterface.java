@@ -47,12 +47,20 @@ public class UserInterface {
     System.out.println("Er det nye medlem konkurrencesvømmer(ja) eller ikke(nej)");
   }
 
-  public void typeMemberID(){
+  public void typeMemberID() {
     System.out.println("Indtast medlemsnummer på person hvis navn du vil ændre");
   }
 
-  public void nameChange(){
+  public void nameChange() {
     System.out.println("Indtast det ændrede navn");
+  }
+
+  public void phoneNumber(){
+    System.out.println("Indtast mobilnummer på nyt medlem");
+  }
+
+  public void email(){
+    System.out.println("Indtast mailadresse for nyt medlem");
   }
 
   public void printMemberList(MemberList ml) {
@@ -76,25 +84,46 @@ public class UserInterface {
     String line = "|";
     String space = " ";
     String dot = ".";
-    System.out.println("Medlemsnr. | Navn" + space.repeat(16) + "| Aktivt medlem | Fødselsdato |");
-    System.out.println(underLine.repeat(65));
+
+    //Overskrifter
+    System.out.println("Medlemsnr. | Navn" + space.repeat(16) + "| Medlemstype | Fødselsdato | Mobilnummer | E-mail");
+
+    //Linjeadskillelse
+    System.out.println(underLine.repeat(100));
+
     for (int i = 0; i < ml.getList().size(); i++) {
       Member print = ml.getList().get(i);
 
+      //Medlemsnummer
       System.out.print(space + print.getMemberID() + space.repeat(6) + line);
+
+      //Navn
       System.out.print(space + print.getName() + space.repeat(20 - print.getName().length()) + line);
 
+      //Medlemstype
+      int rep = 0;
       if (print.getActiveBool()) {
-        System.out.print(space + print.getActive() + space.repeat(9) + line);
+        rep = 6;
       } else if (!print.getActiveBool()) {
-        System.out.print(space + print.getActive() + space.repeat(7));
+        rep = 4;
       }
+      System.out.print(space + print.getActive() + space.repeat(rep) + line);
+
+      //Fødselsdato
       String birthday = Integer.toString(print.getBirth().getDate()) + dot + Integer.toString(print.getBirth().getMonth()) + dot + Integer.toString(print.getBirth().getYear());
-      System.out.print(space + birthday + space.repeat(10 - birthday.length()) + line + "\n");
-      System.out.println(underLine.repeat(65));
+      System.out.print(space + birthday + space.repeat(12 - birthday.length()) + line);
+
+      //Telefonnummer
+      System.out.print(space + print.getPhoneNumber() + space.repeat(4) + line);
+
+      //Mailadresse
+      System.out.println(space + print.getEmail());
+
+      //Linjeadskillelse
+      System.out.println(underLine.repeat(100) + "\n");
     }
-    }
-    }
+  }
+}
 
 
 

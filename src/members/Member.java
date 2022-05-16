@@ -9,6 +9,8 @@ public abstract class Member {
     private String name;
     private String memberID;
     private final Date birth;
+    private int phoneNumber;
+    private String email;
     private boolean competitive;
     private double restance;
     private boolean active;
@@ -18,8 +20,10 @@ public abstract class Member {
     private ArrayList<Result> breastStrokeResults;
 
 
-    public Member(String name, Date birth, boolean competitive, boolean active) {
+    public Member(String name, Date birth, int phoneNumber, String email, boolean competitive, boolean active) {
         this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
         this.active = active;
         this.birth = birth;
         this.competitive = competitive;
@@ -36,6 +40,22 @@ public abstract class Member {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setPhoneNumber(int phoneNumber){
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getPhoneNumber(){
+        return this.phoneNumber;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setMemberID(String memberID) {
