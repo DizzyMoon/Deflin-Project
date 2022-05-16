@@ -1,11 +1,18 @@
 package members;
 
-
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.UUID;
+import java.util.Random;
+
+import members.Junior;
+import members.MemberList;
+import members.Member;
+import members.Senior;
 import filehandling.FileHandler;
 
 public class Creator {
@@ -16,8 +23,9 @@ public class Creator {
   }
 
     public String giveUserID() {
-      UUID u = UUID.randomUUID();
-      return toIDString(u.getMostSignificantBits()) + toIDString(u.getLeastSignificantBits());
+      Random rnd = new Random();
+      int number = rnd.nextInt(9999);
+      return String.format("%04d", number);
     }
 
     public void createUserID(Member member){
