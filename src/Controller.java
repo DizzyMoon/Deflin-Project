@@ -67,7 +67,7 @@ public class Controller {
     ui.dayOfBirth();
     int day = sc.nextInt();
     ui.monthOfBirth();
-    int month = sc.nextInt() - 1;
+    int month = sc.nextInt();
     ui.yearOfBirth();
     int year = sc.nextInt() - 1900; //1900 fratrækkes da det som default lægges til det indtastede fødselsår hvilket giver problemer for fødselsdatoer efter 1999.
     Date newDate = new Date(year, month, day);
