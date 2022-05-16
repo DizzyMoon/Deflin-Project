@@ -1,13 +1,24 @@
-package members;
-
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.UUID;
 
+import members.Junior;
+import members.MemberList;
+import members.Member;
+import members.Senior;
+import filehandling.FileHandler;
 
 public class Creator {
-  private MemberList ml = new MemberList();
+  private MemberList memberList = new MemberList();
+  private FileHandler fileHandler = new FileHandler();
+
+  public Creator() throws FileNotFoundException {
+  }
 
     public String giveUserID() {
       UUID u = UUID.randomUUID();
@@ -28,11 +39,13 @@ public class Creator {
     if (p.getYears() >= 18) {
       Member newMemberSenior = new Senior(name, date, competition, active);
       createUserID(newMemberSenior);
-      ml.getList().add(newMemberSenior);
+      memberList.getList().add(newMemberSenior);
+      fileHandler.saveMembersToCSV(memberList);
     } else {
       Member newMemberJunior = new Junior(name, date, competition, active);
       createUserID(newMemberJunior);
-      ml.getList().add(newMemberJunior);
+      memberList.getList().add(newMemberJunior);
+      fileHandler.saveMembersToCSV(memberList);
     }
   }
 
@@ -55,10 +68,10 @@ public class Creator {
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
   };
   public void addMember(Member member){
-    ml.getList().add(member);
+    memberList.getList().add(member);
   }
 
   public MemberList getMemberList(){
-    return ml;
+    return memberList;
   }
 }

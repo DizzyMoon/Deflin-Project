@@ -15,7 +15,7 @@ public abstract class Member {
     private ArrayList<Result> butterflyResults;
     private ArrayList<Result> crawlResults;
     private ArrayList<Result> rygcrawlResults;
-    private ArrayList<Result> breastStroke;
+    private ArrayList<Result> breastStrokeResults;
 
 
     public Member(String name, Date birth, boolean competitive, boolean active) {
@@ -95,12 +95,12 @@ public abstract class Member {
         this.rygcrawlResults = rygcrawlResults;
     }
 
-    public ArrayList<Result> getBreastStroke() {
-        return breastStroke;
+    public ArrayList<Result> getBreastStrokeResults() {
+        return breastStrokeResults;
     }
 
     public void setBreastStroke(ArrayList<Result> breastStroke) {
-        this.breastStroke = breastStroke;
+        this.breastStrokeResults = breastStroke;
     }
 
     public String toString (){
