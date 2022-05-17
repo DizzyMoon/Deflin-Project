@@ -33,7 +33,7 @@ public class Creator {
       member.setMemberID(ID);
     }
 
-  public void createNewMember(String name, Date date, int phoneNumber, String email, boolean competition, boolean active) {
+  public void createNewMember(String name, Date date, String phoneNumber, String email, boolean competition, boolean active) {
     LocalDate now = LocalDate.now();
 
     LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());

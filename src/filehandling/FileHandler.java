@@ -30,7 +30,7 @@ public class FileHandler {
       printStream.print(";");
       printStream.print(member.getBirth());
       printStream.print(";");
-      printStream.print(member.getRestance());
+      printStream.print(member.getArrears());
       printStream.print(";");
       printStream.print(member.getActive());
       printStream.print(";");
@@ -38,9 +38,9 @@ public class FileHandler {
       printStream.print(";");
       printStream.print(member.getCrawlResults());
       printStream.print(";");
-      printStream.print(member.getRygcrawlResults());
+      printStream.print(member.getBackcrawlResults());
       printStream.print(";");
-      printStream.print(member.getBreastStrokeResults());
+      printStream.print(member.getBreaststrokeResults());
       printStream.print("\n");
     }
     System.out.println("Saved!");

@@ -9,18 +9,18 @@ public abstract class Member {
     private String name;
     private String memberID;
     private final Date birth;
-    private int phoneNumber;
+    private String phoneNumber;
     private String email;
     private boolean competitive;
-    private double restance;
+    private double arrears;
     private boolean active;
-    private ArrayList<Result> butterflyResults;
-    private ArrayList<Result> crawlResults;
-    private ArrayList<Result> rygcrawlResults;
-    private ArrayList<Result> breastStrokeResults;
+    private ArrayList<Achievement> butterflyResults;
+    private ArrayList<Achievement> crawlResults;
+    private ArrayList<Achievement> backstrokeResults;
+    private ArrayList<Achievement> breaststrokeResults;
 
 
-    public Member(String name, Date birth, int phoneNumber, String email, boolean competitive, boolean active) {
+    public Member(String name, Date birth, String phoneNumber, String email, boolean competitive, boolean active) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -32,7 +32,7 @@ public abstract class Member {
 
     public String getActive(){
         return this.active ? "Aktivt" : "Inaktivt";
-    }
+    }   // Skal i UI-klasse?
 
     public boolean getActiveBool(){
         return this.active;
@@ -42,11 +42,11 @@ public abstract class Member {
         this.name = name;
     }
 
-    public void setPhoneNumber(int phoneNumber){
+    public void setPhoneNumber(String phoneNumber){
         this.phoneNumber = phoneNumber;
     }
 
-    public int getPhoneNumber(){
+    public String getPhoneNumber(){
         return this.phoneNumber;
     }
 
@@ -67,12 +67,14 @@ public abstract class Member {
         return birth;
     }
 
-    public void setCompetitive(boolean competitive) {
-        this.competitive = competitive;
+    public void toggleCompetitive() {
+        this.competitive = !competitive;
     }
 
-    public void setRestance(double restance) {
-        this.restance = restance;
+    public void toggleStatus() { this.active = !active; }
+
+    public void setArrears(double arrears) {
+        this.arrears = arrears;
     }
 
     public String getName() {
@@ -87,44 +89,38 @@ public abstract class Member {
         return competitive ? "Competitive member" : "Exercise member";
     }
 
-    public double getRestance() {
-        return restance;
+    public double getArrears() {
+        return arrears;
     }
 
-    public void setActive(boolean active){
-        this.active = active;
-    }
-
-    public ArrayList<Result> getButterflyResults() {
+    public ArrayList<Achievement> getButterflyResults() {
         return butterflyResults;
     }
 
-    public void setButterflyResults(ArrayList<Result> butterflyResults) {
+    public void setButterflyResults(ArrayList<Achievement> butterflyResults) {
         this.butterflyResults = butterflyResults;
     }
 
-    public ArrayList<Result> getCrawlResults() {
+    public ArrayList<Achievement> getCrawlResults() {
         return crawlResults;
     }
 
-    public void setCrawlResults(ArrayList<Result> crawlResults) {
+    public void setCrawlResults(ArrayList<Achievement> crawlResults) {
         this.crawlResults = crawlResults;
     }
 
-    public ArrayList<Result> getRygcrawlResults() {
-        return rygcrawlResults;
+    public ArrayList<Achievement> getBackcrawlResults() {
+        return backstrokeResults;
     }
 
-    public void setRygcrawlResults(ArrayList<Result> rygcrawlResults) {
-        this.rygcrawlResults = rygcrawlResults;
+    public void setBackstrokeResults(ArrayList<Achievement> backstrokeResults) { this.backstrokeResults = backstrokeResults; }
+
+    public ArrayList<Achievement> getBreaststrokeResults() {
+        return breaststrokeResults;
     }
 
-    public ArrayList<Result> getBreastStrokeResults() {
-        return breastStrokeResults;
-    }
-
-    public void setBreastStroke(ArrayList<Result> breastStroke) {
-        this.breastStrokeResults = breastStroke;
+    public void setBreastStroke(ArrayList<Achievement> breaststrokeResults) {
+        this.breaststrokeResults = breaststrokeResults;
     }
 
     public String toString (){
