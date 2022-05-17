@@ -54,12 +54,12 @@ public class Controller {
         }
         case 5 -> ui.printMemberListTable(cr.getMemberList());
         case 6 -> run();
+        case 7 -> exit();
       }
     }
   }
 
   public void kasserer() {
-    System.out.println(cr.getMemberList());
     while (running) {
 
       ui.kassererUI();

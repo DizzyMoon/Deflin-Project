@@ -22,7 +22,8 @@ public class UserInterface {
         3 - Ændre medlemskab til passiv/aktiv
         4 - Ændre navn på medlem
         5 - Se medlemsliste
-        6 - Luk
+        6 - Tilbage til hovedmenu
+        7 - Luk
         \n""");
   }
 
