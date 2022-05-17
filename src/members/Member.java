@@ -3,131 +3,137 @@ package members;
 import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public abstract class Member {
+public abstract class Member implements Comparable<Member> {
 
-    private String name;
-    private String memberID;
-    private final Date birth;
-    private int phoneNumber;
-    private String email;
-    private boolean competitive;
-    private double restance;
-    private boolean active;
-    private ArrayList<Result> butterflyResults;
-    private ArrayList<Result> crawlResults;
-    private ArrayList<Result> rygcrawlResults;
-    private ArrayList<Result> breastStrokeResults;
-
-
-    public Member(String name, Date birth, int phoneNumber, String email, boolean competitive, boolean active) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.active = active;
-        this.birth = birth;
-        this.competitive = competitive;
-    }
+  private String name;
+  private String memberID;
+  private final Date birth;
+  private String phoneNumber;
+  private String email;
+  private boolean competitive;
+  private double restance;
+  private boolean active;
+  private ArrayList<Result> butterflyResults;
+  private ArrayList<Result> crawlResults;
+  private ArrayList<Result> rygcrawlResults;
+  private ArrayList<Result> breastStrokeResults;
 
 
-    public String getActive(){
-        return this.active ? "Aktivt" : "Inaktivt";
-    }
+  public Member(String name, Date birth, String phoneNumber, String email, boolean competitive, boolean active) {
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
+    this.active = active;
+    this.birth = birth;
+    this.competitive = competitive;
+  }
 
-    public boolean getActiveBool(){
-        return this.active;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getActive() {
+    return this.active ? "Aktivt" : "Inaktivt";
+  }
 
-    public void setPhoneNumber(int phoneNumber){
-        this.phoneNumber = phoneNumber;
-    }
+  public boolean getActiveBool() {
+    return this.active;
+  }
 
-    public int getPhoneNumber(){
-        return this.phoneNumber;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setEmail(String email){
-        this.email = email;
-    }
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getPhoneNumber() {
+    return this.phoneNumber;
+  }
 
-    public void setMemberID(String memberID) {
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-        this.memberID = memberID;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public Date getBirth() {
-        return birth;
-    }
+  public void setMemberID(String memberID) {
 
-    public void setCompetitive(boolean competitive) {
-        this.competitive = competitive;
-    }
+    this.memberID = memberID;
+  }
 
-    public void setRestance(double restance) {
-        this.restance = restance;
-    }
+  public Date getBirth() {
+    return birth;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setCompetitive(boolean competitive) {
+    this.competitive = competitive;
+  }
 
-    public String getMemberID() {
-        return memberID;
-    }
+  public void setRestance(double restance) {
+    this.restance = restance;
+  }
 
-    public String getCompetitive() {
-        return competitive ? "Competitive member" : "Exercise member";
-    }
+  public String getName() {
+    return name;
+  }
 
-    public double getRestance() {
-        return restance;
-    }
+  public String getMemberID() {
+    return memberID;
+  }
 
-    public void setActive(boolean active){
-        this.active = active;
-    }
+  public String getCompetitive() {
+    return competitive ? "Competitive member" : "Exercise member";
+  }
 
-    public ArrayList<Result> getButterflyResults() {
-        return butterflyResults;
-    }
+  public double getRestance() {
+    return restance;
+  }
 
-    public void setButterflyResults(ArrayList<Result> butterflyResults) {
-        this.butterflyResults = butterflyResults;
-    }
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 
-    public ArrayList<Result> getCrawlResults() {
-        return crawlResults;
-    }
+  public ArrayList<Result> getButterflyResults() {
+    return butterflyResults;
+  }
 
-    public void setCrawlResults(ArrayList<Result> crawlResults) {
-        this.crawlResults = crawlResults;
-    }
+  public void setButterflyResults(ArrayList<Result> butterflyResults) {
+    this.butterflyResults = butterflyResults;
+  }
 
-    public ArrayList<Result> getRygcrawlResults() {
-        return rygcrawlResults;
-    }
+  public ArrayList<Result> getCrawlResults() {
+    return crawlResults;
+  }
 
-    public void setRygcrawlResults(ArrayList<Result> rygcrawlResults) {
-        this.rygcrawlResults = rygcrawlResults;
-    }
+  public void setCrawlResults(ArrayList<Result> crawlResults) {
+    this.crawlResults = crawlResults;
+  }
 
-    public ArrayList<Result> getBreastStrokeResults() {
-        return breastStrokeResults;
-    }
+  public ArrayList<Result> getRygcrawlResults() {
+    return rygcrawlResults;
+  }
 
-    public void setBreastStroke(ArrayList<Result> breastStroke) {
-        this.breastStrokeResults = breastStroke;
-    }
+  public void setRygcrawlResults(ArrayList<Result> rygcrawlResults) {
+    this.rygcrawlResults = rygcrawlResults;
+  }
 
-    public String toString (){
-        return name + ", " + birth + ", " + getCompetitive() + " - " + getActive();
-    }
+  public ArrayList<Result> getBreastStrokeResults() {
+    return breastStrokeResults;
+  }
+
+  public void setBreastStroke(ArrayList<Result> breastStroke) {
+    this.breastStrokeResults = breastStroke;
+  }
+
+  public String toString() {
+    return name + ", " + birth + ", " + getCompetitive() + " - " + getActive();
+  }
+
+  @Override
+  public int compareTo(Member o) {
+    return this.name.compareTo(o.getName());
+  }
 }

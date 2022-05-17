@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -33,7 +34,7 @@ public class Creator {
       member.setMemberID(ID);
     }
 
-  public void createNewMember(String name, Date date, int phoneNumber, String email, boolean competition, boolean active) {
+  public void createNewMember(String name, Date date, String phoneNumber, String email, boolean competition, boolean active) {
     LocalDate now = LocalDate.now();
 
     LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
@@ -49,6 +50,7 @@ public class Creator {
       createUserID(newMemberJunior);
       memberList.getList().add(newMemberJunior);
       fileHandler.saveMembersToCSV(memberList);
+
     }
   }
 
@@ -76,5 +78,9 @@ public class Creator {
 
   public MemberList getMemberList(){
     return memberList;
+  }
+
+  public ArrayList<Member> getList(){
+    return memberList.getList();
   }
 }
