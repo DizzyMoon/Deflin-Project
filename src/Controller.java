@@ -47,22 +47,31 @@ public class Controller {
       switch (input) {
         case 1 -> formandNewMember();
         case 2 -> System.out.println("Not done");
-        case 3 -> System.out.println("Not done");
+        case 3 -> {
+          ui.typeMemberID();
+          String memberID = sc.next();
+          cr.getMemberList().findMember(memberID, cr.getMemberList()).toggleStatus();
+        }
         case 4 -> {
+          ui.typeMemberID();
+          String memberID = sc.next();
+          cr.getMemberList().findMember(memberID, cr.getMemberList()).toggleCompetitive();
+        }
+        case 5 -> {
           ui.typeMemberID();
           String memberID = sc.next();
           ui.nameChange();
           String newName = sc.next();
           findMember(memberID, cr.getMemberList()).setName(newName);
         }
-        case 5 -> ui.printMemberListTable(cr.getMemberList());
-        case 6 -> run();
+        case 6 -> ui.printMemberListTable(cr.getMemberList());
+        case 7 -> run();
+        case 8 -> exit();
       }
     }
   }
 
   public void kasserer() {
-    System.out.println(cr.getMemberList());
     while (running) {
 
       ui.kassererUI();
@@ -78,7 +87,18 @@ public class Controller {
   }
 
   public void træner() {
-
+      ui.traenerUI();
+      int input = sc.nextInt();
+      sc.nextLine(); //Scannerbug fix
+      switch (input) {
+        case 1 -> System.out.println("Not done, son");
+        //case 2 -> Opret stævne
+        //case 3 -> Se stævner
+        //case 4 -> Udtag svømmere til stævne
+        //case 5 -> Bogfør præstation
+        case 6 -> run();
+        case 7 -> exit();
+      }
   }
 
   public void exit() {
@@ -88,7 +108,7 @@ public class Controller {
   public void formandNewMember() {
     boolean competition = false;
     ui.memberName();
-    String name = sc.next();
+    String name = sc.nextLine();
     ui.dateOfBirth();
     String birthdate = sc.next();
     int first = birthdate.indexOf(".");
@@ -104,12 +124,11 @@ public class Controller {
     } else if (competetive.equalsIgnoreCase("nej")) {
       competition = false;
     }
-
     ui.phoneNumber();
     String phoneNumber = sc.next();
 
     ui.email();
-    String email = sc.next();
+    String email = sc.nextLine();
 
     cr.createNewMember(name, newDate, phoneNumber, email, competition, true);
     sortBy();

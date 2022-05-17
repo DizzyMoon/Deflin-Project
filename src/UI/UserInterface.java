@@ -2,9 +2,14 @@ package UI;
 
 import members.Member;
 import members.MemberList;
+import members.Swimmeet;
+
+import java.util.ArrayList;
 
 
 public class UserInterface {
+
+  ArrayList<Swimmeet> meets = new ArrayList<>();
 
   public void startupMenu() {
     System.out.println("""
@@ -20,9 +25,11 @@ public class UserInterface {
         1 - Opret nyt medlem
         2 - Slet medlemskab
         3 - Ændre medlemskab til passiv/aktiv
-        4 - Ændre navn på medlem
-        5 - Se medlemsliste
-        6 - Luk
+        4 - Ændre type for konkurrence/motionist
+        5 - Ændre navn på medlem
+        6 - Se medlemsliste
+        7 - Tilbage til hovedmenu
+        8 - Luk
         \n""");
   }
 
@@ -32,6 +39,18 @@ public class UserInterface {
         2 - Se liste over restancer
         3 - Tilbage til hovedmenu
         4 - Luk
+        """);
+  }
+
+  public void traenerUI() {
+    System.out.println("""
+        1 - Se ugeskema
+        2 - Opret stævne
+        3 - Se stævner
+        4 - Udtag svømmere til stævne
+        5 - Bogfør præstation
+        6 - Tilbage til hovedmenu
+        7 - Luk
         """);
   }
 
@@ -61,6 +80,16 @@ public class UserInterface {
 
   public void email(){
     System.out.println("Indtast mailadresse for nyt medlem");
+  }
+
+  public void coachSchedule() { System.out.println("Feature kommer i næste udgave!"); }
+
+  public void planSwimmeet() { System.out.println("Event Titel:"); }
+
+  public void listSwimmeets() { System.out.println(meets.toString()); }
+
+  public void addSwimmerToMeet() {
+    System.out.println( "");
   }
 
   public void printMemberList(MemberList ml) {
