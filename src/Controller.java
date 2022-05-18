@@ -13,7 +13,7 @@ public class Controller {
   Scanner sc = new Scanner(System.in);
   UserInterface ui = new UserInterface();
   Creator cr = new Creator();
-  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM-dd-yyyy");
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");
 
   public Controller() throws FileNotFoundException {
   }
@@ -84,6 +84,8 @@ public class Controller {
   }
 
   public void træner() {
+    while (running) {
+
       ui.traenerUI();
       int input = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
@@ -96,6 +98,7 @@ public class Controller {
         case 6 -> run();
         case 7 -> exit();
       }
+    }
   }
 
   public void exit() {
@@ -113,7 +116,7 @@ public class Controller {
     int date = Integer. valueOf(birthdate.substring(0, first));
     int month = Integer. valueOf(birthdate.substring(first + 1, second));
     //1900 fratrækkes da det som default lægges til det indtastede fødselsår hvilket giver problemer for fødselsdatoer efter 1999.
-    int year = Integer. valueOf(birthdate.substring(second + 1)) - 1900;
+    int year = Integer. valueOf(birthdate.substring(second + 1))/* - 1900*/;
     Date newDate = new Date(year, month, date);
 
     ui.competetive();
@@ -127,7 +130,7 @@ public class Controller {
     String phoneNumber = sc.next();
 
     ui.email();
-    String email = sc.nextLine();
+    String email = sc.next();
 
     cr.createNewMember(name, newDate, phoneNumber, email, competition, true);
   }

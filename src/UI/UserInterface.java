@@ -1,15 +1,13 @@
 package UI;
 
+import members.EventList;
 import members.Member;
 import members.MemberList;
 import members.Swimmeet;
 
 import java.util.ArrayList;
 
-
 public class UserInterface {
-
-  ArrayList<Swimmeet> meets = new ArrayList<>();
 
   public void startupMenu() {
     System.out.println("""
@@ -53,6 +51,19 @@ public class UserInterface {
         7 - Luk
         """);
   }
+  /*
+  public void infoConsoleUI() {
+    System.out.println("""
+        1 - Klub Info
+        2 - Se ugeskema
+        3 - Se Event kalender og stævner
+        4 - Rygcrawl      TOP 5 bedste svømmere
+        5 - Brystsvømning TOP 5 bedste svømmere
+        6 - Butterfly     TOP 5 bedste svømmere
+        7 - Crawl         TOP 5 bedste svømmere
+        """);
+  }
+  */
 
   public void memberName() {
     System.out.println("Indtast navn på nyt medlem");
@@ -67,7 +78,7 @@ public class UserInterface {
   }
 
   public void typeMemberID() {
-    System.out.println("Indtast medlemsnummer på person hvis navn du vil ændre");
+    System.out.println("Indtast medlemsnummer for det medlem, hvis navn du vil ændre");
   }
 
   public void nameChange() {
@@ -86,7 +97,7 @@ public class UserInterface {
 
   public void planSwimmeet() { System.out.println("Event Titel:"); }
 
-  public void listSwimmeets() { System.out.println(meets.toString()); }
+  public void listSwimmeets(ArrayList<Swimmeet> schedule) { System.out.println(schedule.toString()); }
 
   public void addSwimmerToMeet() {
     System.out.println( "");
@@ -129,7 +140,7 @@ public class UserInterface {
       //Navn
       System.out.print(space + print.getName() + space.repeat(20 - print.getName().length()) + line);
 
-      //Medlemstype
+      //Medlemstype             // Skal returnere: Junior/Senior + konkurence/motion, eller Passiv
       int rep = 0;
       if (print.getActiveBool()) {
         rep = 6;
@@ -152,6 +163,19 @@ public class UserInterface {
       System.out.println(underLine.repeat(100) + "\n");
     }
   }
+/*
+  public void printEventListTable(EventList meets) {
+    String line = "|";
+    //String dot = ".";
+
+    System.out.printf("%10d %1s %-42s %1s %", eventName, line, eventDate, line, eventType);
+
+    for (int i = 0; i < meets.getList().size(); i++) {
+      Swimmeet print = meets.getList().get(i);
+
+    }
+  }
+*/
 }
 
 

@@ -23,7 +23,7 @@ public class Creator {
   }
 
     public String giveUserID() {
-      Random rnd = new Random();
+      Random rnd = new Random();                // maybe a count++ and a check for MemberList.nextAvailiable()
       int number = rnd.nextInt(9999);
       return String.format("%04d", number);
     }
