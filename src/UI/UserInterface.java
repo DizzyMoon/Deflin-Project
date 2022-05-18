@@ -154,14 +154,16 @@ public class UserInterface {
       System.out.print(space + birthday + space.repeat(12 - birthday.length()) + line);
 
       //Telefonnummer
-      System.out.print(space + print.getPhoneNumber() + space.repeat(4) + line);
+      System.out.print(space + print.getPhoneNumber() + space.repeat(12 - print.getPhoneNumber().length()) + line);
 
       //Mailadresse
       System.out.println(space + print.getEmail());
 
       //Linjeadskillelse
-      System.out.println(underLine.repeat(100) + "\n");
+      System.out.println(underLine.repeat(100));
     }
+    //Ekstra linjeskift efter sidste linje i tabel
+    System.out.println();
   }
 /*
   public void printEventListTable(EventList meets) {

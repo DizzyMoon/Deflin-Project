@@ -1,11 +1,14 @@
 import UI.UserInterface;
 import members.Creator;
-import members.Junior;
+import members.Member;
 import members.MemberList;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
@@ -59,7 +62,7 @@ public class Controller {
           String memberID = sc.next();
           ui.nameChange();
           String newName = sc.next();
-          cr.getMemberList().findMember(memberID, cr.getMemberList()).setName(newName);
+          findMember(memberID, cr.getMemberList()).setName(newName);
         }
         case 6 -> ui.printMemberListTable(cr.getMemberList());
         case 7 -> run();
@@ -115,8 +118,7 @@ public class Controller {
     int second = birthdate.lastIndexOf(".");
     int date = Integer. valueOf(birthdate.substring(0, first));
     int month = Integer. valueOf(birthdate.substring(first + 1, second));
-    //1900 fratrækkes da det som default lægges til det indtastede fødselsår hvilket giver problemer for fødselsdatoer efter 1999.
-    int year = Integer. valueOf(birthdate.substring(second + 1))/* - 1900*/;
+    int year = Integer. valueOf(birthdate.substring(second + 1));
     Date newDate = new Date(year, month, date);
 
     ui.competetive();
@@ -133,6 +135,20 @@ public class Controller {
     String email = sc.next();
 
     cr.createNewMember(name, newDate, phoneNumber, email, competition, true);
+    sortBy();
   }
+
+  public void sortBy() {
+    Collections.sort((List<Member>) cr.getList());
+  }
+
+  public Member findMember(String userID, MemberList memberList) {
+    for (int i = 0; i < memberList.getList().size(); i++) {
+      if (memberList.getList().get(i).getMemberID().equals(userID))
+        return memberList.getList().get(i);
+    }
+    return null;
+  }
+
 }
 

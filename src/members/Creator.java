@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -49,6 +50,7 @@ public class Creator {
       createUserID(newMemberJunior);
       memberList.getList().add(newMemberJunior);
       fileHandler.saveMembersToCSV(memberList);
+
     }
   }
 
@@ -58,5 +60,9 @@ public class Creator {
 
   public MemberList getMemberList(){
     return memberList;
+  }
+
+  public ArrayList<Member> getList(){
+    return memberList.getList();
   }
 }
