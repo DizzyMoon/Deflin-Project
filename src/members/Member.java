@@ -1,64 +1,62 @@
 package members;
 
-import java.time.LocalDate;
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
+import java.util.List;
 
-public abstract class Member {
+public abstract class Member implements Comparable<Member> {
 
   private String name;
   private String memberID;
-  private LocalDate birth;
+  private final Date birth;
+  private String phoneNumber;
+  private String email;
   private boolean competitive;
-  private double restance;
+  private double arrears;
   private boolean active;
   private ArrayList<Achievement> butterflyResults;
   private ArrayList<Achievement> crawlResults;
-  private ArrayList<Achievement> rygcrawlResults;
-  private ArrayList<Achievement> breastStrokeResults;
+  private ArrayList<Achievement> backstrokeResults;
+  private ArrayList<Achievement> breaststrokeResults;
 
 
-  public Member(String name, LocalDate birth, boolean competitive, boolean active) {
+  public Member(String name, Date birth, String phoneNumber, String email, boolean competitive, boolean active) {
     this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
     this.active = active;
     this.birth = birth;
     this.competitive = competitive;
-  }
-
-  public Member(String name, String memberID, LocalDate birth, boolean competitive,
-                double restance, boolean active, ArrayList<Achievement> butterflyResults,
-                ArrayList<Achievement> crawlResults, ArrayList<Achievement> rygcrawlResults,
-                ArrayList<Achievement> breastStrokeResults) {
-    this.name = name;
-    this.memberID = memberID;
-    this.birth = birth;
-    this.competitive = competitive;
-    this.restance = restance;
-    this.active = active;
-    this.butterflyResults = butterflyResults;
-    this.crawlResults = crawlResults;
-    this.rygcrawlResults = rygcrawlResults;
-    this.breastStrokeResults = breastStrokeResults;
-
-  }
-
-  public Member(String name, String memberID, LocalDate birth, boolean competitive, double restance, boolean active) {
-    this.name = name;
-    this.memberID = memberID;
-    this.birth = birth;
-    this.competitive = competitive;
-    this.restance = restance;
-    this.active = active;
   }
 
 
   public String getActive() {
-    return this.active ? "Member_is_active" : "Member_is_not_active";
+    return this.active ? "Aktivt" : "Inaktivt";
+  }   // Skal i UI-klasse?
+
+  public boolean getActiveBool() {
+    return this.active;
   }
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public String getPhoneNumber() {
+    return this.phoneNumber;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getEmail() {
+    return email;
   }
 
   public void setMemberID(String memberID) {
@@ -66,16 +64,18 @@ public abstract class Member {
     this.memberID = memberID;
   }
 
-  public LocalDate getBirth() {
+  public Date getBirth() {
     return birth;
   }
 
-  public void setCompetitive(boolean competitive) {
-    this.competitive = competitive;
+  public void toggleCompetitive() {
+    this.competitive = !competitive;
   }
 
-  public void setRestance(double restance) {
-    this.restance = restance;
+  public void toggleStatus() { this.active = !active; }
+
+    public void setArrears(double arrears) {
+    this.arrears = arrears;
   }
 
   public String getName() {
@@ -87,15 +87,11 @@ public abstract class Member {
   }
 
   public String getCompetitive() {
-    return competitive ? "Competitive_member" : "Exercise_member";
+    return competitive ? "Competitive member" : "Exercise member";
   }
 
-  public double getRestance() {
-    return restance;
-  }
-
-  public void setActive(boolean active) {
-    this.active = active;
+  public double getArrears() {
+    return arrears;
   }
 
   public ArrayList<Achievement> getButterflyResults() {
@@ -114,23 +110,28 @@ public abstract class Member {
     this.crawlResults = crawlResults;
   }
 
-  public ArrayList<Achievement> getRygcrawlResults() {
-    return rygcrawlResults;
+  public ArrayList<Achievement> getBackcrawlResults() {
+    return backstrokeResults;
   }
 
-  public void setRygcrawlResults(ArrayList<Achievement> rygcrawlResults) {
-    this.rygcrawlResults = rygcrawlResults;
+  public void setBackstrokeResults(ArrayList<Achievement> backstrokeResults) {
+    this.backstrokeResults = backstrokeResults;
   }
 
-  public ArrayList<Achievement> getBreastStrokeResults() {
-    return breastStrokeResults;
+  public ArrayList<Achievement> getBreaststrokeResults() {
+    return breaststrokeResults;
   }
 
-  public void setBreastStroke(ArrayList<Achievement> breastStroke) {
-    this.breastStrokeResults = breastStroke;
+  public void setBreastStroke(ArrayList<Achievement> breaststrokeResults) {
+    this.breaststrokeResults = breaststrokeResults;
   }
 
   public String toString() {
     return name + ", " + birth + ", " + getCompetitive() + " - " + getActive();
+  }
+
+  @Override
+  public int compareTo(Member o) {
+    return this.name.compareTo(o.getName());
   }
 }

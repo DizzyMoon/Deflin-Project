@@ -1,8 +1,11 @@
 package UI;
 
+import members.EventList;
 import members.Member;
 import members.MemberList;
+import members.Swimmeet;
 
+import java.util.ArrayList;
 
 public class UserInterface {
 
@@ -20,29 +23,84 @@ public class UserInterface {
         1 - Opret nyt medlem
         2 - Slet medlemskab
         3 - Ændre medlemskab til passiv/aktiv
-        4 - Se medlemsliste
-        5 - Luk
+        4 - Ændre type for konkurrence/motionist
+        5 - Ændre navn på medlem
+        6 - Se medlemsliste
+        7 - Tilbage til hovedmenu
+        8 - Luk
         \n""");
   }
+
+  public void kassererUI() {
+    System.out.println("""
+        1 - Se samlet sum af medlemmers årskontingenter
+        2 - Se liste over restancer
+        3 - Tilbage til hovedmenu
+        4 - Luk
+        """);
+  }
+
+  public void traenerUI() {
+    System.out.println("""
+        1 - Se ugeskema
+        2 - Opret stævne
+        3 - Se stævner
+        4 - Udtag svømmere til stævne
+        5 - Bogfør præstation
+        6 - Tilbage til hovedmenu
+        7 - Luk
+        """);
+  }
+  /*
+  public void infoConsoleUI() {
+    System.out.println("""
+        1 - Klub Info
+        2 - Se ugeskema
+        3 - Se Event kalender og stævner
+        4 - Rygcrawl      TOP 5 bedste svømmere
+        5 - Brystsvømning TOP 5 bedste svømmere
+        6 - Butterfly     TOP 5 bedste svømmere
+        7 - Crawl         TOP 5 bedste svømmere
+        """);
+  }
+  */
 
   public void memberName() {
     System.out.println("Indtast navn på nyt medlem");
   }
 
-  public void dayOfBirth() {
-    System.out.println("Indtast dag på måneden nyt medlem er født");
-  }
-
-  public void monthOfBirth() {
-    System.out.println("Indtast måned (tal) nyt medlem er født");
-  }
-
-  public void yearOfBirth() {
-    System.out.println("Indtast årstal nyt medlem er født");
+  public void dateOfBirth() {
+    System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.yyyy)");
   }
 
   public void competetive() {
     System.out.println("Er det nye medlem konkurrencesvømmer(ja) eller ikke(nej)");
+  }
+
+  public void typeMemberID() {
+    System.out.println("Indtast medlemsnummer for det medlem, hvis navn du vil ændre");
+  }
+
+  public void nameChange() {
+    System.out.println("Indtast det ændrede navn");
+  }
+
+  public void phoneNumber(){
+    System.out.println("Indtast mobilnummer på nyt medlem");
+  }
+
+  public void email(){
+    System.out.println("Indtast mailadresse for nyt medlem");
+  }
+
+  public void coachSchedule() { System.out.println("Feature kommer i næste udgave!"); }
+
+  public void planSwimmeet() { System.out.println("Event Titel:"); }
+
+  public void listSwimmeets(ArrayList<Swimmeet> schedule) { System.out.println(schedule.toString()); }
+
+  public void addSwimmerToMeet() {
+    System.out.println( "");
   }
 
   public void printMemberList(MemberList ml) {
@@ -60,5 +118,67 @@ public class UserInterface {
 
     }
   }
+
+  public void printMemberListTable(MemberList ml) {
+    String underLine = "-";
+    String line = "|";
+    String space = " ";
+    String dot = ".";
+
+    //Overskrifter
+    System.out.println("Medlemsnr. | Navn" + space.repeat(16) + "| Medlemstype | Fødselsdato | Mobilnummer | E-mail");
+
+    //Linjeadskillelse
+    System.out.println(underLine.repeat(100));
+
+    for (int i = 0; i < ml.getList().size(); i++) {
+      Member print = ml.getList().get(i);
+
+      //Medlemsnummer
+      System.out.print(space + print.getMemberID() + space.repeat(6) + line);
+
+      //Navn
+      System.out.print(space + print.getName() + space.repeat(20 - print.getName().length()) + line);
+
+      //Medlemstype             // Skal returnere: Junior/Senior + konkurence/motion, eller Passiv
+      int rep = 0;
+      if (print.getActiveBool()) {
+        rep = 6;
+      } else if (!print.getActiveBool()) {
+        rep = 4;
+      }
+      System.out.print(space + print.getActive() + space.repeat(rep) + line);
+
+      //Fødselsdato
+      String birthday = Integer.toString(print.getBirth().getDate()) + dot + Integer.toString(print.getBirth().getMonth()) + dot + Integer.toString(print.getBirth().getYear());
+      System.out.print(space + birthday + space.repeat(12 - birthday.length()) + line);
+
+      //Telefonnummer
+      System.out.print(space + print.getPhoneNumber() + space.repeat(12 - print.getPhoneNumber().length()) + line);
+
+      //Mailadresse
+      System.out.println(space + print.getEmail());
+
+      //Linjeadskillelse
+      System.out.println(underLine.repeat(100));
+    }
+    //Ekstra linjeskift efter sidste linje i tabel
+    System.out.println();
+  }
+/*
+  public void printEventListTable(EventList meets) {
+    String line = "|";
+    //String dot = ".";
+
+    System.out.printf("%10d %1s %-42s %1s %", eventName, line, eventDate, line, eventType);
+
+    for (int i = 0; i < meets.getList().size(); i++) {
+      Swimmeet print = meets.getList().get(i);
+
+    }
+  }
+*/
 }
+
+
 
