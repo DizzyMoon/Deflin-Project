@@ -114,7 +114,7 @@ public class UserInterface {
           Fødselsdato: %s/%s, %s
           Aktivt medlem: %b
           \n
-          """, print.getMemberID(), print.getName(), print.getBirth().getDate(), print.getBirth().getMonth(), print.getBirth().getYear(), print.getActive());
+          """, print.getMemberID(), print.getName(), print.getBirth().getDayOfMonth(), print.getBirth().getMonth(), print.getBirth().getYear(), print.getActive());
 
     }
   }
@@ -150,7 +150,7 @@ public class UserInterface {
       System.out.print(space + print.getActive() + space.repeat(rep) + line);
 
       //Fødselsdato
-      String birthday = Integer.toString(print.getBirth().getDate()) + dot + Integer.toString(print.getBirth().getMonth()) + dot + Integer.toString(print.getBirth().getYear());
+      String birthday = Integer.toString(print.getBirth().getDayOfMonth()) + dot + Integer.toString(print.getBirth().getMonthValue()) + dot + Integer.toString(print.getBirth().getYear());
       System.out.print(space + birthday + space.repeat(12 - birthday.length()) + line);
 
       //Telefonnummer
