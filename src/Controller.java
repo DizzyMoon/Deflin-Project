@@ -21,7 +21,9 @@ public class Controller {
   public Controller() throws FileNotFoundException {
   }
 
-  public void run() {
+  public void run() throws FileNotFoundException {
+
+    cr.loadMembers(); //Loads members from /src/data/members.csv
 
     while (running) {
       ui.startupMenu();
@@ -36,7 +38,7 @@ public class Controller {
     }
   }
 
-  public void formand() {
+  public void formand() throws FileNotFoundException {
 
     System.out.println(cr.getMemberList());
     while (running) {
@@ -50,12 +52,12 @@ public class Controller {
         case 3 -> {
           ui.typeMemberID();
           String memberID = sc.next();
-          cr.getMemberList().findMember(memberID, cr.getMemberList()).toggleStatus();
+          findMember(memberID, cr.getMemberList()).toggleStatus();
         }
         case 4 -> {
           ui.typeMemberID();
           String memberID = sc.next();
-          cr.getMemberList().findMember(memberID, cr.getMemberList()).toggleCompetitive();
+          findMember(memberID, cr.getMemberList()).toggleCompetitive();
         }
         case 5 -> {
           ui.typeMemberID();
@@ -71,7 +73,7 @@ public class Controller {
     }
   }
 
-  public void kasserer() {
+  public void kasserer() throws FileNotFoundException {
     while (running) {
 
       ui.kassererUI();
@@ -86,7 +88,7 @@ public class Controller {
     }
   }
 
-  public void træner() {
+  public void træner() throws FileNotFoundException {
     while (running) {
 
       ui.traenerUI();
@@ -108,7 +110,7 @@ public class Controller {
     running = false;
   }
 
-  public void formandNewMember() {
+  public void formandNewMember() throws FileNotFoundException {
     boolean competition = false;
     ui.memberName();
     String name = sc.nextLine();
@@ -119,13 +121,13 @@ public class Controller {
     int date = Integer. valueOf(birthdate.substring(0, first));
     int month = Integer. valueOf(birthdate.substring(first + 1, second));
     int year = Integer. valueOf(birthdate.substring(second + 1));
-    Date newDate = new Date(year, month, date);
+    LocalDate newDate = LocalDate.of(year, month, date);
 
     ui.competetive();
-    String competetive = sc.next();
-    if (competetive.equalsIgnoreCase("ja")) {
+    String competitive = sc.next();
+    if (competitive.equalsIgnoreCase("ja")) {
       competition = true;
-    } else if (competetive.equalsIgnoreCase("nej")) {
+    } else if (competitive.equalsIgnoreCase("nej")) {
       competition = false;
     }
     ui.phoneNumber();

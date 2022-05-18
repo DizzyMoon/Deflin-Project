@@ -38,27 +38,25 @@ public class FileHandler {
       String name = lineScanner.next();
       String memberID = lineScanner.next();
       String birthString = lineScanner.next();
+      String phoneNumber = lineScanner.next();
+      String email = lineScanner.next();
       String competitiveString = lineScanner.next();
-      String restanceString = lineScanner.next();
+      String arrearsString = lineScanner.next();
       String activeString = lineScanner.next();
-      String temp1 = lineScanner.next();
-      String temp2 = lineScanner.next();
-      String temp3 = lineScanner.next();
-      String temp4 = lineScanner.next();
 
       ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
 
-      double restance = Double.parseDouble(restanceString);
+      double arrears = Double.parseDouble(arrearsString);
       LocalDate birth = LocalDate.parse(birthString);
-      boolean competitive = competitiveString.equals("Competitive_member");
-      boolean active = activeString.equals("Member_is_active");
+      boolean competitive = competitiveString.equals("Kompetitiv");
+      boolean active = activeString.equals("Aktivt");
 
       Member newMember;
 
       if (calculateIfJunior(birth)){
-        newMember = new Junior(name, memberID, birth, competitive, restance, active, tempAchievementList, tempAchievementList, tempAchievementList, tempAchievementList);
+        newMember = new Junior(name, memberID, birth, phoneNumber, email, competitive, arrears, active);
       } else {
-        newMember = new Senior(name, memberID, birth, competitive, restance, active, tempAchievementList, tempAchievementList, tempAchievementList, tempAchievementList);
+        newMember = new Senior(name, memberID, birth, phoneNumber, email, competitive, arrears, active);
       }
 
       newMemberList.add(newMember);
@@ -130,19 +128,16 @@ public class FileHandler {
       printStream.print(";");
       printStream.print(member.getBirth());
       printStream.print(";");
+      printStream.print(member.getPhoneNumber());
+      printStream.print(";");
+      printStream.print(member.getEmail());
+      printStream.print(";");
       printStream.print(member.getCompetitive());
       printStream.print(";");
-      printStream.print(member.getRestance());
+      printStream.print(member.getArrears());
       printStream.print(";");
       printStream.print(member.getActive());
       printStream.print(";");
-      printStream.print(member.getButterflyResults());
-      printStream.print(";");
-      printStream.print(member.getCrawlResults());
-      printStream.print(";");
-      printStream.print(member.getRygcrawlResults());
-      printStream.print(";");
-      printStream.print(member.getBreastStrokeResults());
       printStream.print("\n");
     }
     System.out.println("Saved!");
