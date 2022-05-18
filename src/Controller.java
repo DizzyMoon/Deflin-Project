@@ -50,12 +50,12 @@ public class Controller {
         case 3 -> {
           ui.typeMemberID();
           String memberID = sc.next();
-          cr.getMemberList().findMember(memberID, cr.getMemberList()).toggleStatus();
+          findMember(memberID, cr.getMemberList()).toggleStatus();
         }
         case 4 -> {
           ui.typeMemberID();
           String memberID = sc.next();
-          cr.getMemberList().findMember(memberID, cr.getMemberList()).toggleCompetitive();
+          findMember(memberID, cr.getMemberList()).toggleCompetitive();
         }
         case 5 -> {
           ui.typeMemberID();
