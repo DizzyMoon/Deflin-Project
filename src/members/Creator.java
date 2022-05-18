@@ -19,23 +19,29 @@ public class Creator {
   private MemberList memberList = new MemberList();
   private FileHandler fileHandler = new FileHandler();
 
+
   public Creator() throws FileNotFoundException {
   }
 
-    public String giveUserID() {
-      UUID u = UUID.randomUUID();
-      return toIDString(u.getMostSignificantBits()) + toIDString(u.getLeastSignificantBits());
-    }
 
-    public void createUserID(Member member){
-      String ID = giveUserID();
-      member.setMemberID(ID);
-    }
+  public void loadMembers() throws FileNotFoundException {
+    memberList.setList(fileHandler.loadMemberList());
+  }
 
-  public void createNewMember(String name, Date date, boolean competition, boolean active) {
+  public String giveUserID() {
+    UUID u = UUID.randomUUID();
+    return toIDString(u.getMostSignificantBits()) + toIDString(u.getLeastSignificantBits());
+  }
+
+  public void createUserID(Member member) {
+    String ID = giveUserID();
+    member.setMemberID(ID);
+  }
+
+  public void createNewMember(String name, LocalDate date, boolean competition, boolean active) throws FileNotFoundException {
     LocalDate now = LocalDate.now();
 
-    LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDay());
+    LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth());
     Period p = Period.between(birthDate, now);
 
     if (p.getYears() >= 18) {
@@ -69,11 +75,12 @@ public class Creator {
       '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
   };
-  public void addMember(Member member){
+
+  public void addMember(Member member) {
     memberList.getList().add(member);
   }
 
-  public MemberList getMemberList(){
+  public MemberList getMemberList() {
     return memberList;
   }
 }

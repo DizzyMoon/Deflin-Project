@@ -3,6 +3,7 @@ import members.Creator;
 import members.Junior;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
@@ -17,8 +18,8 @@ public class Controller {
   public Controller() throws FileNotFoundException {
   }
 
-  public void run() {
-
+  public void run() throws FileNotFoundException {
+  cr.loadMembers();
     while (running) {
       ui.startupMenu();
       int input = sc.nextInt();
@@ -32,9 +33,10 @@ public class Controller {
     }
   }
 
-  public void formand() {
+  public void formand() throws FileNotFoundException {
 
-    System.out.println(cr.getMemberList());
+    //System.out.println(cr.giveUserID());
+    //System.out.println(cr.getMemberList());
     while (running) {
 
       ui.formandUI();
@@ -62,7 +64,7 @@ public class Controller {
     running = false;
   }
 
-  public void formandNewMember() {
+  public void formandNewMember() throws FileNotFoundException {
     boolean competition = false;
     ui.memberName();
     String name = sc.next();
@@ -71,13 +73,13 @@ public class Controller {
     ui.monthOfBirth();
     int month = sc.nextInt();
     ui.yearOfBirth();
-    int year = sc.nextInt() - 1900; //1900 fratrækkes da det som default lægges til det indtastede fødselsår hvilket giver problemer for fødselsdatoer efter 1999.
-    Date newDate = new Date(year, month, day);
+    int year = sc.nextInt(); //Slettet -1900
+    LocalDate newDate = LocalDate.of(year, month, day);
     ui.competetive();
-    String competetive = sc.next();
-    if (competetive.equalsIgnoreCase("ja")) {
+    String competitive = sc.next();
+    if (competitive.equalsIgnoreCase("ja")) {
       competition = true;
-    } else if (competetive.equalsIgnoreCase("nej")) {
+    } else if (competitive.equalsIgnoreCase("nej")) {
       competition = false;
     } else {
 

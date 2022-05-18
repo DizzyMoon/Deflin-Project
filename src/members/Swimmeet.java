@@ -5,6 +5,5 @@ import java.util.Date;
 
 public class Swimmeet {
     Date eventDate;
-    ArrayList<Member>  =
 
 }
