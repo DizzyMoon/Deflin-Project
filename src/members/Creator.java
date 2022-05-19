@@ -41,8 +41,7 @@ public class Creator {
   public void createNewMember(String name, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
     LocalDate now = LocalDate.now();
 
-    LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth());
-    Period p = Period.between(birthDate, now);
+    Period p = Period.between(date, now);
 
     if (p.getYears() >= 18) {
       Member newMemberSenior = new Senior(name, date, phoneNumber, email, competition, active);

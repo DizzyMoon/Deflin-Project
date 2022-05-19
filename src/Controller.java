@@ -172,7 +172,7 @@ public class Controller {
     String phoneNumber = sc.next();
 
     ui.email();
-    String email = sc.nextLine();
+    String email = sc.next();
 
     cr.createNewMember(name, newDate, phoneNumber, email, competition, true);
     sortBy();
