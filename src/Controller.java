@@ -17,7 +17,8 @@ public class Controller {
   UserInterface ui = new UserInterface();
   Creator cr = new Creator();
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
-                                                                              // seems legit!
+
+  // seems legit!
   public Controller() throws FileNotFoundException {
   }
 
@@ -93,7 +94,7 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> System.out.println("Not done, son");
-        case 2 -> subscription();
+        // case 2 -> subscription();
         case 3 -> run();
         case 4 -> exit();
       }
@@ -152,9 +153,9 @@ public class Controller {
     String birthdate = sc.next();
     int first = birthdate.indexOf(".");
     int second = birthdate.lastIndexOf(".");
-    int date = Integer. valueOf(birthdate.substring(0, first));
-    int month = Integer. valueOf(birthdate.substring(first + 1, second));
-    int year = Integer. valueOf(birthdate.substring(second + 1));
+    int date = Integer.valueOf(birthdate.substring(0, first));
+    int month = Integer.valueOf(birthdate.substring(first + 1, second));
+    int year = Integer.valueOf(birthdate.substring(second + 1));
     LocalDate newDate = LocalDate.of(year, month, date);
 
     ui.competetive();
@@ -177,7 +178,7 @@ public class Controller {
     sortBy();
   }
 
-  public double subscription(){
+  /*public double subscription(){
     double subscription;
     double subscriptionJunior = 1000;
     double subscriptionSenior = 1600;
@@ -200,7 +201,7 @@ public class Controller {
       income += cr.getList().size().get(i).subscription();
     }
     System.out.println("Subscription income:" + income);
-    }
+    }*/
 
   public void sortBy() {
     Collections.sort((List<Member>) cr.getList());
@@ -213,4 +214,5 @@ public class Controller {
     }
     return null;
   }
+}
 
