@@ -24,7 +24,7 @@ public class Creator {
   }
 
   public String giveUserID() {
-    Random rnd = new Random();                // maybe a count++ and a check for MemberList.nextAvailiable()
+    Random rnd = new Random();
     int number = rnd.nextInt(9999);
     return String.format("%04d", number);
   }
@@ -41,7 +41,7 @@ public class Creator {
   public void createNewMember(String name, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
     LocalDate now = LocalDate.now();
 
-    LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonth(), date.getDayOfMonth());
+    LocalDate birthDate = LocalDate.of(date.getYear(), date.getMonthValue(), date.getDayOfMonth());
     Period p = Period.between(birthDate, now);
 
     if (p.getYears() >= 18) {
@@ -58,10 +58,10 @@ public class Creator {
     }
   }
 
-  public void addMember(Member member) {
+/*  public void addMember(Member member) {      // Replaced with getList().add
     memberList.getList().add(member);
   }
-
+*/
   public MemberList getMemberList() {
     return memberList;
   }

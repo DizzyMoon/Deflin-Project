@@ -65,8 +65,10 @@ public class UserInterface {
   }
   */
 
+  public void badInput() { System.out.println("Forkert indtastning!"); }
+
   public void memberName() {
-    System.out.println("Indtast navn på nyt medlem");
+    System.out.println("Opretter nyt medlem.../nNavn:");
   }
 
   public void dateOfBirth() {
@@ -74,24 +76,27 @@ public class UserInterface {
   }
 
   public void competetive() {
-    System.out.println("Er det nye medlem konkurrencesvømmer(ja) eller ikke(nej)");
+    System.out.println("Er det nye medlem konkurrencesvømmer? (ja/nej)");
   }
 
-  public void typeMemberID() {
-    System.out.println("Indtast medlemsnummer for det medlem, hvis navn du vil ændre");
-  }
+  public void typeMemberID() { System.out.println("Indtast medlemsnummer for det medlem, hvis oplysninger du vil ændre:"); }
 
   public void nameChange() {
-    System.out.println("Indtast det ændrede navn");
+    System.out.println("Indtast nyt navn:");
   }
 
   public void phoneNumber(){
-    System.out.println("Indtast mobilnummer på nyt medlem");
+    System.out.println("Indtast mobilnummer på nyt medlem:");
   }
 
   public void email(){
-    System.out.println("Indtast mailadresse for nyt medlem");
+    System.out.println("Indtast mailadresse:");
   }
+
+  public void statusAltered(String newStatus) { System.out.println("Medlemsstatus er ændret til " + newStatus); }
+
+  public void typeAltered(String newType) { System.out.println("Medlemsstatus er ændret til " + newType); }
+
 
   public void coachSchedule() { System.out.println("Feature kommer i næste udgave!"); }
 
@@ -102,6 +107,19 @@ public class UserInterface {
   public void addSwimmerToMeet() {
     System.out.println( "");
   }
+
+  public void inputSwimmerID() { System.out.println("Indtast svømmers medlemsnummer:"); }
+
+  public void inputDistance() { System.out.println("Indtast svømmers medlemsnummer:"); }
+
+  public void inputTime() { System.out.println("Indtast svømmers medlemsnummer:"); }
+
+  public void addCommendation() { System.out.println("Har svømmeren opnået en udmærkelse? (ja/nej)"); }
+
+  public void commDescr() { System.out.println("1. Guld\t\t2. Sølv\t\t3.Bronze\t\t4.Andet"); }
+
+  public void specialCommDescr() { System.out.println("Indtast navn på udmærkelse:"); }
+
 
   public void printMemberList(MemberList ml) {
 
@@ -126,10 +144,10 @@ public class UserInterface {
     String dot = ".";
 
     //Overskrifter
-    System.out.println("Medlemsnr. | Navn" + space.repeat(16) + "| Medlemstype | Fødselsdato | Mobilnummer | E-mail");
+    System.out.println("Medlemsnr. | Navn" + space.repeat(26) + "| Medlemstype" + space.repeat(17) + "| Fødselsdato | Mobilnummer | E-mail");
 
     //Linjeadskillelse
-    System.out.println(underLine.repeat(100));
+    System.out.println(underLine.repeat(128));
 
     for (int i = 0; i < ml.getList().size(); i++) {
       Member print = ml.getList().get(i);
@@ -138,14 +156,14 @@ public class UserInterface {
       System.out.print(space + print.getMemberID() + space.repeat(6) + line);
 
       //Navn
-      System.out.print(space + print.getName() + space.repeat(20 - print.getName().length()) + line);
+      System.out.print(space + print.getName() + space.repeat(30 - print.getName().length()) + line);
 
-      //Medlemstype             // Skal returnere: Junior/Senior + konkurence/motion, eller Passiv
+      //Medlemstype             // returner (+ evt. Konkurrence) Junior/Senior, eller Passiv
       int rep = 0;
       if (print.getActiveBool()) {
-        rep = 6;
+        rep = 22;
       } else if (!print.getActiveBool()) {
-        rep = 4;
+        rep = 20;
       }
       System.out.print(space + print.getActive() + space.repeat(rep) + line);
 
@@ -160,7 +178,7 @@ public class UserInterface {
       System.out.println(space + print.getEmail());
 
       //Linjeadskillelse
-      System.out.println(underLine.repeat(100));
+      System.out.println(underLine.repeat(128));
     }
     //Ekstra linjeskift efter sidste linje i tabel
     System.out.println();
