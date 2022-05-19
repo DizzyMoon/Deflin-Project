@@ -1,7 +1,5 @@
 import UI.UserInterface;
-import members.Creator;
-import members.Member;
-import members.MemberList;
+import members.*;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -19,7 +17,8 @@ public class Controller {
   UserInterface ui = new UserInterface();
   Creator cr = new Creator();
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
-                                                                              // seems legit!
+
+  // seems legit!
   public Controller() throws FileNotFoundException {
   }
 
@@ -95,7 +94,7 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> System.out.println("Not done, son");
-        case 2 -> System.out.println("Not done, son");
+        // case 2 -> subscription();
         case 3 -> run();
         case 4 -> exit();
       }
@@ -154,9 +153,9 @@ public class Controller {
     String birthdate = sc.next();
     int first = birthdate.indexOf(".");
     int second = birthdate.lastIndexOf(".");
-    int date = Integer. valueOf(birthdate.substring(0, first));
-    int month = Integer. valueOf(birthdate.substring(first + 1, second));
-    int year = Integer. valueOf(birthdate.substring(second + 1));
+    int date = Integer.valueOf(birthdate.substring(0, first));
+    int month = Integer.valueOf(birthdate.substring(first + 1, second));
+    int year = Integer.valueOf(birthdate.substring(second + 1));
     LocalDate newDate = LocalDate.of(year, month, date);
 
     ui.competetive();
@@ -179,6 +178,31 @@ public class Controller {
     sortBy();
   }
 
+  /*public double subscription(){
+    double subscription;
+    double subscriptionJunior = 1000;
+    double subscriptionSenior = 1600;
+    double subscriptionRetired = 1200;
+    double subscriptionPassive = 500;
+
+    if(active == true){
+      if(Member.equals("Junior")){ //alternativt en funktion der checker om alderen er under 18
+        subscription = 1000;
+      } else if(Member.equals("Senior")){ //alternativt en funktion der checker om alderen er over 18
+        subscription = 1600;
+      } else subscription = 1200;
+    } else subscription = 500;
+    return subscription;
+  }
+
+  public void subscriptionIncome() {
+    double income = 0;
+    for (double i = 0; i < cr.getList().size(); i++) {
+      income += cr.getList().size().get(i).subscription();
+    }
+    System.out.println("Subscription income:" + income);
+    }*/
+
   public void sortBy() {
     Collections.sort((List<Member>) cr.getList());
   }
@@ -190,6 +214,5 @@ public class Controller {
     }
     return null;
   }
-
 }
 
