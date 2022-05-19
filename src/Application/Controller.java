@@ -211,9 +211,11 @@ public class Controller {
 
   public void sortBy(int sort) {
     if (sort == 1) {
+      //Alfabetisk sortering - virker
       Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
     }
     else if (sort == 3){
+      //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
       for (int i = 0; i <= cr.getList().size(); i++) {
         Collections.sort((List<Achievement>) cr.getList().get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
         Collections.sort((List<Achievement>) cr.getList().get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
@@ -221,6 +223,8 @@ public class Controller {
         Collections.sort((List<Achievement>) cr.getList().get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
       }
     }
+    //To DO: Lav en Comparator der sammenligner første index i listen over hver Achievements tidsresultat, og sorterer derefter. Interface afhængig af det samme
+        Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getCrawlResults().get(0).compareTo(o2.getCrawlResults().get(0)));
   }
 
   public Member findMember(String userID, MemberList memberList) {
