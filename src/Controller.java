@@ -186,12 +186,12 @@ public class Controller {
     double subscriptionPassive = 500;
 
     if(active == true){
-      if(Member.equals("Junior")){ //alternativt en funktion der checker om alderen er under 18
-        subscription = 1000;
-      } else if(Member.equals("Senior")){ //alternativt en funktion der checker om alderen er over 18
-        subscription = 1600;
-      } else subscription = 1200;
-    } else subscription = 500;
+      if(Member.equals(Junior)){ //alternativt en funktion der checker om alderen er under 18
+        subscription = subscriptionJunior;
+      } else if(Member.equals(Senior)){ //alternativt en funktion der checker om alderen er over 18
+        subscription = subscriptionSenior;
+      } else subscription = subscriptionRetired;
+    } else subscription = subscriptionPassive;
     return subscription;
   }
 
