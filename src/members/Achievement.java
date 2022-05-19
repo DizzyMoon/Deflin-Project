@@ -42,18 +42,5 @@ public class Achievement {
     public int compareTo(Achievement o) {
         return this.getTime().compareTo(o.getTime());
     }
-/*
-    public boolean sortFastest(Achievement otherAchievement) {
-        return fasterThan((Achievement) otherAchievement);
 
-    }
-
-    public boolean fasterThan(Achievement otherAchievement) {
-        Period period = Period.between()
-        if (otherAchievement.result < this.result) {
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 }

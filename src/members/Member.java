@@ -40,7 +40,7 @@ public abstract class Member implements Comparable<Member> {
   }
 
   public String getActive() {
-    return this.active ? "Aktivt" : "Inaktivt";
+    return this.active ? "Aktiv" : "Inaktiv";
   }   // Skal i UI-klasse?
 
   public boolean getActiveBool() {

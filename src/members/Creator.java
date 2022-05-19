@@ -93,4 +93,24 @@ public class Creator {
   public ArrayList<Member> getList() {
     return memberList.getList();
   }
+
+  public ArrayList<Member> sortSenior(){
+    ArrayList<Member> seniorList = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      if (memberList.getList().get(i) instanceof Senior){
+        seniorList.add(memberList.getList().get(i));
+      }
+    }
+    return seniorList;
+  }
+
+  public ArrayList<Member> sortJunior(){
+    ArrayList<Member> juniorList = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      if (memberList.getList().get(i) instanceof Senior){
+        juniorList.add(memberList.getList().get(i));
+      }
+    }
+    return juniorList;
+  }
 }
