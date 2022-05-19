@@ -1,6 +1,5 @@
 package UI;
 
-import members.EventList;
 import members.Member;
 import members.MemberList;
 import members.Swimmeet;
@@ -73,12 +72,32 @@ public class UserInterface {
     System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.yyyy)");
   }
 
-  public void competetive() {
+  public void savingMessage(){
+    System.out.println("Gemmer...");
+  }
+
+  public void deleting(){
+    System.out.println("Sletter...");
+  }
+
+  public void deleted(){
+    System.out.println("Slettet!");
+  }
+
+  public void savedMessage(){
+    System.out.println("Gemt!");
+  }
+
+  public void competitive() {
     System.out.println("Er det nye medlem konkurrencesvømmer(ja) eller ikke(nej)");
   }
 
-  public void typeMemberID() {
+  public void typeMemberIDForNameChange() {
     System.out.println("Indtast medlemsnummer for det medlem, hvis navn du vil ændre");
+  }
+
+  public void typeMemberIDForRemove(){
+    System.out.println("Indtast medlemsnummer for det medlem, hvis medlemskab du vil slette");
   }
 
   public void nameChange() {
@@ -91,6 +110,10 @@ public class UserInterface {
 
   public void email(){
     System.out.println("Indtast mailadresse for nyt medlem");
+  }
+
+  public void elementDoesNotExits(){
+    System.out.println("Element does not exist");
   }
 
   public void coachSchedule() { System.out.println("Feature kommer i næste udgave!"); }

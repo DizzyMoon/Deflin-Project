@@ -9,6 +9,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import UI.UserInterface;
 
 import members.Junior;
 import members.MemberList;
@@ -19,6 +20,7 @@ import filehandling.FileHandler;
 public class Creator {
   private MemberList memberList = new MemberList();
   private FileHandler fileHandler = new FileHandler();
+  private UserInterface ui = new UserInterface();
 
   public Creator() throws FileNotFoundException {
   }
@@ -56,6 +58,28 @@ public class Creator {
       fileHandler.saveMembersToCSV(memberList);
 
     }
+  }
+
+  public void removeMember (String UID) throws FileNotFoundException {
+    String memberID = UID;
+    boolean found = false;
+    int searchedElements = 0;
+
+    for (Member member : memberList.getList()){
+      if (member.getMemberID().equals(UID)){
+        found = true;
+        ui.deleting();
+        memberList.getList().remove(member);
+        ui.deleted();
+        fileHandler.saveMembersToCSV(memberList);
+        break;
+      }
+      searchedElements++;
+      if (searchedElements == memberList.getList().size() && !found){
+        ui.elementDoesNotExits();
+      }
+    }
+
   }
 
   public void addMember(Member member) {

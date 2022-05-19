@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,8 +40,6 @@ public class Controller {
   }
 
   public void formand() throws FileNotFoundException {
-
-    System.out.println(cr.getMemberList());
     while (running) {
 
       ui.formandUI();
@@ -50,19 +47,19 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> formandNewMember();
-        case 2 -> System.out.println("Not done");
+        case 2 -> removeMember();
         case 3 -> {
-          ui.typeMemberID();
+          ui.typeMemberIDForNameChange();
           String memberID = sc.next();
           findMember(memberID, cr.getMemberList()).toggleStatus();
         }
         case 4 -> {
-          ui.typeMemberID();
+          ui.typeMemberIDForNameChange();
           String memberID = sc.next();
           findMember(memberID, cr.getMemberList()).toggleCompetitive();
         }
         case 5 -> {
-          ui.typeMemberID();
+          ui.typeMemberIDForNameChange();
           String memberID = sc.next();
           ui.nameChange();
           String newName = sc.next();
@@ -83,7 +80,7 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> System.out.println("Not done, son");
-        case 2 -> System.out.println("Not done, son");
+        case 2 -> removeMember();
         case 3 -> run();
         case 4 -> exit();
       }
@@ -112,6 +109,12 @@ public class Controller {
     running = false;
   }
 
+  public void removeMember() throws FileNotFoundException {
+    ui.typeMemberIDForRemove();
+    String UID = sc.nextLine();
+    cr.removeMember(UID);
+  }
+
   public void formandNewMember() throws FileNotFoundException {
     boolean competition = false;
     ui.memberName();
@@ -125,7 +128,7 @@ public class Controller {
     int year = Integer. valueOf(birthdate.substring(second + 1));
     LocalDate newDate = LocalDate.of(year, month, date);
 
-    ui.competetive();
+    ui.competitive();
     String competitive = sc.next();
     if (competitive.equalsIgnoreCase("ja")) {
       competition = true;
