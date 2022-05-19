@@ -1,9 +1,6 @@
 package UI;
 
-import members.EventList;
-import members.Member;
-import members.MemberList;
-import members.Swimmeet;
+import members.*;
 
 import java.util.ArrayList;
 
@@ -65,7 +62,9 @@ public class UserInterface {
   }
   */
 
-  public void badInput() { System.out.println("Forkert indtastning!"); }
+  public void badInput() {
+    System.out.println("Forkert indtastning!");
+  }
 
   public void memberName() {
     System.out.println("Opretter nyt medlem.../nNavn:");
@@ -75,19 +74,19 @@ public class UserInterface {
     System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.yyyy)");
   }
 
-  public void savingMessage(){
+  public void savingMessage() {
     System.out.println("Gemmer...");
   }
 
-  public void deleting(){
+  public void deleting() {
     System.out.println("Sletter...");
   }
 
-  public void deleted(){
+  public void deleted() {
     System.out.println("Slettet!");
   }
 
-  public void savedMessage(){
+  public void savedMessage() {
     System.out.println("Gemt!");
   }
 
@@ -95,9 +94,11 @@ public class UserInterface {
     System.out.println("Er det nye medlem konkurrencesvømmer(ja) eller ikke(nej)");
   }
 
-  public void typeMemberIDForNameChange() { System.out.println("Indtast medlemsnummer for det medlem, hvis oplysninger du vil ændre:"); }
+  public void typeMemberIDForNameChange() {
+    System.out.println("Indtast medlemsnummer for det medlem, hvis oplysninger du vil ændre:");
+  }
 
-  public void typeMemberIDForRemove(){
+  public void typeMemberIDForRemove() {
     System.out.println("Indtast medlemsnummer for det medlem, hvis medlemskab du vil slette");
   }
 
@@ -105,44 +106,66 @@ public class UserInterface {
     System.out.println("Indtast nyt navn:");
   }
 
-  public void phoneNumber(){
+  public void phoneNumber() {
     System.out.println("Indtast mobilnummer på nyt medlem:");
   }
 
-  public void email(){
+  public void email() {
     System.out.println("Indtast mailadresse:");
   }
 
-  public void statusAltered(String newStatus) { System.out.println("Medlemsstatus er ændret til " + newStatus); }
+  public void statusAltered(String newStatus) {
+    System.out.println("Medlemsstatus er ændret til " + newStatus);
+  }
 
-  public void typeAltered(String newType) { System.out.println("Medlemsstatus er ændret til " + newType); }
+  public void typeAltered(String newType) {
+    System.out.println("Medlemsstatus er ændret til " + newType);
+  }
 
 
-  public void elementDoesNotExits(){
+  public void elementDoesNotExits() {
     System.out.println("Element findes ikke");
   }
 
-  public void coachSchedule() { System.out.println("Feature kommer i næste udgave!"); }
-
-  public void planSwimmeet() { System.out.println("Event Titel:"); }
-
-  public void listSwimmeets(ArrayList<Swimmeet> schedule) { System.out.println(schedule.toString()); }
-
-  public void addSwimmerToMeet() {
-    System.out.println( "");
+  public void coachSchedule() {
+    System.out.println("Feature kommer i næste udgave!");
   }
 
-  public void inputSwimmerID() { System.out.println("Indtast svømmers medlemsnummer:"); }
+  public void planSwimmeet() {
+    System.out.println("Event Titel:");
+  }
 
-  public void inputDistance() { System.out.println("Indtast svømmers medlemsnummer:"); }
+  public void listSwimmeets(ArrayList<Swimmeet> schedule) {
+    System.out.println(schedule.toString());
+  }
 
-  public void inputTime() { System.out.println("Indtast svømmers medlemsnummer:"); }
+  public void addSwimmerToMeet() {
+    System.out.println("");
+  }
 
-  public void addCommendation() { System.out.println("Har svømmeren opnået en udmærkelse? (ja/nej)"); }
+  public void inputSwimmerID() {
+    System.out.println("Indtast svømmers medlemsnummer:");
+  }
 
-  public void commDescr() { System.out.println("1. Guld\t\t2. Sølv\t\t3.Bronze\t\t4.Andet"); }
+  public void inputDistance() {
+    System.out.println("Indtast svømmers medlemsnummer:");
+  }
 
-  public void specialCommDescr() { System.out.println("Indtast navn på udmærkelse:"); }
+  public void inputTime() {
+    System.out.println("Indtast svømmers medlemsnummer:");
+  }
+
+  public void addCommendation() {
+    System.out.println("Har svømmeren opnået en udmærkelse? (ja/nej)");
+  }
+
+  public void commDescr() {
+    System.out.println("1. Guld\t\t2. Sølv\t\t3.Bronze\t\t4.Andet");
+  }
+
+  public void specialCommDescr() {
+    System.out.println("Indtast navn på udmærkelse:");
+  }
 
 
   public void printMemberList(MemberList ml) {
@@ -206,6 +229,22 @@ public class UserInterface {
     }
     //Ekstra linjeskift efter sidste linje i tabel
     System.out.println();
+  }
+
+  public void printTop5(MemberList ml) {
+    String underLine = "-";
+    String line = "|";
+    String space = " ";
+    String dot = ".";
+
+    //Linjeadskillelse
+    System.out.println(underLine.repeat(128));
+
+    for (int i = 0; i < 5; i++) {
+    if (ml.getList().get(i) instanceof Senior){
+
+    }
+    }
   }
 /*
   public void printEventListTable(EventList meets) {
