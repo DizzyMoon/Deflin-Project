@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Scanner;
+import UI.UserInterface;
 
 public class FileHandler {
   Scanner sc = new Scanner(System.in);
@@ -121,7 +122,10 @@ public class FileHandler {
 
 
   public void saveMembersMethod(PrintStream printStream, ArrayList<Member> memberArrayList) {
-    System.out.println("Saving...");
+
+    UserInterface ui = new UserInterface();
+
+    ui.savingMessage();
     for (Member member : memberArrayList) {
       printStream.print(member.getName());
       printStream.print(";");
@@ -141,6 +145,6 @@ public class FileHandler {
       printStream.print(";");
       printStream.print("\n");
     }
-    System.out.println("Saved!");
+    ui.savedMessage();
   }
 }

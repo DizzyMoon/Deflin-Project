@@ -75,11 +75,31 @@ public class UserInterface {
     System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.yyyy)");
   }
 
-  public void competetive() {
-    System.out.println("Er det nye medlem konkurrencesvømmer? (ja/nej)");
+  public void savingMessage(){
+    System.out.println("Gemmer...");
   }
 
-  public void typeMemberID() { System.out.println("Indtast medlemsnummer for det medlem, hvis oplysninger du vil ændre:"); }
+  public void deleting(){
+    System.out.println("Sletter...");
+  }
+
+  public void deleted(){
+    System.out.println("Slettet!");
+  }
+
+  public void savedMessage(){
+    System.out.println("Gemt!");
+  }
+
+  public void competitive() {
+    System.out.println("Er det nye medlem konkurrencesvømmer(ja) eller ikke(nej)");
+  }
+
+  public void typeMemberIDForNameChange() { System.out.println("Indtast medlemsnummer for det medlem, hvis oplysninger du vil ændre:"); }
+
+  public void typeMemberIDForRemove(){
+    System.out.println("Indtast medlemsnummer for det medlem, hvis medlemskab du vil slette");
+  }
 
   public void nameChange() {
     System.out.println("Indtast nyt navn:");
@@ -97,6 +117,10 @@ public class UserInterface {
 
   public void typeAltered(String newType) { System.out.println("Medlemsstatus er ændret til " + newType); }
 
+
+  public void elementDoesNotExits(){
+    System.out.println("Element findes ikke");
+  }
 
   public void coachSchedule() { System.out.println("Feature kommer i næste udgave!"); }
 
