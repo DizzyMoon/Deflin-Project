@@ -50,14 +50,14 @@ public class Controller {
         case 1 -> formandNewMember();
         case 2 -> removeMember();
         case 3 -> {
-          ui.typeMemberID();
+          ui.typeMemberIDForNameChange();
           String memberID = sc.next();
           findMember(memberID, cr.getMemberList()).toggleStatus();
           String activeMember = findMember(memberID, cr.getMemberList()).getActive();
           ui.statusAltered(activeMember);
         }
         case 4 -> {
-          ui.typeMemberID();
+          ui.typeMemberIDForNameChange();
           String memberID = sc.next();
           findMember(memberID, cr.getMemberList()).toggleCompetitive();
           String competionSwimmer = findMember(memberID, cr.getMemberList()).getCompetitive();
@@ -66,15 +66,15 @@ public class Controller {
         case 5 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
-          ui.typeMemberID();
-          String memberID = sc.next();                                  // nextLine crasher i runtime 1
+          ui.typeMemberIDForNameChange();
+          String memberID1 = sc.next();                                  // nextLine crasher i runtime 1
           ui.nameChange();
           //String newName = sc.next();                                   // nextLine indsætter tomt felt
           String firstName = sc.next();
           String middleName = sc.next();
           String surname = sc.next();
           String newName = (firstName + " " + middleName + " " + surname);
-          findMember(memberID, cr.getMemberList()).setName(newName);    // CRASHER! InputMismatchException
+          findMember(memberID1, cr.getMemberList()).setName(newName);    // CRASHER! InputMismatchException
           fileHandler.saveMembersToCSV(cr.getMemberList());             // throwFor, next, nextInt, nextInt
         }
         case 6 -> ui.printMemberListTable(cr.getMemberList());
@@ -165,7 +165,7 @@ public class Controller {
     int year = Integer.valueOf(birthdate.substring(second + 1));
     LocalDate newDate = LocalDate.of(year, month, date);
 
-    ui.competetive();
+    ui.competitive();
     String competitive = sc.next();
     if (competitive.equalsIgnoreCase("ja")) {
       competition = true;
