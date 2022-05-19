@@ -37,4 +37,8 @@ public class Achievement {
     }
 
     public void setDistance(int distance) { this.distance = distance; }
+
+    public int compareTo(Achievement o) {
+        return this.getTime().compareTo(o.getTime());
+    }
 }

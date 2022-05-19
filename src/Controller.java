@@ -175,7 +175,7 @@ public class Controller {
     String email = sc.next();
 
     cr.createNewMember(name, newDate, phoneNumber, email, competition, true);
-    sortBy();
+    sortBy(1);
   }
 
   /*public double subscription(){
@@ -203,8 +203,18 @@ public class Controller {
     System.out.println("Subscription income:" + income);
     }*/
 
-  public void sortBy() {
-    Collections.sort((List<Member>) cr.getList());
+  public void sortBy(int sort) {
+    if (sort == 1) {
+      Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+    }
+    else if (sort == 3){
+      for (int i = 0; i <= cr.getList().size(); i++) {
+        Collections.sort((List<Achievement>) cr.getList().get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+        Collections.sort((List<Achievement>) cr.getList().get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+        Collections.sort((List<Achievement>) cr.getList().get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+        Collections.sort((List<Achievement>) cr.getList().get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+      }
+    }
   }
 
   public Member findMember(String userID, MemberList memberList) {
