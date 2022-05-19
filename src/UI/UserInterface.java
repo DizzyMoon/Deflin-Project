@@ -274,11 +274,10 @@ public class UserInterface {
 
       //Tredjebedste tid
       System.out.print(space + ml.getList().get(i).getCrawlResults().get(2) + space.repeat(9) + line);
+
+      //Linjeadskillelse
+      System.out.println(underLine.repeat(128));
     }
-
-    //Linjeadskillelse
-    System.out.println(underLine.repeat(128));
-
   }
 /*
   public void printEventListTable(EventList meets) {
