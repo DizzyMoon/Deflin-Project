@@ -85,7 +85,7 @@ public abstract class Member implements Comparable<Member> {
 
   public void toggleStatus() { this.active = !active; }
 
-    public void setArrears(double arrears) {
+  public void setArrears(double arrears) {
     this.arrears = arrears;
   }
 
@@ -98,7 +98,7 @@ public abstract class Member implements Comparable<Member> {
   }
 
   public String getCompetitive() {
-    return competitive ? "Kompetitiv" : "Motionist";
+    return competitive ? "Konkurrencesvømmer" : "Motionist";
   }
 
   public double getArrears() {
