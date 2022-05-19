@@ -1,7 +1,6 @@
 package members;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Junior extends Member{
   public Junior(String name, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
