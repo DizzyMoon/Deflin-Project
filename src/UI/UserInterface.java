@@ -273,7 +273,7 @@ public class UserInterface {
       System.out.print(space + ml.getList().get(i).getCrawlResults().get(1) + space.repeat(9) + line);
 
       //Tredjebedste tid
-      System.out.print(space + ml.getList().get(i).getCrawlResults().get(2) + space.repeat(9) + line);
+      System.out.print(space + ml.getList().get(i).getCrawlResults().get(2) + space.repeat(11) + line);
 
       //Linjeadskillelse
       System.out.println(underLine.repeat(128));
