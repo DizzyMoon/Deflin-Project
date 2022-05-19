@@ -1,29 +1,40 @@
 package members;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Achievement {
-    private String dicipline;
-    private Date date;
+    private String discipline;
+    private LocalDateTime result;                  // use time field, to store the finish time
+    private int distance;
+    private String medal;
 
-    public Achievement(String dicipline, Date date){
-        this.dicipline = dicipline;
-        this.date = date;
+    public Achievement(String dicipline, LocalDateTime result, int distance){
+        this.discipline = dicipline;
+        this.result = result;
+        this.distance = distance;
     }
 
-    public String dicipline(){
-        return dicipline;
+    public String getDiscipline(){
+        return discipline;
     }
 
-    public Date getDate(){
-        return date;
+    public LocalDateTime getTime(){
+        return result;
     }
 
-    public void setDicipline(String dicipline){
-        this.dicipline = dicipline;
+    public int getDistance() { return distance; }
+
+    public void setMedal(String medal) { this.medal = medal; }
+
+// maybe other setters too, need for... later edit/addition to meet?
+    public void setDiscipline(String discipline){
+        this.discipline = discipline;
     }
 
-    public void setDate(Date date){
-        this.date = date;
+    public void setTime(LocalDateTime result){
+        this.result = result;
     }
+
+    public void setDistance(int distance) { this.distance = distance; }
 }

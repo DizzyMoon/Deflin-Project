@@ -11,6 +11,10 @@ public class MemberList {
     return list;
   }
 
+  public void setList (ArrayList<Member> list){
+    this.list = list;
+  }
+
   public String toString() {
     for (Member member : list) {
       sb.append(member + "\n");

@@ -1,6 +1,7 @@
 package members;
 
 import javax.xml.transform.Result;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ public abstract class Member implements Comparable<Member> {
 
   private String name;
   private String memberID;
-  private final Date birth;
+  private final LocalDate birth;
   private String phoneNumber;
   private String email;
   private boolean competitive;
@@ -21,7 +22,7 @@ public abstract class Member implements Comparable<Member> {
   private ArrayList<Achievement> breaststrokeResults;
 
 
-  public Member(String name, Date birth, String phoneNumber, String email, boolean competitive, boolean active) {
+  public Member(String name, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
     this.name = name;
     this.phoneNumber = phoneNumber;
     this.email = email;
@@ -30,6 +31,16 @@ public abstract class Member implements Comparable<Member> {
     this.competitive = competitive;
   }
 
+  public Member(String name, String memberID, LocalDate birth, String phoneNumber, String email, boolean competitive, double arrears, boolean active) {
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.email = email;
+    this.active = active;
+    this.birth = birth;
+    this.competitive = competitive;
+    this.arrears = arrears;
+    this.memberID = memberID;
+  }
 
   public String getActive() {
     return this.active ? "Aktivt" : "Inaktivt";
@@ -64,7 +75,7 @@ public abstract class Member implements Comparable<Member> {
     this.memberID = memberID;
   }
 
-  public Date getBirth() {
+  public LocalDate getBirth() {
     return birth;
   }
 
@@ -74,7 +85,7 @@ public abstract class Member implements Comparable<Member> {
 
   public void toggleStatus() { this.active = !active; }
 
-    public void setArrears(double arrears) {
+  public void setArrears(double arrears) {
     this.arrears = arrears;
   }
 
@@ -87,7 +98,7 @@ public abstract class Member implements Comparable<Member> {
   }
 
   public String getCompetitive() {
-    return competitive ? "Competitive member" : "Exercise member";
+    return competitive ? "Konkurrencesvømmer" : "Motionist";
   }
 
   public double getArrears() {
