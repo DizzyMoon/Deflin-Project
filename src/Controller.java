@@ -1,7 +1,5 @@
 import UI.UserInterface;
-import members.Creator;
-import members.Member;
-import members.MemberList;
+import members.*;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -81,7 +79,7 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> System.out.println("Not done, son");
-        case 2 -> System.out.println("Not done, son");
+        case 2 -> subscription();
         case 3 -> run();
         case 4 -> exit();
       }
@@ -140,6 +138,31 @@ public class Controller {
     sortBy();
   }
 
+  public double subscription(){
+    double subscription;
+    double subscriptionJunior = 1000;
+    double subscriptionSenior = 1600;
+    double subscriptionRetired = 1200;
+    double subscriptionPassive = 500;
+
+    if(active == true){
+      if(Member.equals("Junior")){ //alternativt en funktion der checker om alderen er under 18
+        subscription = 1000;
+      } else if(Member.equals("Senior")){ //alternativt en funktion der checker om alderen er over 18
+        subscription = 1600;
+      } else subscription = 1200;
+    } else subscription = 500;
+    return subscription;
+  }
+
+  public void subscriptionIncome() {
+    double income = 0;
+    for (double i = 0; i < cr.getList().size(); i++) {
+      income += cr.getList().size().get(i).subscription();
+    }
+    System.out.println("Subscription income:" + income);
+    }
+
   public void sortBy() {
     Collections.sort((List<Member>) cr.getList());
   }
@@ -151,6 +174,4 @@ public class Controller {
     }
     return null;
   }
-
-}
 
