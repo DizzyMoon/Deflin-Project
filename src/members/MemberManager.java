@@ -8,7 +8,6 @@ import java.util.Random;
 
 import UI.UserInterface;
 import filehandling.FileHandler;
-import members.Creator;
 
 public class MemberManager {
 

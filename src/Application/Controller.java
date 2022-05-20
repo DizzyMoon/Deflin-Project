@@ -24,8 +24,6 @@ public class Controller {
   }
 
   public void run() throws FileNotFoundException {
-
-    System.out.println("Hej");
     memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
 
     while (running) {
