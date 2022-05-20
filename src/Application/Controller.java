@@ -94,8 +94,8 @@ public class Controller {
       int input = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       switch (input) {
-        case 1 -> System.out.println("Not done, son");
-        // case 2 -> subscription();
+        case 1 -> subscriptionIncome();
+        case 2 -> System.out.println("Not done, son");
         case 3 -> run();
         case 4 -> exit();
       }
@@ -184,30 +184,30 @@ public class Controller {
     sortBy(1);
   }
 
-  /*public double subscription(){
-    double subscription;
-    double subscriptionJunior = 1000;
-    double subscriptionSenior = 1600;
-    double subscriptionRetired = 1200;
-    double subscriptionPassive = 500;
+  public int subscription(int i) {
+    int subscription;
+    int subscriptionJunior = 1000;
+    int subscriptionSenior = 1600;
+    int subscriptionRetired = 1200;
+    int subscriptionPassive = 500;
 
-    if(active == true){
-      if(Member.equals(Junior)){ //alternativt en funktion der checker om alderen er under 18
+    if (cr.getMemberList().getList().equals("aktivt")) {
+      if (cr.getMemberList().getList().equals("Junior")) {
         subscription = subscriptionJunior;
-      } else if(Member.equals(Senior)){ //alternativt en funktion der checker om alderen er over 18
+      } else if (cr.getMemberList().getList().equals("Senior")) {
         subscription = subscriptionSenior;
       } else subscription = subscriptionRetired;
     } else subscription = subscriptionPassive;
-    return subscription;
-  }
+      return subscription;
+    }
 
   public void subscriptionIncome() {
-    double income = 0;
-    for (double i = 0; i < cr.getList().size(); i++) {
-      income += cr.getList().size().get(i).subscription();
+    int income = 0;
+    for (int i = 0; i < cr.getList().size(); i++) {
+      income += cr.getList().size() * subscription(i);
     }
     System.out.println("Subscription income:" + income);
-    }*/
+    }
 
   public void sortBy(int sort) {
     if (sort == 1) {
