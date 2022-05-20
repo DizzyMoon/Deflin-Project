@@ -1,15 +1,14 @@
 package members;
 
-import javax.xml.transform.Result;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.Arrays;
 
 public abstract class Member implements Comparable<Member> {
 
   private String name;
   private String memberID;
+  private final String gender;
   private final LocalDate birth;
   private String phoneNumber;
   private String email;
@@ -20,10 +19,12 @@ public abstract class Member implements Comparable<Member> {
   private ArrayList<Achievement> crawlResults;
   private ArrayList<Achievement> backstrokeResults;
   private ArrayList<Achievement> breaststrokeResults;
+  private Achievement[] tempTop3 = new Achievement[3];
 
 
-  public Member(String name, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
+  public Member(String name, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
     this.name = name;
+    this.gender = gender;
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.active = active;
@@ -31,19 +32,22 @@ public abstract class Member implements Comparable<Member> {
     this.competitive = competitive;
   }
 
-  public Member(String name, String memberID, LocalDate birth, String phoneNumber, String email, boolean competitive, double arrears, boolean active) {
+  public Member(String name, String memberID, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, double arrears, boolean active) {
     this.name = name;
+    this.memberID = memberID;
+    this.gender = gender;
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.active = active;
     this.birth = birth;
     this.competitive = competitive;
     this.arrears = arrears;
-    this.memberID = memberID;
   }
 
+  public String getGender() { return gender; }
+
   public String getActive() {
-    return this.active ? "Aktivt" : "Inaktivt";
+    return this.active ? "Aktiv" : "Inaktiv";
   }   // Skal i UI-klasse?
 
   public boolean getActiveBool() {
@@ -137,6 +141,14 @@ public abstract class Member implements Comparable<Member> {
     this.breaststrokeResults = breaststrokeResults;
   }
 
+  public void setTempTop3(int i, Achievement achievement){
+    this.tempTop3[i] = achievement;
+  }
+
+  public Achievement[] getTempTop3() {
+    return tempTop3;
+  }
+
   public String toString() {
     return name + ", " + birth + ", " + getCompetitive() + " - " + getActive();
   }
@@ -145,4 +157,6 @@ public abstract class Member implements Comparable<Member> {
   public int compareTo(Member o) {
     return this.name.compareTo(o.getName());
   }
+
+
 }

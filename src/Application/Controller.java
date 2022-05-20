@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
 import filehandling.FileHandler;
 
 public class Controller {
@@ -24,7 +25,8 @@ public class Controller {
   }
 
   public void run() throws FileNotFoundException {
-    memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
+    if (fileHandler.hasSavedData())
+      memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
 
     while (running) {
       ui.startupMenu();
@@ -155,6 +157,8 @@ public class Controller {
     boolean competition = false;
     ui.memberName();
     String name = sc.nextLine();
+    ui.gender();
+    String gender = sc.next();
     ui.dateOfBirth();
     String birthdate = sc.next();
     int first = birthdate.indexOf(".");
@@ -179,21 +183,21 @@ public class Controller {
     ui.email();
     String email = sc.next();
 
-    memberManager.createNewMember(name, newDate, phoneNumber, email, competition, true);
-    sortBy();
+    memberManager.createNewMember(name, gender, newDate, phoneNumber, email, competition, true);
+    sortBy(1);
   }
 
-  /*public double subscription(){
-    double subscription;
-    double subscriptionJunior = 1000;
-    double subscriptionSenior = 1600;
-    double subscriptionRetired = 1200;
-    double subscriptionPassive = 500;
+  public int subscription(int i) {
+    int subscription;
+    int subscriptionJunior = 1000;
+    int subscriptionSenior = 1600;
+    int subscriptionRetired = 1200;
+    int subscriptionPassive = 500;
 
-    if(active == true){
-      if(Member.equals(Junior)){ //alternativt en funktion der checker om alderen er under 18
+    if (memberManager.getMemberList().getList().equals("aktivt")) {
+      if (memberManager.getMemberList().getList().equals("Junior")) {
         subscription = subscriptionJunior;
-      } else if(Member.equals(Senior)){ //alternativt en funktion der checker om alderen er over 18
+      } else if (memberManager.getMemberList().getList().equals("Senior")) {
         subscription = subscriptionSenior;
       } else subscription = subscriptionRetired;
     } else subscription = subscriptionPassive;
@@ -201,24 +205,92 @@ public class Controller {
   }
 
   public void subscriptionIncome() {
-    double income = 0;
-    for (double i = 0; i < cr.getList().size(); i++) {
-      income += cr.getList().size().get(i).subscription();
+    int income = 0;
+    for (int i = 0; i < memberManager.getList().size(); i++) {
+      income += memberManager.getList().size() * subscription(i);
     }
     System.out.println("Subscription income:" + income);
-    }*/
-
-  public void sortBy() {
-    Collections.sort((List<Member>) memberManager.getList());
   }
 
-  public Member findMember(String userID, MemberList memberList) {
-    for (int i = 0; i < memberList.getList().size(); i++) {
-      if (memberList.getList().get(i).getMemberID().equals(userID))
-        return memberList.getList().get(i);
+  public void sortBy(int sort) {
+    switch (sort) {
+      case 1 -> {
+        //Alfabetisk sortering - virker
+        Collections.sort((List<Member>) memberManager.getList(), (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+      }
+      case 2 -> {
+        //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
+        for (int i = 0; i <= memberManager.getList().size(); i++) {
+
+          //Sortering af backcrawl og indv. top 3
+          Collections.sort((List<Achievement>) memberManager.getList().get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3backCrawl();
+        }
+      }
+      case 3 -> {
+        for (int i = 0; i <= memberManager.getList().size(); i++) {
+          Collections.sort((List<Achievement>) memberManager.getList().get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3breastStroke();
+        }
+      }
+      case 4 -> {     //Sortering af butterfly og indv. top3 for videre sortering
+        for (int i = 0; i <= memberManager.getList().size(); i++) {
+          Collections.sort((List<Achievement>) memberManager.getList().get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3butterfly();
+        }
+      }
+      case 5 -> {
+        //Achievement listerne sorteres herunder for hver bruger hvorefter de tre bedste resultater flyttes til en Array for videre sortering af top5
+        for (int i = 0; i <= memberManager.getList().size(); i++) {
+          Collections.sort((List<Achievement>) memberManager.getList().get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3crawl();
+        }
+      }
+      case 6 -> {
+        //Oprettelse af indv. top3 for hver svømmer
+        Collections.sort((List<Member>) memberManager.getList(), (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
+      }
     }
-    return null;
   }
 
-}
+    public Member findMember (String userID, MemberList memberList){
+      for (int i = 0; i < memberList.getList().size(); i++) {
+        if (memberList.getList().get(i).getMemberID().equals(userID))
+          return memberList.getList().get(i);
+      }
+      return null;
+    }
+
+    public void top3crawl () {
+      for (int i = 0; i < memberManager.getList().size(); i++) {
+        for (int o = 0; o < 3; o++) {
+          memberManager.getList().get(i).setTempTop3(o, memberManager.getList().get(i).getCrawlResults().get(o));
+        }
+      }
+    }
+
+    public void top3butterfly () {
+      for (int i = 0; i < memberManager.getList().size(); i++) {
+        for (int o = 0; o < 3; o++)
+          memberManager.getList().get(i).setTempTop3(o, memberManager.getList().get(i).getButterflyResults().get(o));
+      }
+    }
+
+
+    public void top3backCrawl () {
+      for (int i = 0; i < memberManager.getList().size(); i++) {
+        for (int o = 0; o < 3; o++) {
+          memberManager.getList().get(i).setTempTop3(o, memberManager.getList().get(i).getBackcrawlResults().get(o));
+        }
+      }
+    }
+
+    public void top3breastStroke () {
+      for (int i = 0; i < memberManager.getList().size(); i++) {
+        for (int o = 0; o < 3; o++)
+          memberManager.getList().get(i).setTempTop3(o, memberManager.getList().get(i).getBreaststrokeResults().get(o));
+      }
+    }
+  }
+
 

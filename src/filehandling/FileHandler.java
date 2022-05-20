@@ -22,6 +22,10 @@ public class FileHandler {
   public FileHandler() throws FileNotFoundException {
   }
 
+  public boolean hasSavedData() {
+    if (membersCSV.isFile()) { return true; }
+    return false; }
+
   public void saveMembersToCSV(MemberList memberList) throws FileNotFoundException {
     PrintStream out = new PrintStream(membersCSV);
     saveMembersMethod(out, memberList.getList());
@@ -39,6 +43,7 @@ public class FileHandler {
 
       String name = lineScanner.next();
       String memberID = lineScanner.next();
+      String gender = lineScanner.next();
       String birthString = lineScanner.next();
       String phoneNumber = lineScanner.next();
       String email = lineScanner.next();
@@ -56,9 +61,9 @@ public class FileHandler {
       Member newMember;
 
       if (calculateIfJunior(birth)){
-        newMember = new Junior(name, memberID, birth, phoneNumber, email, competitive, arrears, active);
+        newMember = new Junior(name, memberID, gender, birth, phoneNumber, email, competitive, arrears, active);
       } else {
-        newMember = new Senior(name, memberID, birth, phoneNumber, email, competitive, arrears, active);
+        newMember = new Senior(name, memberID, gender, birth, phoneNumber, email, competitive, arrears, active);
       }
 
       newMemberList.add(newMember);
@@ -66,8 +71,8 @@ public class FileHandler {
     }
       return newMemberList;
   }
-
-  public int getMonthNumber(String month) {
+/*
+  public int getMonthNumber(String month) {       // Is this just a homemade getMonthValue? It's not called?
     int monthNum = 0;
     switch (month) {
       case "Jan" -> {
@@ -109,7 +114,7 @@ public class FileHandler {
     }
     return monthNum;
   }
-
+*/
 
   public boolean calculateIfJunior(LocalDate dateIn) {
     LocalDate now = LocalDate.now();
