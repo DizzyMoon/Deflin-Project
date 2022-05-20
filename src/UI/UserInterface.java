@@ -44,6 +44,7 @@ public class UserInterface {
         3 - Se stævner
         4 - Udtag svømmere til stævne
         5 - Bogfør præstation
+        6 - Se top 5-liste
         6 - Tilbage til hovedmenu
         7 - Luk
         """);
@@ -64,9 +65,9 @@ public class UserInterface {
 
   public void top5StyleUI(){
     System.out.println("""
-        1 - Brystsvømning
-        2 - Crawl
-        3 - Backcrawl
+        1 - Backcrawl
+        2 - Brystsvømning
+        3 - Crawl
         4 - Butterfly""");
   }
   /*

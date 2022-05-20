@@ -54,15 +54,15 @@ public class Controller {
         case 3 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
-          findMember(memberID, cr.getMemberList()).toggleStatus();
-          String activeMember = findMember(memberID, cr.getMemberList()).getActive();
+          findMember(memberID).toggleStatus();
+          String activeMember = findMember(memberID).getActive();
           ui.statusAltered(activeMember);
         }
         case 4 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
-          findMember(memberID, cr.getMemberList()).toggleCompetitive();
-          String competionSwimmer = findMember(memberID, cr.getMemberList()).getCompetitive();
+          findMember(memberID).toggleCompetitive();
+          String competionSwimmer = findMember(memberID).getCompetitive();
           ui.typeAltered(competionSwimmer);
         }
         case 5 -> {
@@ -76,7 +76,7 @@ public class Controller {
           String middleName = sc.next();
           String surname = sc.next();
           String newName = (firstName + " " + middleName + " " + surname);
-          findMember(memberID1, cr.getMemberList()).setName(newName);    // CRASHER! InputMismatchException
+          findMember(memberID1);    // CRASHER! InputMismatchException
           fileHandler.saveMembersToCSV(cr.getMemberList());             // throwFor, next, nextInt, nextInt
         }
         case 6 -> ui.printMemberListTable(cr.getMemberList());
@@ -138,8 +138,49 @@ public class Controller {
           }
           //findMember(memberID, cr.getMemberList()).logResult();
         }
-        case 6 -> run();
-        case 7 -> exit();
+        case 6 -> {
+          ui.top5AgeUI();
+          int ageChoice = sc.nextInt();
+          sc.nextLine(); //Scannerbug fix
+          if (ageChoice == 1){
+            top5Gender(cr.sortSenior());
+          }
+          else if (ageChoice == 2){
+            top5Gender(cr.sortJunior());
+          }
+        }
+        case 7 -> run();
+        case 8 -> exit();
+      }
+    }
+  }
+
+  public void top5Gender(ArrayList member) {
+    boolean running = true;
+    while (running){
+      ui.top5GenderUI();
+      int genderChoice = sc.nextInt();
+      sc.nextLine(); //Scannerbug fix
+      if (genderChoice == 1){
+        top5Style(mensList(member));
+      }
+      else if (genderChoice == 2){
+        top5Style(womensList(member));
+      }
+    }
+  }
+
+  public void top5Style(ArrayList<Member> member){
+    boolean running = true;
+    while (running){
+      ui.top5StyleUI();
+      int styleChoice = sc.nextInt();
+      sc.nextLine(); //Scannerbug fix
+      switch (styleChoice){
+       case 1 -> {sortBy(2, member);}
+       case 2 -> {sortBy(3, member);}
+       case 3 -> {sortBy(4, member);}
+       case 4 -> {sortBy(5, member);}
       }
     }
   }
@@ -185,7 +226,7 @@ public class Controller {
     String email = sc.next();
 
     cr.createNewMember(name, gender, newDate, phoneNumber, email, competition, true);
-    sortBy(1);
+    sortBy(1, cr.getList());
   }
 
   public int subscription(int i) {
@@ -213,7 +254,7 @@ public class Controller {
     System.out.println("Subscription income:" + income);
   }
 
-  public void sortBy(int sort) {
+  public void sortBy(int sort, ArrayList<Member> member) {
 
     switch (sort) {
       case 1 -> {
@@ -222,43 +263,43 @@ public class Controller {
       }
       case 2 -> {
         //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
-        for (int i = 0; i <= cr.getList().size(); i++) {
+        for (int i = 0; i <= member.size(); i++) {
 
           //Sortering af backcrawl og indv. top 3
-          Collections.sort((List<Achievement>) cr.getList().get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          Collections.sort((List<Achievement>) member.get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           top3backCrawl();
         }
       }
       case 3 -> {
-        for (int i = 0; i <= cr.getList().size(); i++) {
-          Collections.sort((List<Achievement>) cr.getList().get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+        for (int i = 0; i <= member.size(); i++) {
+          Collections.sort((List<Achievement>) member.get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           top3breastStroke();
         }
       }
       case 4 -> {     //Sortering af butterfly og indv. top3 for videre sortering
-        for (int i = 0; i <= cr.getList().size(); i++) {
-          Collections.sort((List<Achievement>) cr.getList().get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+        for (int i = 0; i <= member.size(); i++) {
+          Collections.sort((List<Achievement>) member.get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           top3butterfly();
         }
       }
       case 5 -> {
         //Achievement listerne sorteres herunder for hver bruger hvorefter de tre bedste resultater flyttes til en Array for videre sortering af top5
-        for (int i = 0; i <= cr.getList().size(); i++) {
-          Collections.sort((List<Achievement>) cr.getList().get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+        for (int i = 0; i <= member.size(); i++) {
+          Collections.sort((List<Achievement>) member.get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           top3crawl();
         }
       }
       case 6 -> {
         //Oprettelse af indv. top3 for hver svømmer
-        Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
       }
     }
   }
 
-  public Member findMember(String userID, MemberList memberList) {
-    for (int i = 0; i < memberList.getList().size(); i++) {
-      if (memberList.getList().get(i).getMemberID().equals(userID))
-        return memberList.getList().get(i);
+  public Member findMember(String userID) {
+    for (int i = 0; i < cr.getList().size(); i++) {
+      if (cr.getList().get(i).getMemberID().equals(userID))
+        return cr.getList().get(i);
     }
     return null;
   }
@@ -294,20 +335,20 @@ public class Controller {
     }
   }
 
-  public ArrayList<Member> womensList() {
+  public ArrayList<Member> womensList(ArrayList<Member> member) {
     ArrayList<Member> women = null;
-    for (int i = 0; i < cr.getList().size(); i++)
-      if (cr.getList().get(i).getGender().equals("Kvinde")) {
-        women.add(cr.getList().get(i));
+    for (int i = 0; i < member.size(); i++)
+      if (member.get(i).getGender().equals("Kvinde")) {
+        women.add(member.get(i));
       }
     return women;
   }
 
-  public ArrayList<Member> mensList() {
+  public ArrayList<Member> mensList(ArrayList<Member> member) {
     ArrayList<Member> men = null;
-    for (int i = 0; i < cr.getList().size(); i++)
-      if (cr.getList().get(i).getGender().equals("Mand")) {
-        men.add(cr.getList().get(i));
+    for (int i = 0; i < member.size(); i++)
+      if (member.get(i).getGender().equals("Mand")) {
+        men.add(member.get(i));
       }
     return men;
   }
