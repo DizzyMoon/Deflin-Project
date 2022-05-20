@@ -44,9 +44,31 @@ public class UserInterface {
         3 - Se stævner
         4 - Udtag svømmere til stævne
         5 - Bogfør præstation
+        6 - Se top 5-liste
         6 - Tilbage til hovedmenu
         7 - Luk
         """);
+  }
+
+  public void top5AgeUI(){
+    System.out.println("""
+        1 - Se top5 SENIOR
+        2 - Se top5 Junior
+        """);
+  }
+
+  public void top5GenderUI(){
+    System.out.println("""
+        1. Se top5 herrer
+        2. Se top5 kvinder""");
+  }
+
+  public void top5StyleUI(){
+    System.out.println("""
+        1 - Backcrawl
+        2 - Brystsvømning
+        3 - Crawl
+        4 - Butterfly""");
   }
   /*
   public void infoConsoleUI() {
@@ -243,17 +265,29 @@ public class UserInterface {
     System.out.println();
   }
 
-  public void printTop5(MemberList ml) {
+  public void printTop5(ArrayList<Member> member) {
     String underLine = "-";
     String line = "|";
     String space = " ";
     String dot = ".";
-
-    if (ml.getList().get(0) instanceof Junior){
-      System.out.println("Top 5 - JUNIOR");
+    String gender = "";
+    if (member.get(0) instanceof Junior){
+      if (member.get(0).getGender().equals("Mand")){
+        gender = "herrer";
+      }
+      else if (member.get(0).getGender().equals("Kvinde")){
+        gender = "kvinder";
+      }
+      System.out.println("Top 5 - JUNIOR " + gender);
     }
-    else if (ml.getList().get(0) instanceof Senior){
-      System.out.println("Top 5 - SENIOR");
+    else if (member.get(0) instanceof Senior){
+      if (member.get(0).getGender().equals("Mand")){
+        gender = "herrer";
+      }
+      else if (member.get(0).getGender().equals("Kvinde")){
+        gender = "kvinder";
+      }
+      System.out.println("Top 5 - SENIOR " + gender);
     }
 
     System.out.println(" #   | Navn" + space.repeat(26) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
@@ -266,16 +300,16 @@ public class UserInterface {
       System.out.print("Nr. " + i + space + line);
 
       //Navn
-      System.out.print(ml.getList().get(i).getName() + space.repeat(31 - ml.getList().get(i).getName().length()) + line);
+      System.out.print(member.get(i).getName() + space.repeat(31 - member.get(i).getName().length()) + line);
 
       //Svømmers bedste tid
-      System.out.print(space + ml.getList().get(i).getCrawlResults().get(0) + space.repeat(5) + line);
+      System.out.print(space + member.get(i).getCrawlResults().get(0) + space.repeat(5) + line);
 
       //Næstbedste tid
-      System.out.print(space + ml.getList().get(i).getCrawlResults().get(1) + space.repeat(9) + line);
+      System.out.print(space + member.get(i).getCrawlResults().get(1) + space.repeat(9) + line);
 
       //Tredjebedste tid
-      System.out.print(space + ml.getList().get(i).getCrawlResults().get(2) + space.repeat(11) + line);
+      System.out.print(space + member.get(i).getCrawlResults().get(2) + space.repeat(11) + line);
 
       //Linjeadskillelse
       System.out.println(underLine.repeat(128));
