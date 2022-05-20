@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
 import filehandling.FileHandler;
 
 public class Controller {
@@ -210,21 +211,45 @@ public class Controller {
     }*/
 
   public void sortBy(int sort) {
-    if (sort == 1) {
-      //Alfabetisk sortering - virker
-      Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
-    }
-    else if (sort == 3){
-      //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
-      for (int i = 0; i <= cr.getList().size(); i++) {
-        Collections.sort((List<Achievement>) cr.getList().get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
-        Collections.sort((List<Achievement>) cr.getList().get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
-        Collections.sort((List<Achievement>) cr.getList().get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
-        Collections.sort((List<Achievement>) cr.getList().get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+
+    switch (sort) {
+      case 1 -> {
+        //Alfabetisk sortering - virker
+        Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+      }
+      case 2 -> {
+        //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
+        for (int i = 0; i <= cr.getList().size(); i++) {
+
+          //Sortering af backcrawl og indv. top 3
+          Collections.sort((List<Achievement>) cr.getList().get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3backCrawl();
+        }
+      }
+      case 3 -> {
+        for (int i = 0; i <= cr.getList().size(); i++) {
+          Collections.sort((List<Achievement>) cr.getList().get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3breastStroke();
+        }
+      }
+      case 4 -> {     //Sortering af butterfly og indv. top3 for videre sortering
+        for (int i = 0; i <= cr.getList().size(); i++) {
+          Collections.sort((List<Achievement>) cr.getList().get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3butterfly();
+        }
+      }
+      case 5 -> {
+        //Achievement listerne sorteres herunder for hver bruger hvorefter de tre bedste resultater flyttes til en Array for videre sortering af top5
+        for (int i = 0; i <= cr.getList().size(); i++) {
+          Collections.sort((List<Achievement>) cr.getList().get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3crawl();
+        }
+      }
+      case 6 -> {
+        //Oprettelse af indv. top3 for hver svømmer
+        Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
       }
     }
-    //To DO: Lav en Comparator der sammenligner første index i listen over hver Achievements tidsresultat, og sorterer derefter. Interface afhængig af det samme
-        Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getCrawlResults().get(0).compareTo(o2.getCrawlResults().get(0)));
   }
 
   public Member findMember(String userID, MemberList memberList) {
@@ -235,5 +260,36 @@ public class Controller {
     return null;
   }
 
+  public void top3crawl() {
+    for (int i = 0; i < cr.getList().size(); i++) {
+      for (int o = 0; o < 3; o++) {
+        cr.getList().get(i).setTempTop3(o, cr.getList().get(i).getCrawlResults().get(o));
+      }
+    }
+  }
+
+  public void top3butterfly() {
+    for (int i = 0; i < cr.getList().size(); i++) {
+      for (int o = 0; o < 3; o++)
+        cr.getList().get(i).setTempTop3(o, cr.getList().get(i).getButterflyResults().get(o));
+    }
+  }
+
+
+  public void top3backCrawl() {
+    for (int i = 0; i < cr.getList().size(); i++) {
+      for (int o = 0; o < 3; o++) {
+        cr.getList().get(i).setTempTop3(o, cr.getList().get(i).getBackcrawlResults().get(o));
+      }
+    }
+  }
+
+  public void top3breastStroke() {
+    for (int i = 0; i < cr.getList().size(); i++) {
+      for (int o = 0; o < 3; o++)
+      cr.getList().get(i).setTempTop3(o, cr.getList().get(i).getBreaststrokeResults().get(o));
+    }
+  }
 }
+
 
