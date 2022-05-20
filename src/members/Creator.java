@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Random;
+
 import UI.UserInterface;
 
 import filehandling.FileHandler;
@@ -28,7 +29,7 @@ public class Creator {
     member.setMemberID(ID);
   }
 
-  public void loadMembers() throws FileNotFoundException{
+  public void loadMembers() throws FileNotFoundException {
     memberList.setList(fileHandler.loadMemberList());
   }
 
@@ -51,18 +52,18 @@ public class Creator {
     }
   }
 
-/*  public void addMember(Member member) {      // Replaced with getList().add
-  public void addMember(Member member) {
-    memberList.getList().add(member);
-  }
-*/
-  public void removeMember (String UID) throws FileNotFoundException {
+  /*  public void addMember(Member member) {      // Replaced with getList().add
+    public void addMember(Member member) {
+      memberList.getList().add(member);
+    }
+  */
+  public void removeMember(String UID) throws FileNotFoundException {
     String memberID = UID;
     boolean found = false;
     int searchedElements = 0;
 
-    for (Member member : memberList.getList()){
-      if (member.getMemberID().equals(UID)){
+    for (Member member : memberList.getList()) {
+      if (member.getMemberID().equals(UID)) {
         found = true;
         ui.deleting();
         memberList.getList().remove(member);
@@ -71,7 +72,7 @@ public class Creator {
         break;
       }
       searchedElements++;
-      if (searchedElements == memberList.getList().size() && !found){
+      if (searchedElements == memberList.getList().size() && !found) {
         ui.elementDoesNotExits();
       }
     }
@@ -86,20 +87,20 @@ public class Creator {
     return memberList.getList();
   }
 
-  public ArrayList<Member> sortSenior(){
-    ArrayList<Member> seniorList = new ArrayList<Member>();
+  public ArrayList<Member> sortSenior() {
+    ArrayList<Member> seniorList = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
-      if (memberList.getList().get(i) instanceof Senior){
+      if (memberList.getList().get(i) instanceof Senior) {
         seniorList.add(memberList.getList().get(i));
       }
     }
     return seniorList;
   }
 
-  public ArrayList<Member> sortJunior(){
-    ArrayList<Member> juniorList = new ArrayList<Member>();
+  public ArrayList<Member> sortJunior() {
+    ArrayList<Member> juniorList = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
-      if (memberList.getList().get(i) instanceof Senior){
+      if (memberList.getList().get(i) instanceof Senior) {
         juniorList.add(memberList.getList().get(i));
       }
     }

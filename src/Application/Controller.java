@@ -177,7 +177,7 @@ public class Controller {
       int styleChoice = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       switch (styleChoice){
-       case 1 -> {sortBy(2, member);}
+       case 1 -> {ui.printTop5(sortBy(2, member));}
        case 2 -> {sortBy(3, member);}
        case 3 -> {sortBy(4, member);}
        case 4 -> {sortBy(5, member);}
@@ -254,7 +254,7 @@ public class Controller {
     System.out.println("Subscription income:" + income);
   }
 
-  public void sortBy(int sort, ArrayList<Member> member) {
+  public ArrayList<Member> sortBy(int sort, ArrayList<Member> member) {
 
     switch (sort) {
       case 1 -> {
@@ -294,6 +294,7 @@ public class Controller {
         Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
       }
     }
+    return member;
   }
 
   public Member findMember(String userID) {
