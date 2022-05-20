@@ -67,8 +67,10 @@ public class UserInterface {
   }
 
   public void memberName() {
-    System.out.println("Opretter nyt medlem.../nNavn:");
+    System.out.println("Opretter nyt medlem...\nNavn:");
   }
+
+  public void gender() { System.out.println("Køn: (H/D)"); }
 
   public void dateOfBirth() {
     System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.yyyy)");
@@ -148,11 +150,11 @@ public class UserInterface {
   }
 
   public void inputDistance() {
-    System.out.println("Indtast svømmers medlemsnummer:");
+    System.out.println("Konkurrence distance:");
   }
 
   public void inputTime() {
-    System.out.println("Indtast svømmers medlemsnummer:");
+    System.out.println("Indtast opnået resultat: (mm:ss)");
   }
 
   public void addCommendation() {

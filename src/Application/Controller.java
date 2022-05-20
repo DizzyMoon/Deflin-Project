@@ -24,7 +24,7 @@ public class Controller {
   }
 
   public void run() throws FileNotFoundException {
-
+if (fileHandler.hasSavedData())
     cr.loadMembers(); //Loads members from /src/data/members.csv
 
     while (running) {
@@ -156,6 +156,8 @@ public class Controller {
     boolean competition = false;
     ui.memberName();
     String name = sc.nextLine();
+    ui.gender();
+    String gender = sc. next();
     ui.dateOfBirth();
     String birthdate = sc.next();
     int first = birthdate.indexOf(".");
@@ -180,7 +182,7 @@ public class Controller {
     ui.email();
     String email = sc.next();
 
-    cr.createNewMember(name, newDate, phoneNumber, email, competition, true);
+    cr.createNewMember(name, gender, newDate, phoneNumber, email, competition, true);
     sortBy(1);
   }
 

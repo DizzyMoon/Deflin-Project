@@ -1,20 +1,12 @@
 package members;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 import UI.UserInterface;
 
-import members.Junior;
-import members.MemberList;
-import members.Member;
-import members.Senior;
 import filehandling.FileHandler;
 
 public class Creator {
@@ -40,18 +32,18 @@ public class Creator {
     memberList.setList(fileHandler.loadMemberList());
   }
 
-  public void createNewMember(String name, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
+  public void createNewMember(String name, String gender, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
     LocalDate now = LocalDate.now();
 
     Period p = Period.between(date, now);
 
     if (p.getYears() >= 18) {
-      Member newMemberSenior = new Senior(name, date, phoneNumber, email, competition, active);
+      Member newMemberSenior = new Senior(name, gender, date, phoneNumber, email, competition, active);
       createUserID(newMemberSenior);
       memberList.getList().add(newMemberSenior);
       fileHandler.saveMembersToCSV(memberList);
     } else {
-      Member newMemberJunior = new Junior(name, date, phoneNumber, email, competition, active);
+      Member newMemberJunior = new Junior(name, gender, date, phoneNumber, email, competition, active);
       createUserID(newMemberJunior);
       memberList.getList().add(newMemberJunior);
       fileHandler.saveMembersToCSV(memberList);

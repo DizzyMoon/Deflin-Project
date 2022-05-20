@@ -7,6 +7,7 @@ public abstract class Member implements Comparable<Member> {
 
   private String name;
   private String memberID;
+  private final String gender;
   private final LocalDate birth;
   private String phoneNumber;
   private String email;
@@ -19,8 +20,9 @@ public abstract class Member implements Comparable<Member> {
   private ArrayList<Achievement> breaststrokeResults;
 
 
-  public Member(String name, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
+  public Member(String name, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
     this.name = name;
+    this.gender = gender;
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.active = active;
@@ -28,16 +30,19 @@ public abstract class Member implements Comparable<Member> {
     this.competitive = competitive;
   }
 
-  public Member(String name, String memberID, LocalDate birth, String phoneNumber, String email, boolean competitive, double arrears, boolean active) {
+  public Member(String name, String memberID, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, double arrears, boolean active) {
     this.name = name;
+    this.memberID = memberID;
+    this.gender = gender;
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.active = active;
     this.birth = birth;
     this.competitive = competitive;
     this.arrears = arrears;
-    this.memberID = memberID;
   }
+
+  public String getGender() { return gender; }
 
   public String getActive() {
     return this.active ? "Aktiv" : "Inaktiv";
