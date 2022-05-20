@@ -87,7 +87,7 @@ public class Creator {
   }
 
   public ArrayList<Member> sortSenior(){
-    ArrayList<Member> seniorList = new ArrayList<>();
+    ArrayList<Member> seniorList = new ArrayList<Member>();
     for (int i = 0; i < 5; i++) {
       if (memberList.getList().get(i) instanceof Senior){
         seniorList.add(memberList.getList().get(i));
@@ -97,7 +97,7 @@ public class Creator {
   }
 
   public ArrayList<Member> sortJunior(){
-    ArrayList<Member> juniorList = new ArrayList<>();
+    ArrayList<Member> juniorList = new ArrayList<Member>();
     for (int i = 0; i < 5; i++) {
       if (memberList.getList().get(i) instanceof Senior){
         juniorList.add(memberList.getList().get(i));

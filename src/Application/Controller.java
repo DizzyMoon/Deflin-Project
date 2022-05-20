@@ -155,7 +155,7 @@ public class Controller {
     }
   }
 
-  public void top5Gender(ArrayList member) {
+  public void top5Gender(ArrayList<Member> member) {
     boolean running = true;
     while (running){
       ui.top5GenderUI();
@@ -336,7 +336,7 @@ public class Controller {
   }
 
   public ArrayList<Member> womensList(ArrayList<Member> member) {
-    ArrayList<Member> women = null;
+    ArrayList<Member> women = new ArrayList<>();
     for (int i = 0; i < member.size(); i++)
       if (member.get(i).getGender().equals("Kvinde")) {
         women.add(member.get(i));
@@ -345,7 +345,7 @@ public class Controller {
   }
 
   public ArrayList<Member> mensList(ArrayList<Member> member) {
-    ArrayList<Member> men = null;
+    ArrayList<Member> men = new ArrayList<Member>();
     for (int i = 0; i < member.size(); i++)
       if (member.get(i).getGender().equals("Mand")) {
         men.add(member.get(i));
