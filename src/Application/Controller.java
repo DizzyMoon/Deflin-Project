@@ -54,15 +54,15 @@ public class Controller {
         case 3 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
-          findMember(memberID, memberManager.getMemberList()).toggleStatus();
-          String activeMember = findMember(memberID, memberManager.getMemberList()).getActive();
+          findMember(memberID).toggleStatus();
+          String activeMember = findMember(memberID).getActive();
           ui.statusAltered(activeMember);
         }
         case 4 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
-          findMember(memberID, memberManager.getMemberList()).toggleCompetitive();
-          String competionSwimmer = findMember(memberID, memberManager.getMemberList()).getCompetitive();
+          findMember(memberID).toggleCompetitive();
+          String competionSwimmer = findMember(memberID).getCompetitive();
           ui.typeAltered(competionSwimmer);
         }
         case 5 -> {
@@ -76,7 +76,7 @@ public class Controller {
           String middleName = sc.next();
           String surname = sc.next();
           String newName = (firstName + " " + middleName + " " + surname);
-          findMember(memberID1, memberManager.getMemberList()).setName(newName);    // CRASHER! InputMismatchException
+          findMember(memberID1).setName(newName);    // CRASHER! InputMismatchException
           fileHandler.saveMembersToCSV(memberManager.getMemberList());             // throwFor, next, nextInt, nextInt
         }
         case 6 -> ui.printMemberListTable(memberManager.getMemberList());
@@ -226,7 +226,7 @@ public class Controller {
     String email = sc.next();
 
     memberManager.createNewMember(name, gender, newDate, phoneNumber, email, competition, true);
-    sortBy(1);
+    sortBy(1, memberManager.getList());
   }
 
   public int subscription(int i) {
@@ -259,41 +259,42 @@ public class Controller {
     switch (sort) {
       case 1 -> {
         //Alfabetisk sortering - virker
-        Collections.sort((List<Member>) cr.getList(), (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
       }
       case 2 -> {
         //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
-        for (int i = 0; i <= memberManager.getList().size(); i++) {
+        for (int i = 0; i <= member.size(); i++) {
 
           //Sortering af backcrawl og indv. top 3
-          Collections.sort((List<Achievement>) cr.getList().get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
-          top3backCrawl();
+          Collections.sort((List<Achievement>) member.get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3backCrawl(member);
         }
       }
       case 3 -> {
-        for (int i = 0; i <= memberManager.getList().size(); i++) {
-          Collections.sort((List<Achievement>) memberManager.getList().get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
-          top3breastStroke();
+        for (int i = 0; i <= member.size(); i++) {
+          Collections.sort((List<Achievement>) member.get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3breastStroke(member);
         }
       }
       case 4 -> {     //Sortering af butterfly og indv. top3 for videre sortering
-        for (int i = 0; i <= memberManager.getList().size(); i++) {
-          Collections.sort((List<Achievement>) memberManager.getList().get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
-          top3butterfly();
+        for (int i = 0; i <= member.size(); i++) {
+          Collections.sort((List<Achievement>) member.get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3butterfly(member);
         }
       }
       case 5 -> {
         //Achievement listerne sorteres herunder for hver bruger hvorefter de tre bedste resultater flyttes til en Array for videre sortering af top5
-        for (int i = 0; i <= memberManager.getList().size(); i++) {
-          Collections.sort((List<Achievement>) memberManager.getList().get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
-          top3crawl();
+        for (int i = 0; i <= member.size(); i++) {
+          Collections.sort((List<Achievement>) member.get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          top3crawl(member);
         }
       }
       case 6 -> {
         //Oprettelse af indv. top3 for hver svømmer
-        Collections.sort((List<Member>) memberManager.getList(), (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
       }
     }
+    return member;
   }
 
   public Member findMember(String userID) {
@@ -304,55 +305,56 @@ public class Controller {
     return null;
   }
 
-    public void top3crawl () {
-      for (int i = 0; i < memberManager.getList().size(); i++) {
+    public void top3crawl (ArrayList<Member> member) {
+      for (int i = 0; i < member.size(); i++) {
         for (int o = 0; o < 3; o++) {
-          memberManager.getList().get(i).setTempTop3(o, memberManager.getList().get(i).getCrawlResults().get(o));
+          member.get(i).setTempTop3(o, member.get(i).getCrawlResults().get(o));
         }
       }
     }
 
-    public void top3butterfly () {
-      for (int i = 0; i < memberManager.getList().size(); i++) {
+    public void top3butterfly (ArrayList<Member> member) {
+      for (int i = 0; i < member.size(); i++) {
         for (int o = 0; o < 3; o++)
-          memberManager.getList().get(i).setTempTop3(o, memberManager.getList().get(i).getButterflyResults().get(o));
+          member.get(i).setTempTop3(o, member.get(i).getButterflyResults().get(o));
       }
     }
 
 
-    public void top3backCrawl () {
-      for (int i = 0; i < memberManager.getList().size(); i++) {
+    public void top3backCrawl (ArrayList<Member> member) {
+      for (int i = 0; i < member.size(); i++) {
         for (int o = 0; o < 3; o++) {
-          memberManager.getList().get(i).setTempTop3(o, memberManager.getList().get(i).getBackcrawlResults().get(o));
+          member.get(i).setTempTop3(o, member.get(i).getBackcrawlResults().get(o));
         }
       }
     }
 
-    public void top3breastStroke () {
-      for (int i = 0; i < memberManager.getList().size(); i++) {
+    public void top3breastStroke (ArrayList<Member> member) {
+      for (int i = 0; i < member.size(); i++) {
         for (int o = 0; o < 3; o++)
-          memberManager.getList().get(i).setTempTop3(o, memberManager.getList().get(i).getBreaststrokeResults().get(o));
+          member.get(i).setTempTop3(o, member.get(i).getBreaststrokeResults().get(o));
       }
 
 
-      public ArrayList<Member> womensList(ArrayList<Member> member) {
-        ArrayList<Member> women = new ArrayList<>();
-        for (int i = 0; i < member.size(); i++)
-          if (member.get(i).getGender().equals("Kvinde")) {
-            women.add(member.get(i));
-          }
-        return women;
-      }
 
-      public ArrayList<Member> mensList(ArrayList<Member> member) {
-        ArrayList<Member> men = new ArrayList<Member>();
-        for (int i = 0; i < member.size(); i++)
-          if (member.get(i).getGender().equals("Mand")) {
-            men.add(member.get(i));
-          }
-        return men;
-      }
     }
+  public ArrayList<Member> womensList(ArrayList<Member> member) {
+    ArrayList<Member> women = new ArrayList<>();
+    for (int i = 0; i < member.size(); i++)
+      if (member.get(i).getGender().equals("Kvinde")) {
+        women.add(member.get(i));
+      }
+    return women;
+  }
+
+  public ArrayList<Member> mensList(ArrayList<Member> member) {
+    ArrayList<Member> men = new ArrayList<Member>();
+    for (int i = 0; i < member.size(); i++)
+      if (member.get(i).getGender().equals("Mand")) {
+        men.add(member.get(i));
+      }
+    return men;
+  }
   }
 
 
