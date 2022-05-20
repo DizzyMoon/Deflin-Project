@@ -2,6 +2,7 @@ package members;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Member implements Comparable<Member> {
 
@@ -18,6 +19,7 @@ public abstract class Member implements Comparable<Member> {
   private ArrayList<Achievement> crawlResults;
   private ArrayList<Achievement> backstrokeResults;
   private ArrayList<Achievement> breaststrokeResults;
+  private Achievement[] tempTop3 = new Achievement[3];
 
 
   public Member(String name, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
@@ -137,6 +139,14 @@ public abstract class Member implements Comparable<Member> {
 
   public void setBreastStroke(ArrayList<Achievement> breaststrokeResults) {
     this.breaststrokeResults = breaststrokeResults;
+  }
+
+  public void setTempTop3(int i, Achievement achievement){
+    this.tempTop3[i] = achievement;
+  }
+
+  public Achievement[] getTempTop3() {
+    return tempTop3;
   }
 
   public String toString() {
