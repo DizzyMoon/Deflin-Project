@@ -95,8 +95,8 @@ public class Controller {
       int input = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       switch (input) {
-        case 1 -> System.out.println("Not done, son");
-        // case 2 -> subscription();
+        case 1 -> subscriptionIncome();
+        case 2 -> System.out.println("Not done, son");
         case 3 -> run();
         case 4 -> exit();
       }
@@ -194,10 +194,10 @@ public class Controller {
     int subscriptionRetired = 1200;
     int subscriptionPassive = 500;
 
-    if (memberManager.getMemberList().getList().equals("aktivt")) {
-      if (memberManager.getMemberList().getList().equals("Junior")) {
+    if (memberManager.getList().equals("Inaktiv")) {
+      if (memberManager.getList().get(i) instanceof Junior) {
         subscription = subscriptionJunior;
-      } else if (memberManager.getMemberList().getList().equals("Senior")) {
+      } else if (memberManager.getList().get(i) instanceof Senior) {
         subscription = subscriptionSenior;
       } else subscription = subscriptionRetired;
     } else subscription = subscriptionPassive;
@@ -206,8 +206,8 @@ public class Controller {
 
   public void subscriptionIncome() {
     int income = 0;
-    for (int i = 0; i < memberManager.getList().size(); i++) {
-      income += memberManager.getList().size() * subscription(i);
+    for (int i = 0; i < memberManager.getMemberList().getList().size(); i++) {
+      income += subscription(i);
     }
     System.out.println("Subscription income:" + income);
   }
