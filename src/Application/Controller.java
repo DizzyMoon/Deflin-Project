@@ -6,6 +6,7 @@ import members.*;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -25,8 +26,8 @@ public class Controller {
   }
 
   public void run() throws FileNotFoundException {
-if (fileHandler.hasSavedData())
-    cr.loadMembers(); //Loads members from /src/data/members.csv
+    if (fileHandler.hasSavedData())
+      cr.loadMembers(); //Loads members from /src/data/members.csv
 
     while (running) {
       ui.startupMenu();
@@ -158,7 +159,7 @@ if (fileHandler.hasSavedData())
     ui.memberName();
     String name = sc.nextLine();
     ui.gender();
-    String gender = sc. next();
+    String gender = sc.next();
     ui.dateOfBirth();
     String birthdate = sc.next();
     int first = birthdate.indexOf(".");
@@ -201,8 +202,8 @@ if (fileHandler.hasSavedData())
         subscription = subscriptionSenior;
       } else subscription = subscriptionRetired;
     } else subscription = subscriptionPassive;
-      return subscription;
-    }
+    return subscription;
+  }
 
   public void subscriptionIncome() {
     int income = 0;
@@ -210,7 +211,7 @@ if (fileHandler.hasSavedData())
       income += cr.getList().size() * subscription(i);
     }
     System.out.println("Subscription income:" + income);
-    }
+  }
 
   public void sortBy(int sort) {
 
@@ -289,8 +290,26 @@ if (fileHandler.hasSavedData())
   public void top3breastStroke() {
     for (int i = 0; i < cr.getList().size(); i++) {
       for (int o = 0; o < 3; o++)
-      cr.getList().get(i).setTempTop3(o, cr.getList().get(i).getBreaststrokeResults().get(o));
+        cr.getList().get(i).setTempTop3(o, cr.getList().get(i).getBreaststrokeResults().get(o));
     }
+  }
+
+  public ArrayList<Member> womensList() {
+    ArrayList<Member> women = null;
+    for (int i = 0; i < cr.getList().size(); i++)
+      if (cr.getList().get(i).getGender().equals("Kvinde")) {
+        women.add(cr.getList().get(i));
+      }
+    return women;
+  }
+
+  public ArrayList<Member> mensList() {
+    ArrayList<Member> men = null;
+    for (int i = 0; i < cr.getList().size(); i++)
+      if (cr.getList().get(i).getGender().equals("Mand")) {
+        men.add(cr.getList().get(i));
+      }
+    return men;
   }
 }
 

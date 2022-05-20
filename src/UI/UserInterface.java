@@ -48,6 +48,27 @@ public class UserInterface {
         7 - Luk
         """);
   }
+
+  public void top5AgeUI(){
+    System.out.println("""
+        1 - Se top5 SENIOR
+        2 - Se top5 Junior
+        """);
+  }
+
+  public void top5GenderUI(){
+    System.out.println("""
+        1. Se top5 herrer
+        2. Se top5 kvinder""");
+  }
+
+  public void top5StyleUI(){
+    System.out.println("""
+        1 - Brystsvømning
+        2 - Crawl
+        3 - Backcrawl
+        4 - Butterfly""");
+  }
   /*
   public void infoConsoleUI() {
     System.out.println("""
