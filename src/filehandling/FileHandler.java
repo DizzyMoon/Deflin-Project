@@ -16,7 +16,7 @@ public class FileHandler {
   boolean running = true;
   File membersCSV = new File("src/data/members.csv");
   File resultsCSV = new File("src/data/results.csv");
-//  File eventsCSV = new File("src/data/events.csv");
+//File eventsCSV = new File("src/data/events.csv");
 
 
   public FileHandler() throws FileNotFoundException {
@@ -135,6 +135,8 @@ public class FileHandler {
       printStream.print(member.getName());
       printStream.print(";");
       printStream.print(member.getMemberID());
+      printStream.print(";");
+      printStream.print(member.getGender());
       printStream.print(";");
       printStream.print(member.getBirth());
       printStream.print(";");
