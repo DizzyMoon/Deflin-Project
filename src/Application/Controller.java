@@ -16,7 +16,7 @@ public class Controller {
   private FileHandler fileHandler = new FileHandler();          // Maybe/maybe-not remove from cr?
   Scanner sc = new Scanner(System.in);
   UserInterface ui = new UserInterface();
-  Creator cr = new Creator();
+  MemberManager memberManager = new MemberManager();
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
 
   // seems legit!
@@ -25,7 +25,8 @@ public class Controller {
 
   public void run() throws FileNotFoundException {
 
-    cr.loadMembers(); //Loads members from /src/data/members.csv
+    System.out.println("Hej");
+    memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
 
     while (running) {
       ui.startupMenu();
@@ -52,15 +53,15 @@ public class Controller {
         case 3 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
-          findMember(memberID, cr.getMemberList()).toggleStatus();
-          String activeMember = findMember(memberID, cr.getMemberList()).getActive();
+          findMember(memberID, memberManager.getMemberList()).toggleStatus();
+          String activeMember = findMember(memberID, memberManager.getMemberList()).getActive();
           ui.statusAltered(activeMember);
         }
         case 4 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
-          findMember(memberID, cr.getMemberList()).toggleCompetitive();
-          String competionSwimmer = findMember(memberID, cr.getMemberList()).getCompetitive();
+          findMember(memberID, memberManager.getMemberList()).toggleCompetitive();
+          String competionSwimmer = findMember(memberID, memberManager.getMemberList()).getCompetitive();
           ui.typeAltered(competionSwimmer);
         }
         case 5 -> {
@@ -74,12 +75,12 @@ public class Controller {
           String middleName = sc.next();
           String surname = sc.next();
           String newName = (firstName + " " + middleName + " " + surname);
-          findMember(memberID1, cr.getMemberList()).setName(newName);    // CRASHER! InputMismatchException
-          fileHandler.saveMembersToCSV(cr.getMemberList());             // throwFor, next, nextInt, nextInt
+          findMember(memberID1, memberManager.getMemberList()).setName(newName);    // CRASHER! InputMismatchException
+          fileHandler.saveMembersToCSV(memberManager.getMemberList());             // throwFor, next, nextInt, nextInt
         }
-        case 6 -> ui.printMemberListTable(cr.getMemberList());
+        case 6 -> ui.printMemberListTable(memberManager.getMemberList());
         case 7 -> {
-          fileHandler.saveMembersToCSV(cr.getMemberList());
+          fileHandler.saveMembersToCSV(memberManager.getMemberList());
           run();
         }
         case 8 -> exit();
@@ -149,7 +150,7 @@ public class Controller {
   public void removeMember() throws FileNotFoundException {
     ui.typeMemberIDForRemove();
     String UID = sc.nextLine();
-    cr.removeMember(UID);
+    memberManager.removeMember(UID);
   }
 
   public void formandNewMember() throws FileNotFoundException {
@@ -180,7 +181,7 @@ public class Controller {
     ui.email();
     String email = sc.next();
 
-    cr.createNewMember(name, newDate, phoneNumber, email, competition, true);
+    memberManager.createNewMember(name, newDate, phoneNumber, email, competition, true);
     sortBy();
   }
 
@@ -210,7 +211,7 @@ public class Controller {
     }*/
 
   public void sortBy() {
-    Collections.sort((List<Member>) cr.getList());
+    Collections.sort((List<Member>) memberManager.getList());
   }
 
   public Member findMember(String userID, MemberList memberList) {

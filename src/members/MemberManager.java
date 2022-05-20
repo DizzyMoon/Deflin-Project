@@ -1,50 +1,25 @@
 package members;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
+
 import UI.UserInterface;
-
-import members.Junior;
-import members.MemberList;
-import members.Member;
-import members.Senior;
 import filehandling.FileHandler;
+import members.Creator;
 
-public class Creator {
-  //private MemberList memberList = new MemberList();
+public class MemberManager {
+
+  Creator cr = new Creator();
+  private MemberList memberList = new MemberList();
   private FileHandler fileHandler = new FileHandler();
-  MemberManager memberManager = new MemberManager();
+  private UserInterface ui = new UserInterface();
 
-  public Creator() throws FileNotFoundException {
-  }
-/*
-  public String giveUserID() {
-    Random rnd = new Random();                // maybe a count++ and a check for MemberList.nextAvailiable()
-    int number = rnd.nextInt(9999);
-    return String.format("%04d", number);
+  public MemberManager() throws FileNotFoundException {
   }
 
- */
-/*
-  public void createUserID(Member member) {
-    String ID = giveUserID();
-    member.setMemberID(ID);
-  }
-
-
- */
-  public ArrayList<Member> loadMembers() throws FileNotFoundException{
-    return fileHandler.loadMemberList();
-  }
-
-  /*
   public void createNewMember(String name, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
     LocalDate now = LocalDate.now();
 
@@ -64,14 +39,17 @@ public class Creator {
     }
   }
 
-   */
-
-/*  public void addMember(Member member) {      // Replaced with getList().add
-  public void addMember(Member member) {
-    memberList.getList().add(member);
+  public String giveUserID() {
+    Random rnd = new Random();                // maybe a count++ and a check for MemberList.nextAvailiable()
+    int number = rnd.nextInt(9999);
+    return String.format("%04d", number);
   }
-*/
-  /*
+
+  public void createUserID(Member member) {
+    String ID = giveUserID();
+    member.setMemberID(ID);
+  }
+
   public void removeMember (String UID) throws FileNotFoundException {
     String memberID = UID;
     boolean found = false;
@@ -94,19 +72,17 @@ public class Creator {
 
   }
 
-   */
+  public void loadMembersFromCSV () throws FileNotFoundException {
+    memberList.setList(cr.loadMembers());
+  }
 
-/*
   public MemberList getMemberList() {
     return memberList;
   }
 
- */
-
-  /*
   public ArrayList<Member> getList() {
     return memberList.getList();
   }
 
-   */
+
 }
