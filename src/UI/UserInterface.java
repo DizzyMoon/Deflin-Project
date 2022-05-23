@@ -195,6 +195,10 @@ public class UserInterface {
     System.out.println("1. Guld\t\t2. Sølv\t\t3.Bronze\t\t4.Andet");
   }
 
+  public void writeDiscipline(){
+    System.out.println("Indtast disciplin (butterfly, crawl, ryg, bryst)");
+  }
+
   public void specialCommDescr() {
     System.out.println("Indtast navn på udmærkelse:");
   }
