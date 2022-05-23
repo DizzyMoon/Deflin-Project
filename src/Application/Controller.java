@@ -280,8 +280,6 @@ public class Controller {
     int subscriptionRetired = 1200;
     int subscriptionPassive = 500;
 
-
-
       if (memberManager.getList().get(i) instanceof Junior) {
         if (memberManager.getList().get(i).getActiveBool()) {
           subscription += subscriptionJunior;
