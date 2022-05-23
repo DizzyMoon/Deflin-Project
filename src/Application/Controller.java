@@ -5,7 +5,9 @@ import members.*;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -25,8 +27,8 @@ public class Controller {
   }
 
   public void run() throws FileNotFoundException {
-if (fileHandler.hasSavedData())
-    cr.loadMembers(); //Loads members from /src/data/members.csv
+    if (fileHandler.hasSavedData())
+      cr.loadMembers(); //Loads members from /src/data/members.csv
 
     while (running) {
       ui.startupMenu();
@@ -66,17 +68,38 @@ if (fileHandler.hasSavedData())
         }
         case 5 -> {
           ui.typeMemberIDForNameChange();
-          String memberID = sc.next();
-          ui.typeMemberIDForNameChange();
-          String memberID1 = sc.next();                                  // nextLine crasher i runtime 1
+          String memberID = sc.next();                                  // nextLine crasher i runtime 1
           ui.nameChange();
+
+/*    I'm tired of trying to do it the hard way:
+
+          String keybdINput = sc.useDelimiter("\n").next();
+          int firstSpace = keybdINput.indexOf(" ");
+          int secondSpace = keybdINput.substring(firstSpace + 1).indexOf(" ");
           //String newName = sc.next();                                   // nextLine indsætter tomt felt
-          String firstName = sc.next();
-          String middleName = sc.next();
+          String firstName = keybdINput.substring(0,firstSpace);
+          String middleName = "blank";
           String surname = sc.next();
-          String newName = (firstName + " " + middleName + " " + surname);
-          findMember(memberID1, cr.getMemberList()).setName(newName);    // CRASHER! InputMismatchException
-          fileHandler.saveMembersToCSV(cr.getMemberList());             // throwFor, next, nextInt, nextInt
+
+          if (secondSpace == -1) {
+            secondSpace = firstSpace;
+          } else {
+            middleName = keybdINput.substring(firstSpace + 1, secondSpace);
+          }
+
+          String newName;
+          String builtName;
+          if (middleName != "blank") {
+            builtName = (firstName + " " + middleName + " " + surname);
+          } else {
+            builtName = (firstName + " " + surname);
+          }
+          newName = builtName;
+
+          // so for the time being, we'll just use the simple version*/
+          String newName = sc.useDelimiter("\n").next();
+          findMember(memberID, cr.getMemberList()).setName(newName);
+          fileHandler.saveMembersToCSV(cr.getMemberList());
         }
         case 6 -> ui.printMemberListTable(cr.getMemberList());
         case 7 -> {
@@ -111,7 +134,7 @@ if (fileHandler.hasSavedData())
       sc.nextLine(); //Scannerbug fix
       switch (input) {
 //        case 1 -> coachViewSchedule();
-//        case 2 -> coachNewEvent();
+        case 2 -> coachNewEvent();
         //case 3 -> ui.Events();
 //        case 4 -> coachAssignAthleteToComp();
         case 5 -> {
@@ -135,7 +158,10 @@ if (fileHandler.hasSavedData())
           } else {
             ui.badInput();
           }
-          //findMember(memberID, cr.getMemberList()).logResult();
+          ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
+
+        //  Achievement registered = cr.newAchievement(DateTime, discipline, distance, commendation);
+        //  findMember(memberID, cr.getMemberList()).logResult(registered, proficiency);
         }
         case 6 -> run();
         case 7 -> exit();
@@ -153,6 +179,24 @@ if (fileHandler.hasSavedData())
     cr.removeMember(UID);
   }
 
+  public LocalDate truncateToDate(LocalDateTime input)  {
+    int d = input.getDayOfMonth();
+    int m = input.getMonthValue();
+    int y = input.getYear();
+    LocalDate newDate = LocalDate.of(y,m,d);
+    return newDate;
+  }
+
+  public LocalDateTime transformToDate(String dateFormat) {
+    int first = dateFormat.indexOf(".");
+    int second = dateFormat.lastIndexOf(".");
+    int date = Integer.valueOf(dateFormat.substring(0, first));
+    int month = Integer.valueOf(dateFormat.substring(first + 1, second));
+    int year = Integer.valueOf(dateFormat.substring(second + 1));
+    LocalDateTime newDate = LocalDateTime.of(year, month, date,0,0);
+    return newDate;
+  }
+
   public void formandNewMember() throws FileNotFoundException {
     boolean competition = false;
     ui.memberName();
@@ -160,14 +204,7 @@ if (fileHandler.hasSavedData())
     ui.gender();
     String gender = sc. next();
     ui.dateOfBirth();
-    String birthdate = sc.next();
-    int first = birthdate.indexOf(".");
-    int second = birthdate.lastIndexOf(".");
-    int date = Integer.valueOf(birthdate.substring(0, first));
-    int month = Integer.valueOf(birthdate.substring(first + 1, second));
-    int year = Integer.valueOf(birthdate.substring(second + 1));
-    LocalDate newDate = LocalDate.of(year, month, date);
-
+    LocalDate newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
     ui.competitive();
     String competitive = sc.next();
     if (competitive.equalsIgnoreCase("ja")) {
@@ -212,6 +249,51 @@ if (fileHandler.hasSavedData())
     System.out.println("Subscription income:" + income);
     }
 
+  public void coachNewEvent() {
+    ui.promptEventName();
+    String eventName = sc.useDelimiter("\n").next();
+    ui.promptSubdivisionCode();
+    boolean SDCvalid = false;
+    String category = "";
+    String categoryIN = "";
+    boolean league = false;
+    String leagueIN = "";
+
+    while (!SDCvalid) {
+      String input = sc.next();
+      if (input.length() == 2) {
+        categoryIN = input.substring(0, 1);
+        leagueIN = input.substring(1, 2);
+        if (categoryIN.equalsIgnoreCase("h") || categoryIN.equalsIgnoreCase("d")) {
+          if (leagueIN.equalsIgnoreCase("j")) {
+            category = categoryIN;
+            league = true;
+            SDCvalid = true;
+          } else if (leagueIN.equalsIgnoreCase("s")) {
+            category = categoryIN;
+            league = false;
+            SDCvalid = true;
+            } else {
+            ui.badInput();
+          }
+        }
+      } else {
+        ui.badInput();
+      }
+    }
+    ui.promptEventDate();
+    LocalDate tempTime = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
+    ui.promptEventTime();
+    int year = tempTime.getYear();
+    int month = tempTime.getMonthValue();
+    int day = tempTime.getDayOfMonth();
+    int hours = sc.useDelimiter(":").nextInt();
+    int minutes = sc.nextInt();
+    LocalDateTime eventTime = LocalDateTime.of(year, month, day , hours, minutes);
+
+    cr.createNewEvent(eventName, category, league, eventTime);
+  }
+
   public void sortBy(int sort) {
 
     switch (sort) {
@@ -225,7 +307,7 @@ if (fileHandler.hasSavedData())
 
           //Sortering af backcrawl og indv. top 3
           Collections.sort((List<Achievement>) cr.getList().get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
-          top3backCrawl();
+          top3backstroke();
         }
       }
       case 3 -> {
@@ -278,7 +360,7 @@ if (fileHandler.hasSavedData())
   }
 
 
-  public void top3backCrawl() {
+  public void top3backstroke() {
     for (int i = 0; i < cr.getList().size(); i++) {
       for (int o = 0; o < 3; o++) {
         cr.getList().get(i).setTempTop3(o, cr.getList().get(i).getBackcrawlResults().get(o));

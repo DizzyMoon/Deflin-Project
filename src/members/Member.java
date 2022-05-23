@@ -20,8 +20,7 @@ public abstract class Member implements Comparable<Member> {
   private ArrayList<Achievement> backstrokeResults;
   private ArrayList<Achievement> breaststrokeResults;
   private Achievement[] tempTop3 = new Achievement[3];
-
-
+/*
   public Member(String name, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
     this.name = name;
     this.gender = gender;
@@ -31,7 +30,7 @@ public abstract class Member implements Comparable<Member> {
     this.birth = birth;
     this.competitive = competitive;
   }
-
+*/
   public Member(String name, String memberID, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, double arrears, boolean active) {
     this.name = name;
     this.memberID = memberID;
@@ -139,6 +138,12 @@ public abstract class Member implements Comparable<Member> {
 
   public void setBreastStroke(ArrayList<Achievement> breaststrokeResults) {
     this.breaststrokeResults = breaststrokeResults;
+  }
+
+  public ArrayList getProficiency() {       //Search Arrays and find the most recent Achievements, return their list
+    ///?????????
+    ArrayList<Achievement> proficiency = new ArrayList(); //temporarily, new, should be this.xResults
+    return proficiency;
   }
 
   public void setTempTop3(int i, Achievement achievement){

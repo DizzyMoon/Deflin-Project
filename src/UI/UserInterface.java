@@ -125,7 +125,7 @@ public class UserInterface {
   }
 
 
-  public void elementDoesNotExits() {
+  public void elementDoesNotExist() {
     System.out.println("Element findes ikke");
   }
 
@@ -133,9 +133,17 @@ public class UserInterface {
     System.out.println("Feature kommer i næste udgave!");
   }
 
-  public void planSwimmeet() {
+  public void promptEventName() {
     System.out.println("Event Titel:");
   }
+
+  public void promptSubdivisionCode() {
+    System.out.println("Division: (HJ / HS / DJ / DS)");
+  }
+
+  public void promptEventDate() { System.out.println("Dato: (dd.mm.yy)"); }
+
+  public void promptEventTime() { System.out.println("Tidspunkt for træffet: (tt:mm)"); }
 
   public void listSwimmeets(ArrayList<Swimmeet> schedule) {
     System.out.println(schedule.toString());

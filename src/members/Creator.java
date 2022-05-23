@@ -2,6 +2,7 @@ package members;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,6 +12,7 @@ import filehandling.FileHandler;
 
 public class Creator {
   private MemberList memberList = new MemberList();
+  private EventList eventList = new EventList();
   private FileHandler fileHandler = new FileHandler();
   private UserInterface ui = new UserInterface();
 
@@ -33,17 +35,19 @@ public class Creator {
   }
 
   public void createNewMember(String name, String gender, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
-    LocalDate now = LocalDate.now();
+    String tempID = " ";
+    double noArrears = 0;
 
+    LocalDate now = LocalDate.now();
     Period p = Period.between(date, now);
 
     if (p.getYears() >= 18) {
-      Member newMemberSenior = new Senior(name, gender, date, phoneNumber, email, competition, active);
+      Member newMemberSenior = new Senior(name, tempID, gender, date, phoneNumber, email, competition, noArrears, active);
       createUserID(newMemberSenior);
       memberList.getList().add(newMemberSenior);
       fileHandler.saveMembersToCSV(memberList);
     } else {
-      Member newMemberJunior = new Junior(name, gender, date, phoneNumber, email, competition, active);
+      Member newMemberJunior = new Junior(name, tempID, gender, date, phoneNumber, email, competition, noArrears, active);
       createUserID(newMemberJunior);
       memberList.getList().add(newMemberJunior);
       fileHandler.saveMembersToCSV(memberList);
@@ -52,7 +56,6 @@ public class Creator {
   }
 
 /*  public void addMember(Member member) {      // Replaced with getList().add
-  public void addMember(Member member) {
     memberList.getList().add(member);
   }
 */
@@ -72,7 +75,7 @@ public class Creator {
       }
       searchedElements++;
       if (searchedElements == memberList.getList().size() && !found){
-        ui.elementDoesNotExits();
+        ui.elementDoesNotExist();
       }
     }
 
@@ -104,6 +107,11 @@ public class Creator {
       }
     }
     return juniorList;
+  }
+  public void createNewEvent(String eventName, String category, boolean league, LocalDateTime eventTime) {
+    Swimmeet nextMeet = new Swimmeet(eventName, category, league, eventTime);
+    eventList.getList().add(nextMeet);
+    //fileHandler.saveEventsToCSV();
   }
 }
 

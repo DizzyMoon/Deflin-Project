@@ -2,37 +2,34 @@ package members;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Swimmeet {
 
     private String eventName;
-    private char genderCategory;
-    private boolean juniorMeet;
-    private LocalDate eventDate;
+    private String genderCategory;
+    private boolean juniorLeague;
+    private LocalDateTime eventTime;
     private ArrayList<Member> backstrokeComp = new ArrayList<>();
     private ArrayList<Member> breaststrokeComp = new ArrayList<>();
     private ArrayList<Member> butterflyComp = new ArrayList<>();
     private ArrayList<Member> crawlComp = new ArrayList<>();
 
-    public Swimmeet(LocalDate eventDate) {
+    public Swimmeet(String eventName, String genderCategory, boolean juniorLeague, LocalDateTime eventTime) {
         this.eventName = eventName;
         this.genderCategory = genderCategory;
-        this.juniorMeet = juniorMeet;
-        this.eventDate = eventDate;
+        this.juniorLeague = juniorLeague;
+        this.eventTime = eventTime;
     }
 
     public String getEventName() {
         return eventName;
     }
 
-    public LocalDate getEventDate() {
-        return eventDate;
-    }
+    public LocalDateTime getEventTime() { return eventTime; }
 
-    public boolean isJuniorMeet() {
-        return juniorMeet;
-    }
+    public boolean isJuniorLeague() { return juniorLeague; }
 
     /*  public ArrayList getBackstrokeComp() { return backstrokeComp; }
         public ArrayList getBreaststrokeComp() { return breaststrokeComp; }
