@@ -331,8 +331,12 @@ public class Controller {
     int year = tempTime.getYear();
     int month = tempTime.getMonthValue();
     int day = tempTime.getDayOfMonth();
-    int hours = sc.useDelimiter(":").nextInt();
-    int minutes = sc.nextInt();
+
+    String timeString = sc.next();
+    int colonIndex = timeString.indexOf(":");
+    int hours = Integer.parseInt(timeString.substring(0, colonIndex));
+    int minutes = Integer.parseInt(timeString.substring(colonIndex + 1, timeString.length()));
+
     LocalDateTime eventTime = LocalDateTime.of(year, month, day , hours, minutes);
 
     cr.createNewEvent(eventName, category, league, eventTime);
