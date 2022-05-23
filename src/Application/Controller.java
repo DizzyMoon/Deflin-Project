@@ -223,10 +223,13 @@ public class Controller {
       int genderChoice = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       if (genderChoice == 1){
-        top5Style(mensList(member));
+        memberManager.mensList(member);
+        top5Style(memberManager.getMen());
+        System.out.println(memberManager.getMen());
       }
       else if (genderChoice == 2){
-        top5Style(womensList(member));
+        memberManager.womensList(member);
+        top5Style(memberManager.getWomen());
       }
     }
   }
@@ -238,10 +241,11 @@ public class Controller {
       int styleChoice = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       switch (styleChoice){
-       case 1 -> {ui.printTop5(sortBy(2, member));}
-       case 2 -> {sortBy(3, member);}
-       case 3 -> {sortBy(4, member);}
-       case 4 -> {sortBy(5, member);}
+       case 1 -> {ui.printTop5(sortBy(2, member));
+         System.out.println(member);}
+       case 2 -> {ui.printTop5(sortBy(3, member));}
+       case 3 -> {ui.printTop5(sortBy(4, member));}
+       case 4 -> {ui.printTop5(sortBy(5, member));}
       }
     }
   }
@@ -339,7 +343,8 @@ public class Controller {
     for (int i = 0; i < memberManager.getMemberList().getList().size(); i++) {
       income += subscription(i);
     }
-    System.out.println("Subscription income:" + income);
+    System.out.println("| Årlig indkomst fra medlemskontigenter: |");
+    System.out.println("| \t" + income + " kroner\t |");
     }
 
   public void coachNewEvent() {
@@ -386,7 +391,7 @@ public class Controller {
     int hours = Integer.parseInt(timeString.substring(0, colonIndex));
     int minutes = Integer.parseInt(timeString.substring(colonIndex + 1, timeString.length()));
 
-    LocalDateTime eventTime = LocalDateTime.of(year, month, day , hours, minutes);
+    LocalDateTime eventTime = LocalDateTime.of(year, month, day, hours, minutes);
 
     cr.createNewEvent(eventName, category, league, eventTime);
   }
@@ -475,7 +480,7 @@ public class Controller {
 
 
     }
-  public ArrayList<Member> womensList(ArrayList<Member> member) {
+  /*public ArrayList<Member> womensList(ArrayList<Member> member) {
     ArrayList<Member> women = new ArrayList<>();
     for (int i = 0; i < member.size(); i++)
       if (member.get(i).getGender().equals("Kvinde")) {
@@ -485,13 +490,13 @@ public class Controller {
   }
 
   public ArrayList<Member> mensList(ArrayList<Member> member) {
-    ArrayList<Member> men = new ArrayList<Member>();
+    ArrayList<Member> men = new ArrayList<>();
     for (int i = 0; i < member.size(); i++)
       if (member.get(i).getGender().equals("Mand")) {
         men.add(member.get(i));
       }
     return men;
-  }
+  }*/
   }
 
 

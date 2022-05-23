@@ -15,6 +15,10 @@ public class MemberManager {
   private MemberList memberList = new MemberList();
   private FileHandler fileHandler = new FileHandler();
   private UserInterface ui = new UserInterface();
+  private ArrayList<Member> juniorList = new ArrayList<Member>();
+  private ArrayList<Member> seniorList = new ArrayList<Member>();
+  private ArrayList<Member> men = new ArrayList<Member>();
+  private ArrayList<Member> women = new ArrayList<Member>();
 
   public MemberManager() throws FileNotFoundException {
   }
@@ -84,8 +88,8 @@ public class MemberManager {
   }
 
   public ArrayList<Member> sortSenior(){
-    ArrayList<Member> seniorList = new ArrayList<Member>();
-    for (int i = 0; i < 5; i++) {
+    //ArrayList<Member> seniorList = new ArrayList<Member>();
+    for (int i = 0; i < memberList.getList().size(); i++) {
       if (memberList.getList().get(i) instanceof Senior){
         seniorList.add(memberList.getList().get(i));
       }
@@ -94,12 +98,44 @@ public class MemberManager {
   }
 
   public ArrayList<Member> sortJunior(){
-    ArrayList<Member> juniorList = new ArrayList<Member>();
-    for (int i = 0; i < 5; i++) {
+    //ArrayList<Member> juniorList = new ArrayList<Member>();
+    for (int i = 0; i < memberList.getList().size(); i++) {
       if (memberList.getList().get(i) instanceof Senior){
         juniorList.add(memberList.getList().get(i));
       }
     }
     return juniorList;
+  }
+
+  public void womensList(ArrayList<Member> member) {
+    //ArrayList<Member> women = new ArrayList<>();
+    for (int i = 0; i < member.size(); i++)
+      if (member.get(i).getGender().equalsIgnoreCase("H")) {
+        women.add(member.get(i));
+      }
+  }
+
+  public void mensList(ArrayList<Member> member) {
+    //ArrayList<Member> men = new ArrayList<>();
+    for (int i = 0; i < member.size(); i++)
+      if (member.get(i).getGender().equalsIgnoreCase("D")) {
+        men.add(member.get(i));
+      }
+  }
+
+  public ArrayList<Member> getMen() {
+    return men;
+  }
+
+  public ArrayList<Member> getWomen() {
+    return women;
+  }
+
+  public ArrayList<Member> getJuniorList() {
+    return juniorList;
+  }
+
+  public ArrayList<Member> getSeniorList() {
+    return seniorList;
   }
 }
