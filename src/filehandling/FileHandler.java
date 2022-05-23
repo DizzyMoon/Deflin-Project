@@ -121,7 +121,7 @@ public class FileHandler {
 
     Period p = Period.between(birthDate, now);
 
-    return p.getYears() >= 18;
+    return !(p.getYears() >= 18);
   }
 
 
