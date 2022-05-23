@@ -309,7 +309,8 @@ public class Controller {
     for (int i = 0; i < memberManager.getMemberList().getList().size(); i++) {
       income += subscription(i);
     }
-    System.out.println("Subscription income:" + income);
+    System.out.println("| Årlig indkomst fra medlemskontigenter: |");
+    System.out.println("| \t" + income + " kroner\t |");
     }
 
   public void coachNewEvent() {
