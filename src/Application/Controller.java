@@ -189,10 +189,13 @@ public class Controller {
       int genderChoice = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       if (genderChoice == 1){
-        top5Style(mensList(member));
+        memberManager.mensList(member);
+        top5Style(memberManager.getMen());
+        System.out.println(memberManager.getMen());
       }
       else if (genderChoice == 2){
-        top5Style(womensList(member));
+        memberManager.womensList(member);
+        top5Style(memberManager.getWomen());
       }
     }
   }
@@ -204,10 +207,11 @@ public class Controller {
       int styleChoice = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       switch (styleChoice){
-       case 1 -> {ui.printTop5(sortBy(2, member));}
-       case 2 -> {sortBy(3, member);}
-       case 3 -> {sortBy(4, member);}
-       case 4 -> {sortBy(5, member);}
+       case 1 -> {ui.printTop5(sortBy(2, member));
+         System.out.println(member);}
+       case 2 -> {ui.printTop5(sortBy(3, member));}
+       case 3 -> {ui.printTop5(sortBy(4, member));}
+       case 4 -> {ui.printTop5(sortBy(5, member));}
       }
     }
   }
@@ -332,7 +336,7 @@ public class Controller {
             category = categoryIN;
             league = false;
             SDCvalid = true;
-            } else {
+          } else {
             ui.badInput();
           }
         }
@@ -348,7 +352,7 @@ public class Controller {
     int day = tempTime.getDayOfMonth();
     int hours = sc.useDelimiter(":").nextInt();
     int minutes = sc.nextInt();
-    LocalDateTime eventTime = LocalDateTime.of(year, month, day , hours, minutes);
+    LocalDateTime eventTime = LocalDateTime.of(year, month, day, hours, minutes);
 
     cr.createNewEvent(eventName, category, league, eventTime);
   }
@@ -406,7 +410,7 @@ public class Controller {
 
     public void top3crawl (ArrayList<Member> member) {
       for (int i = 0; i < member.size(); i++) {
-        for (int o = 0; o < 3; o++) {
+        for (int o = 0; o <= 3; o++) {
           member.get(i).setTempTop3(o, member.get(i).getCrawlResults().get(o));
         }
       }
@@ -437,7 +441,7 @@ public class Controller {
 
 
     }
-  public ArrayList<Member> womensList(ArrayList<Member> member) {
+  /*public ArrayList<Member> womensList(ArrayList<Member> member) {
     ArrayList<Member> women = new ArrayList<>();
     for (int i = 0; i < member.size(); i++)
       if (member.get(i).getGender().equals("Kvinde")) {
@@ -447,13 +451,13 @@ public class Controller {
   }
 
   public ArrayList<Member> mensList(ArrayList<Member> member) {
-    ArrayList<Member> men = new ArrayList<Member>();
+    ArrayList<Member> men = new ArrayList<>();
     for (int i = 0; i < member.size(); i++)
       if (member.get(i).getGender().equals("Mand")) {
         men.add(member.get(i));
       }
     return men;
-  }
+  }*/
   }
 
 
