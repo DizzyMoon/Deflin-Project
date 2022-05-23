@@ -302,7 +302,7 @@ public class UserInterface {
       System.out.println("Top 5 - SENIOR " + gender);
     }
 
-    System.out.println(" #   | Navn" + space.repeat(26) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
+    System.out.println(" #   | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
     //Linjeadskillelse
     System.out.println(underLine.repeat(128));
 
@@ -313,6 +313,9 @@ public class UserInterface {
 
       //Navn
       System.out.print(member.get(i).getName() + space.repeat(31 - member.get(i).getName().length()) + line);
+
+      //Medlemsskabstype (ex. aktiv konkurrencesvømmer)
+      System.out.println(member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(29 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
 
       //Svømmers bedste tid
       System.out.print(space + member.get(i).getTempTop3()[0].getTime().getMinute() + ":" + member.get(i).getTempTop3()[0].getTime().getSecond() + space.repeat(5) + line);
