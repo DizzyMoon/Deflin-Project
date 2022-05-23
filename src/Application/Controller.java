@@ -6,6 +6,7 @@ import members.*;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -269,23 +270,37 @@ public class Controller {
   }
 
   public int subscription(int i) {
-    int subscription;
+    int subscription = 0;
     int subscriptionJunior = 1000;
     int subscriptionSenior = 1600;
     int subscriptionRetired = 1200;
     int subscriptionPassive = 500;
 
-    if (memberManager.getList().equals("Inaktiv")) {
+
+
       if (memberManager.getList().get(i) instanceof Junior) {
-        subscription = subscriptionJunior;
+        if (memberManager.getList().get(i).getActiveBool()) {
+          subscription += subscriptionJunior;
+        } else {
+          subscription += subscriptionPassive;
+        }
+
       } else if (memberManager.getList().get(i) instanceof Senior) {
-        subscription = subscriptionSenior;
-      } else subscription = subscriptionRetired;
-    } else subscription = subscriptionPassive;
+        LocalDate now = LocalDate.now();
+        Period p = Period.between(memberManager.getList().get(i).getBirth(), now);
+        if (memberManager.getList().get(i).getActiveBool()) {
+          subscription += subscriptionSenior;
+        } else if (p.getYears() >= 60) {
+          subscription += subscriptionRetired;
+        } else if (!memberManager.getList().get(i).getActiveBool()) {
+          subscription += subscriptionPassive;
+        }
+      }
+
     return subscription;
   }
 
-  public void subscriptionIncome() {
+  public void subscriptionIncome(){
     int income = 0;
     for (int i = 0; i < memberManager.getMemberList().getList().size(); i++) {
       income += subscription(i);

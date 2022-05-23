@@ -45,15 +45,15 @@ public class UserInterface {
         4 - Udtag svømmere til stævne
         5 - Bogfør præstation
         6 - Se top 5-liste
-        6 - Tilbage til hovedmenu
-        7 - Luk
+        7 - Tilbage til hovedmenu
+        8 - Luk
         """);
   }
 
   public void top5AgeUI(){
     System.out.println("""
         1 - Se top5 SENIOR
-        2 - Se top5 Junior
+        2 - Se top5 JUNIOR
         """);
   }
 
