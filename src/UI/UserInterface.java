@@ -284,20 +284,20 @@ public class UserInterface {
     String dot = ".";
     String gender = "";
     if (member.get(0) instanceof Junior){
-      if (member.get(0).getGender().equals("Mand")){
+      if (member.get(0).getGender().equals("H")){
         gender = "herrer";
       }
-      else if (member.get(0).getGender().equals("Kvinde")){
-        gender = "kvinder";
+      else if (member.get(0).getGender().equals("D")){
+        gender = "damer";
       }
       System.out.println("Top 5 - JUNIOR " + gender);
     }
     else if (member.get(0) instanceof Senior){
-      if (member.get(0).getGender().equals("Mand")){
+      if (member.get(0).getGender().equals("H")){
         gender = "herrer";
       }
-      else if (member.get(0).getGender().equals("Kvinde")){
-        gender = "kvinder";
+      else if (member.get(0).getGender().equals("D")){
+        gender = "damer";
       }
       System.out.println("Top 5 - SENIOR " + gender);
     }
@@ -315,13 +315,13 @@ public class UserInterface {
       System.out.print(member.get(i).getName() + space.repeat(31 - member.get(i).getName().length()) + line);
 
       //Svømmers bedste tid
-      System.out.print(space + member.get(i).getCrawlResults().get(0) + space.repeat(5) + line);
+      System.out.print(space + member.get(i).getTempTop3()[0].getTime().getMinute() + ":" + member.get(i).getTempTop3()[0].getTime().getSecond() + space.repeat(5) + line);
 
       //Næstbedste tid
-      System.out.print(space + member.get(i).getCrawlResults().get(1) + space.repeat(9) + line);
+      System.out.print(space + member.get(i).getTempTop3()[1].getTime().getMinute() + ":" + member.get(i).getTempTop3()[1].getTime().getSecond() + space.repeat(9) + line);
 
       //Tredjebedste tid
-      System.out.print(space + member.get(i).getCrawlResults().get(2) + space.repeat(11) + line);
+      System.out.print(space + member.get(i).getTempTop3()[2].getTime().getMinute() + ":" + member.get(i).getTempTop3()[2].getTime().getSecond() + space.repeat(11) + line);
 
       //Linjeadskillelse
       System.out.println(underLine.repeat(128));
