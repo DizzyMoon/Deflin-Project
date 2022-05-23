@@ -15,7 +15,7 @@ public abstract class Member implements Comparable<Member> {
   private boolean competitive;
   private double arrears;
   private boolean active;
-  private ArrayList<Achievement> butterflyResults;
+  private ArrayList<Achievement> butterflyResults = new ArrayList<>();
   private ArrayList<Achievement> crawlResults;
   private ArrayList<Achievement> backstrokeResults;
   private ArrayList<Achievement> breaststrokeResults;

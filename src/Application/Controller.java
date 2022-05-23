@@ -386,12 +386,14 @@ public class Controller {
           top3breaststroke(member);
         }
       }
-      case 4 -> {     //Sortering af butterfly og indv. top3 for videre sortering
+      case 4 -> {
+        //Sortering af butterfly og indv. top3 for videre sortering
         for (int i = 0; i <= member.size(); i++) {
 
           Collections.sort((List<Achievement>) member.get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           top3butterfly(member);
         }
+
       }
       case 5 -> {
         //Achievement listerne sorteres herunder for hver bruger hvorefter de tre bedste resultater flyttes til en Array for videre sortering af top5
