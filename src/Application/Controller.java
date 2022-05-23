@@ -4,14 +4,17 @@ import UI.UserInterface;
 import members.*;
 
 import java.io.FileNotFoundException;
+import java.net.Inet4Address;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import Achievement.*;
 
 import filehandling.FileHandler;
 
@@ -139,32 +142,9 @@ public class Controller {
         case 2 -> coachNewEvent();
         //case 3 -> ui.Events();
 //        case 4 -> coachAssignAthleteToComp();
-        case 5 -> {
-          ui.inputSwimmerID();
-          String memberID = sc.next();
-//          ui.inputDicipline();
-//          int option = sc.nextInt();      // 1-4, but actually, we should get this value from recent Achievement
-          ui.inputDistance();
-          int distance = sc.nextInt();
-//          ui.inputDate();                 // Shouldn't be input, should come from System
-//          LocalDate somethingsomething;
-          ui.inputTime();                   // Ideally, put in LocalDateTime, due to the close relationship
-          ui.addCommendation();
-          String commendation = sc.next();
-          if (commendation.equalsIgnoreCase("ja")) {
-            ui.commDescr();
-            //selectMedal();
-          } else if (commendation.equalsIgnoreCase("nej")) {
-            ui.specialCommDescr();
-            String awardedComm = sc.nextLine();
-          } else {
-            ui.badInput();
-          }
- //         ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
+        case 5 -> createNewAchievement();
 
-        //  Achievement registered = cr.newAchievement(DateTime, discipline, distance, commendation);
-        //  findMember(memberID, cr.getMemberList()).logResult(registered, proficiency);
-        }
+
         case 6 -> {
           ui.top5AgeUI();
           int ageChoice = sc.nextInt();
@@ -180,6 +160,60 @@ public class Controller {
         case 8 -> exit();
       }
     }
+  }
+
+  public void createNewAchievement(){
+
+    Discipline discipline;
+
+    ui.writeDiscipline();
+    String disciplineString = sc.nextLine();
+    switch (disciplineString) {
+      case "butterfly" -> discipline = Discipline.BUTTERFLY;
+      case "crawl" -> discipline = Discipline.CRAWL;
+      case "ryg" -> discipline = Discipline.BACKSTROKE;
+      case "bryst" -> discipline = Discipline.BREASTSTROKE;
+    }
+
+
+    ui.inputSwimmerID();
+    String memberID = sc.next();
+//          ui.inputDicipline();
+//          int option = sc.nextInt();      // 1-4, but actually, we should get this value from recent Achievement
+    ui.inputDistance();
+    int distance = sc.nextInt();
+//          ui.inputDate();                 // Shouldn't be input, should come from System
+//          LocalDate somethingsomething;
+    ui.inputTime();                   // Ideally, put in LocalDateTime, due to the close relationship
+
+
+    String timeString = sc.next();
+    int minutes = Integer.parseInt(timeString.substring(0, timeString.indexOf(":")));
+    int seconds = Integer.parseInt(timeString.substring(timeString.indexOf(":") + 1), timeString.length());
+    LocalDateTime today = LocalDateTime.now();
+    int year = today.getYear();
+    int month = today.getMonthValue();
+    int day = today.getDayOfMonth();
+    int hours = today.getHour();
+
+    LocalDateTime time = LocalDateTime.of(year, month, day, hours, minutes, seconds);
+
+
+    ui.addCommendation();
+    String commendation = sc.next();
+    if (commendation.equalsIgnoreCase("ja")) {
+      ui.commDescr();
+      //selectMedal();
+    } else if (commendation.equalsIgnoreCase("nej")) {
+      ui.specialCommDescr();
+      String awardedComm = sc.nextLine();
+    } else {
+      ui.badInput();
+    }
+    //         ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
+
+    //  Achievement registered = cr.newAchievement(DateTime, discipline, distance, commendation);
+    //  findMember(memberID, cr.getMemberList()).logResult(registered, proficiency);
   }
 
   public void top5Gender(ArrayList<Member> member) {
