@@ -5,6 +5,7 @@ import members.*;
 
 import java.io.FileNotFoundException;
 import java.net.Inet4Address;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -224,10 +225,12 @@ public class Controller {
       if (genderChoice == 1) {
         memberManager.mensList(member);
         top5Style(memberManager.getMen());
-        System.out.println(memberManager.getMen());
       } else if (genderChoice == 2) {
         memberManager.womensList(member);
         top5Style(memberManager.getWomen());
+      }
+      else {
+        ui.badInput();
       }
     }
   }
@@ -288,6 +291,8 @@ public class Controller {
     boolean pass = true;
     String gender = "";
     String phoneNumber = "";
+    LocalDate newDate = LocalDate.now();
+    String email = "";
     ui.memberName();
     String name = sc.nextLine();
     ui.gender();
@@ -300,8 +305,16 @@ public class Controller {
         ui.badInput();
       }
     }
+    pass = true;
     ui.dateOfBirth();
-    LocalDate newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
+    while (pass) {
+      try {
+        newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
+        pass = false;
+      } catch (NumberFormatException | DateTimeException e) {
+        ui.badInput();
+      }
+    }
     pass = true;
     ui.competitive();
     while(pass) {
@@ -327,9 +340,17 @@ public class Controller {
         pass = false;
       }
     }
+    pass = true;
     ui.email();
-    String email = sc.next();
-
+    while (pass) {
+      email = sc.next();
+      if (email.contains("@")){
+        pass = false;
+      }
+      else{
+        ui.badInput();
+      }
+    }
     String tempID = " ";
     double noArrears = 0;
     memberManager.createNewMember(name, tempID, gender, newDate, phoneNumber, email, competition, noArrears, true);
