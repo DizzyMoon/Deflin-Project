@@ -27,9 +27,9 @@ public class Controller {
   UserInterface ui = new UserInterface();
   MemberManager memberManager = new MemberManager();
   Creator cr = new Creator();
-  EventList el = new EventList();
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
-                                                                              // seems legit!
+
+  // seems legit!
   public Controller() throws FileNotFoundException {
   }
 
@@ -37,6 +37,8 @@ public class Controller {
     if (fileHandler.hasSavedData())
       memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
 
+
+    //fileHandler.achievementListLoad();
     while (running) {
       ui.startupMenu();
       int input = sc.nextInt();
@@ -140,11 +142,12 @@ public class Controller {
       int input = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       switch (input) {
-//        case 1 -> coachViewSchedule();      Coming in version 2!
+//        case 1 -> coachViewSchedule();
         case 2 -> coachNewEvent();
-        case 3 -> ui.printEventListTable(el.getList());
-        case 4 -> coachAssignAthleteToComp();
-        case 5 -> coachCreateNewAchievement();
+        //case 3 -> ui.Events();
+//        case 4 -> coachAssignAthleteToComp();
+        case 5 -> createNewAchievement();
+
 
         case 6 -> {
           ui.top5AgeUI();
@@ -152,6 +155,7 @@ public class Controller {
           sc.nextLine(); //Scannerbug fix
           if (ageChoice == 1) {
             top5Gender(memberManager.sortSenior());
+            System.out.print(memberManager.getList().get(2).getBackcrawlResults());
           } else if (ageChoice == 2) {
             top5Gender(memberManager.sortJunior());
           }
@@ -162,32 +166,8 @@ public class Controller {
     }
   }
 
-  public void coachAssignAthleteToComp() {
-    ui.printEventListTable(el.getList());
-    ui.chooseComp();
-    int selection = sc.nextInt();
-    Swimmeet chosen = el.getList().get(selection-1);
-    ui.chooseDiscipline();
-    selection = sc.nextInt();
-    String discipline;
-    switch (selection) {
-      case 1 -> discipline = "Backcrawl";
-      case 2 -> discipline = "Brystsvømning";
-      case 3 -> discipline = "Butterfly";
-      default -> discipline = "Crawl";
-    }
-    //getTop5 (chosen.getGenderCategory(), chosen.getLeague())
-    ui.inputDistance();
-    int distance = sc.nextInt();
-    ui.addProspect();
-    ui.inputSwimmerID();
-    String competitor = sc.next();
-    Member swimmer = findMember(competitor);
-    chosen.assignCompetitor(swimmer, chosen.chosenDiscipline(selection));
-    ui.competitorReady(discipline, distance);
-  }
+  public void createNewAchievement() {
 
-  public void coachCreateNewAchievement() {
     Discipline discipline;
 
     ui.writeDiscipline();
@@ -199,6 +179,7 @@ public class Controller {
       case "bryst" -> discipline = Discipline.BREASTSTROKE;
     }
 
+
     ui.inputSwimmerID();
     String memberID = sc.next();
 //          ui.inputDicipline();
@@ -208,6 +189,7 @@ public class Controller {
 //          ui.inputDate();                 // Shouldn't be input, should come from System
 //          LocalDate somethingsomething;
     ui.inputTime();                   // Ideally, put in LocalDateTime, due to the close relationship
+
 
     String timeString = sc.next();
     int minutes = Integer.parseInt(timeString.substring(0, timeString.indexOf(":")));
@@ -230,13 +212,14 @@ public class Controller {
     } else {
       ui.badInput();
     }
-    //  ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
+    //         ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
 
     //  Achievement registered = cr.newAchievement(DateTime, discipline, distance, commendation);
     //  findMember(memberID, cr.getMemberList()).logResult(registered, proficiency);
   }
 
-  public void top5Gender(ArrayList<Member> member) {
+
+  public void top5Gender(ArrayList<Member> member) throws FileNotFoundException {
     boolean running = true;
     while (running) {
       ui.top5GenderUI();
@@ -248,14 +231,13 @@ public class Controller {
       } else if (genderChoice == 2) {
         memberManager.womensList(member);
         top5Style(memberManager.getWomen());
-      }
-      else {
+      } else {
         ui.badInput();
       }
     }
   }
 
-  public void top5Style(ArrayList<Member> member) {
+  public void top5Style(ArrayList<Member> member) throws FileNotFoundException {
     boolean running = true;
     while (running) {
       ui.top5StyleUI();
@@ -316,12 +298,11 @@ public class Controller {
     ui.memberName();
     String name = sc.nextLine();
     ui.gender();
-    while(pass) {
+    while (pass) {
       gender = sc.next();
-      if (gender.equalsIgnoreCase("H") || gender.equalsIgnoreCase("D")){
+      if (gender.equalsIgnoreCase("H") || gender.equalsIgnoreCase("D")) {
         pass = false;
-      }
-      else{
+      } else {
         ui.badInput();
       }
     }
@@ -337,7 +318,7 @@ public class Controller {
     }
     pass = true;
     ui.competitive();
-    while(pass) {
+    while (pass) {
       String competitive = sc.next();
       if (competitive.equalsIgnoreCase("ja")) {
         competition = true;
@@ -353,10 +334,9 @@ public class Controller {
     ui.phoneNumber();
     while (pass) {
       phoneNumber = sc.next();
-      if (phoneNumber.length() > 12 || phoneNumber.length() < 8){
+      if (phoneNumber.length() > 12 || phoneNumber.length() < 8) {
         ui.badInput();
-      }
-      else{
+      } else {
         pass = false;
       }
     }
@@ -364,10 +344,9 @@ public class Controller {
     ui.email();
     while (pass) {
       email = sc.next();
-      if (email.contains("@")){
+      if (email.contains("@")) {
         pass = false;
-      }
-      else{
+      } else {
         ui.badInput();
       }
     }
@@ -462,12 +441,11 @@ public class Controller {
 
     LocalDateTime eventTime = LocalDateTime.of(year, month, day, hours, minutes);
 
-    Swimmeet next = cr.createNewEvent(eventName, category, league, eventTime);
-    el.getList().add(next);
-    //fileHandler.saveEventsToCSV();
+    cr.createNewEvent(eventName, category, league, eventTime);
   }
 
-  public ArrayList<Member> sortBy(int sort, ArrayList<Member> member) {
+  public ArrayList<Member> sortBy(int sort, ArrayList<Member> member) throws FileNotFoundException {
+
 
     switch (sort) {
       case 1 -> {
@@ -475,7 +453,13 @@ public class Controller {
         Collections.sort((List<Member>) member, (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
       }
       case 2 -> {
-        //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
+        //Frasortering af medlemmer uden resultater indenfor kategorien
+        for (int i = 0; i < member.size(); i++) {
+          if (member.get(i).getBackcrawlResults() == null) {
+            member.remove(member.get(i));
+          }
+        }
+        //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i <= member.size(); i++) {
           //Sortering af backcrawl og indv. top 3
           Collections.sort((List<Achievement>) member.get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
@@ -486,44 +470,60 @@ public class Controller {
         }
       }
       case 3 -> {
+        //Frasortering af medlemmer uden resultater indenfor kategorien
+        for (int i = 0; i < member.size(); i++) {
+          if (member.get(i).getBreaststrokeResults() == null) {
+            member.remove(member.get(i));
+          }
+        }
+        //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i <= member.size(); i++) {
           Collections.sort((List<Achievement>) member.get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           //Indv. oprettelse af top3 for hver svømmer
           top3breaststroke(member);
-          //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
-          Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
         }
+        //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
       }
-      case 4 -> {     //Sortering af butterfly og indv. top3 for videre sortering
+      case 4 -> {
+        //Frasortering af medlemmer uden resultater indenfor kategorien
+        for (int i = 0; i < member.size(); i++) {
+          if (member.get(i).getButterflyResults() == null) {
+            member.remove(member.get(i));
+          }
+        }
+        //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i <= member.size(); i++) {
           Collections.sort((List<Achievement>) member.get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           //Indv. oprettelse af top3 for hver svømmer
           top3butterfly(member);
-          //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
-          Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
         }
+        //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
       }
       case 5 -> {
-        //Achievement listerne sorteres herunder for hver bruger hvorefter de tre bedste resultater flyttes til en Array for videre sortering af top5
+        //Frasortering af medlemmer uden resultater indenfor kategorien
+        for (int i = 0; i < member.size(); i++) {
+          if (member.get(i).getCrawlResults() == null) {
+            member.remove(member.get(i));
+          }
+        }
+        //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i <= member.size(); i++) {
           Collections.sort((List<Achievement>) member.get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           //Indv. oprettelse af top3 for hver svømmer
           top3crawl(member);
-          //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
-          Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
         }
-      }
-/*      case 6 -> {
-
+        //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
         Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
-      }*/
+      }
     }
     return member;
   }
 
   public Member findMember(String userID) {
     for (int i = 0; i < memberManager.getList().size(); i++) {
-      if (memberManager.getList().get(i).getMemberID().equals(userID))
+      if (userID.equals(memberManager.getList().get(i).getMemberID()))
         return memberManager.getList().get(i);
     }
     return null;

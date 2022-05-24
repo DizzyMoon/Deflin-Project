@@ -210,6 +210,10 @@ public class UserInterface {
     System.out.println("Indtast navn på udmærkelse:");
   }
 
+  public void noResult(){
+    System.out.println("Der er ingen resultater at vise inden for kategorien");
+  }
+
 
   public void printMemberList(MemberList ml) {
 
@@ -309,14 +313,16 @@ public class UserInterface {
       System.out.println("Top 5 - SENIOR " + gender);
     }
 
-    System.out.println(" #   | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
+    //Overskrifter
+    System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
+
     //Linjeadskillelse
     System.out.println(underLine.repeat(128));
 
     for (int i = 0; i < 5; i++){
 
       //Placering
-      System.out.print("Nr. " + i + space + line);
+      System.out.print("Nr. " + (i + 1) + space + line);
 
       //Navn
       System.out.print(member.get(i).getName() + space.repeat(31 - member.get(i).getName().length()) + line);

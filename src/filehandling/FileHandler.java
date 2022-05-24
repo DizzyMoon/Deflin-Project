@@ -21,7 +21,6 @@ public class FileHandler {
   boolean running = true;
   File membersCSV = new File("src/data/members.csv");
   File resultsCSV = new File("src/data/results.csv");
-  Controller con = new Controller();
 //File eventsCSV = new File("src/data/events.csv");
 
 
@@ -81,7 +80,7 @@ public class FileHandler {
   }
 
 
-  public void loadAchievementList() throws FileNotFoundException {
+/*  public void achievementListLoad() throws FileNotFoundException {
     Scanner fileScanner = new Scanner(resultsCSV);
     while (fileScanner.hasNextLine()) {
       //4825, backcrawl;int minute;int second;int distance;String medal
@@ -98,22 +97,24 @@ public class FileHandler {
 
       ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
       Achievement achievement;
-      Member member;
-      if (memberID.equals(con.findMember(memberID).getMemberID())) {
-        LocalDateTime lc = LocalDateTime.of(10, 10, 2020, 0, minute, second);
+      Controller controller = new Controller();
+
+      if (memberID.equals(controller.findMember(memberID))) {
+        LocalDateTime lc = LocalDateTime.of(2020, 10, 10, 0, minute, second);
         achievement = new Achievement(discipline, lc, distance);
+        achievement.setMemberID(memberID);
         achievement.setMedal(medal);
         switch (discipline){
-          case "backstroke" -> con.findMember(memberID).setBackstrokeResults(achievement);
-          case "crawl" -> con.findMember(memberID).setCrawlResults(achievement);
-          case "breaststroke" -> con.findMember(memberID).setBreastStroke(achievement);
-          case "butterfly" -> con.findMember(memberID).setButterflyResults(achievement);
+          case "backstroke" -> controller.findMember(memberID).setBackstrokeResults(achievement);
+          case "crawl" -> controller.findMember(memberID).setCrawlResults(achievement);
+          case "breaststroke" -> controller.findMember(memberID).setBreastStroke(achievement);
+          case "butterfly" -> controller.findMember(memberID).setButterflyResults(achievement);
         }
-      }
 
+      }
     }
 
-  }
+  }*/
 
 
 

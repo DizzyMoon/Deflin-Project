@@ -23,6 +23,10 @@ public class Creator {
     return fileHandler.loadMemberList();
   }
 
+/*  public void loadAchivements() throws FileNotFoundException{
+    fileHandler.loadAchievementList();
+  }*/
+
 
 /*  public void createNewMember(String name, String gender, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
     String tempID = " ";
