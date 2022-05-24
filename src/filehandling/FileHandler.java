@@ -81,10 +81,12 @@ public class FileHandler {
 
 
 
-/*  public void achievementListLoad() throws FileNotFoundException {
+  public ArrayList<Achievement> achievementListLoad() throws FileNotFoundException{
     Scanner fileScanner = new Scanner(resultsCSV);
+    ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
+
     while (fileScanner.hasNextLine()) {
-      //4825, backcrawl;int minute;int second;int distance;String medal
+
 
       String line = fileScanner.nextLine();
 
@@ -96,26 +98,27 @@ public class FileHandler {
       int distance = lineScanner.nextInt();
       String medal = lineScanner.next();
 
-      ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
+
       Achievement achievement;
       Controller controller = new Controller();
 
-      if (memberID.equals(controller.findMember(memberID))) {
+      //if (memberID.equals(controller.findMember(memberID).getMemberID())) {
         LocalDateTime lc = LocalDateTime.of(2020, 10, 10, 0, minute, second);
         achievement = new Achievement(discipline, lc, distance);
         achievement.setMemberID(memberID);
         achievement.setMedal(medal);
-        switch (discipline){
+        /*switch (discipline){
           case "backstroke" -> controller.findMember(memberID).setBackstrokeResults(achievement);
           case "crawl" -> controller.findMember(memberID).setCrawlResults(achievement);
           case "breaststroke" -> controller.findMember(memberID).setBreastStroke(achievement);
           case "butterfly" -> controller.findMember(memberID).setButterflyResults(achievement);
-        }
-
+        }*/
+        tempAchievementList.add(achievement);
       }
+    return tempAchievementList;
     }
 
-  }*/
+
 
 
 

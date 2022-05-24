@@ -23,9 +23,9 @@ public class Creator {
     return fileHandler.loadMemberList();
   }
 
-/*  public void loadAchivements() throws FileNotFoundException{
-    fileHandler.loadAchievementList();
-  }*/
+  public ArrayList<Achievement> loadAchivements() throws FileNotFoundException{
+    return fileHandler.achievementListLoad();
+  }
 
 
 /*  public void createNewMember(String name, String gender, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {

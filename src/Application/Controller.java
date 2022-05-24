@@ -38,7 +38,10 @@ public class Controller {
       memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
 
 
-    //fileHandler.achievementListLoad();
+    sortAchievementList(cr.loadAchivements());
+
+
+    System.out.println(memberManager.getList().get(1).getBackcrawlResults());
     while (running) {
       ui.startupMenu();
       int input = sc.nextInt();
@@ -466,7 +469,7 @@ public class Controller {
           //Indv. oprettelse af top3 for hver svømmer
           top3backstroke(member);
           //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
-          Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
+          Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3().get(0).compareTo(o2.getTempTop3().get(0)));
         }
       }
       case 3 -> {
@@ -483,7 +486,7 @@ public class Controller {
           top3breaststroke(member);
         }
         //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
-        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3().get(0).compareTo(o2.getTempTop3().get(0)));
       }
       case 4 -> {
         //Frasortering af medlemmer uden resultater indenfor kategorien
@@ -499,7 +502,7 @@ public class Controller {
           top3butterfly(member);
         }
         //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
-        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3().get(0).compareTo(o2.getTempTop3().get(0)));
       }
       case 5 -> {
         //Frasortering af medlemmer uden resultater indenfor kategorien
@@ -515,7 +518,7 @@ public class Controller {
           top3crawl(member);
         }
         //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
-        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3()[0].compareTo(o2.getTempTop3()[0]));
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3().get(0).compareTo(o2.getTempTop3().get(0)));
       }
     }
     return member;
@@ -523,16 +526,19 @@ public class Controller {
 
   public Member findMember(String userID) {
     for (int i = 0; i < memberManager.getList().size(); i++) {
-      if (userID.equals(memberManager.getList().get(i).getMemberID()))
+      if (userID.equals(memberManager.getList().get(i).getMemberID())) {
         return memberManager.getList().get(i);
+      } else {
+        return null;
+      }
     }
-    return null;
+    return memberManager.getList().get(0);
   }
 
   public void top3crawl(ArrayList<Member> member) {
     for (int i = 0; i < member.size(); i++) {
       for (int o = 0; o < 3; o++) {
-        member.get(i).setTempTop3(o, member.get(i).getCrawlResults().get(o));
+        member.get(i).setTempTop3(member.get(i).getCrawlResults().get(o));
       }
     }
   }
@@ -540,7 +546,7 @@ public class Controller {
   public void top3butterfly(ArrayList<Member> member) {
     for (int i = 0; i < member.size(); i++) {
       for (int o = 0; o < 3; o++)
-        member.get(i).setTempTop3(o, member.get(i).getButterflyResults().get(o));
+        member.get(i).setTempTop3(member.get(i).getButterflyResults().get(o));
     }
   }
 
@@ -548,7 +554,7 @@ public class Controller {
   public void top3backstroke(ArrayList<Member> member) {
     for (int i = 0; i < member.size(); i++) {
       for (int o = 0; o < 3; o++) {
-        member.get(i).setTempTop3(o, member.get(i).getBackcrawlResults().get(o));
+        member.get(i).setTempTop3(member.get(i).getBackcrawlResults().get(o));
       }
     }
   }
@@ -556,7 +562,22 @@ public class Controller {
   public void top3breaststroke(ArrayList<Member> member) {
     for (int i = 0; i < member.size(); i++) {
       for (int o = 0; o < 3; o++)
-        member.get(i).setTempTop3(o, member.get(i).getBreaststrokeResults().get(o));
+        member.get(i).setTempTop3(member.get(i).getBreaststrokeResults().get(o));
+    }
+  }
+
+  public void sortAchievementList(ArrayList<Achievement> achievements) {
+    for (int i = 0; i < achievements.size(); i++) {
+      for (int o = 0; o < memberManager.getList().size(); o++) {
+        if (achievements.get(i).getMemberID() == memberManager.getList().get(o).getMemberID()) {
+          switch (achievements.get(i).getDiscipline()) {
+            case "backstroke" -> memberManager.getList().get(o).setBackstrokeResults(achievements.get(i));
+            case "crawl" -> memberManager.getList().get(o).setCrawlResults(achievements.get(i));
+            case "breaststroke" -> memberManager.getList().get(o).setBreastStroke(achievements.get(i));
+            case "butterfly" -> memberManager.getList().get(o).setButterflyResults(achievements.get(i));
+          }
+        }
+      }
     }
   }
 }

@@ -66,7 +66,7 @@ public class UserInterface {
 
   public void top5StyleUI(){
     System.out.println("""
-        1 - Backcrawl
+        1 - Rygsvømning
         2 - Brystsvømning
         3 - Crawl
         4 - Butterfly""");
@@ -331,13 +331,13 @@ public class UserInterface {
       System.out.println(member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(29 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
 
       //Svømmers bedste tid
-      System.out.print(space + member.get(i).getTempTop3()[0].getTime().getMinute() + ":" + member.get(i).getTempTop3()[0].getTime().getSecond() + space.repeat(5) + line);
+      System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(5) + line);
 
       //Næstbedste tid
-      System.out.print(space + member.get(i).getTempTop3()[1].getTime().getMinute() + ":" + member.get(i).getTempTop3()[1].getTime().getSecond() + space.repeat(9) + line);
+      System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(9) + line);
 
       //Tredjebedste tid
-      System.out.print(space + member.get(i).getTempTop3()[2].getTime().getMinute() + ":" + member.get(i).getTempTop3()[2].getTime().getSecond() + space.repeat(11) + line);
+      System.out.print(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(11) + line);
 
       //Linjeadskillelse
       System.out.println(underLine.repeat(128));

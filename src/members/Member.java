@@ -16,10 +16,11 @@ public abstract class Member implements Comparable<Member> {
   private double arrears;
   private boolean active;
   private ArrayList<Achievement> butterflyResults = new ArrayList<>();
-  private ArrayList<Achievement> crawlResults;
-  private ArrayList<Achievement> backstrokeResults;
-  private ArrayList<Achievement> breaststrokeResults;
-  private Achievement[] tempTop3 = new Achievement[3];
+  private ArrayList<Achievement> crawlResults = new ArrayList<>();
+  private ArrayList<Achievement> backstrokeResults = new ArrayList<>();
+  private ArrayList<Achievement> breaststrokeResults = new ArrayList<>();
+  private ArrayList<Achievement> tempTop3 = new ArrayList<>();
+  //private Achievement[] tempTop3 = new Achievement[3];
 /*
   public Member(String name, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
     this.name = name;
@@ -146,11 +147,11 @@ public abstract class Member implements Comparable<Member> {
     return proficiency;
   }
 
-  public void setTempTop3(int i, Achievement achievement){
-    this.tempTop3[i] = achievement;
+  public void setTempTop3(Achievement achievement){
+    tempTop3.add(achievement);
   }
 
-  public Achievement[] getTempTop3() {
+  public ArrayList<Achievement> getTempTop3() {
     return tempTop3;
   }
 
