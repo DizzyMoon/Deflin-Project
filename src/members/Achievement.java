@@ -5,6 +5,7 @@ import java.time.Period;
 import java.util.Date;
 
 public class Achievement {
+    private String memberID;
     private String discipline;
     private LocalDateTime result;                  // use time field, to store the finish time
     private int distance;
@@ -43,4 +44,11 @@ public class Achievement {
         return this.getTime().compareTo(o.getTime());
     }
 
+    public void setMemberID(String memberID) {
+        this.memberID = memberID;
+    }
+
+    public String getMemberID() {
+        return memberID;
+    }
 }

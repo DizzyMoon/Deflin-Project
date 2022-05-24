@@ -1,14 +1,19 @@
 package filehandling;
 
+import Application.Controller;
 import members.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import UI.UserInterface;
 
 public class FileHandler {
@@ -16,6 +21,7 @@ public class FileHandler {
   boolean running = true;
   File membersCSV = new File("src/data/members.csv");
   File resultsCSV = new File("src/data/results.csv");
+  Controller con = new Controller();
 //File eventsCSV = new File("src/data/events.csv");
 
 
@@ -23,8 +29,11 @@ public class FileHandler {
   }
 
   public boolean hasSavedData() {
-    if (membersCSV.isFile()) { return true; }
-    return false; }
+    if (membersCSV.isFile()) {
+      return true;
+    }
+    return false;
+  }
 
   public void saveMembersToCSV(MemberList memberList) throws FileNotFoundException {
     PrintStream out = new PrintStream(membersCSV);
@@ -36,7 +45,7 @@ public class FileHandler {
     ArrayList<Member> newMemberList = new ArrayList<Member>();
 
     Scanner fileScanner = new Scanner(membersCSV);
-    while (fileScanner.hasNextLine()){
+    while (fileScanner.hasNextLine()) {
       String line = fileScanner.nextLine();
 
       Scanner lineScanner = new Scanner(line).useDelimiter(";");
@@ -59,7 +68,7 @@ public class FileHandler {
 
       Member newMember;
 
-      if (calculateIfJunior(birth)){
+      if (calculateIfJunior(birth)) {
         newMember = new Junior(name, memberID, gender, birth, phoneNumber, email, competitive, arrears, active);
       } else {
         newMember = new Senior(name, memberID, gender, birth, phoneNumber, email, competitive, arrears, active);
@@ -68,8 +77,46 @@ public class FileHandler {
       newMemberList.add(newMember);
 
     }
-      return newMemberList;
+    return newMemberList;
   }
+
+
+  public void loadAchievementList() throws FileNotFoundException {
+    Scanner fileScanner = new Scanner(resultsCSV);
+    while (fileScanner.hasNextLine()) {
+      //4825, backcrawl;int minute;int second;int distance;String medal
+
+      String line = fileScanner.nextLine();
+
+      Scanner lineScanner = new Scanner(line).useDelimiter(";");
+      String memberID = lineScanner.next();
+      String discipline = lineScanner.next();
+      int minute = lineScanner.nextInt();
+      int second = lineScanner.nextInt();
+      int distance = lineScanner.nextInt();
+      String medal = lineScanner.next();
+
+      ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
+      Achievement achievement;
+      Member member;
+      if (memberID.equals(con.findMember(memberID).getMemberID())) {
+        LocalDateTime lc = LocalDateTime.of(10, 10, 2020, 0, minute, second);
+        achievement = new Achievement(discipline, lc, distance);
+        achievement.setMedal(medal);
+        switch (discipline){
+          case "backstroke" -> con.findMember(memberID).setBackstrokeResults(achievement);
+          case "crawl" -> con.findMember(memberID).setCrawlResults(achievement);
+          case "breaststroke" -> con.findMember(memberID).setBreastStroke(achievement);
+          case "butterfly" -> con.findMember(memberID).setButterflyResults(achievement);
+        }
+      }
+
+    }
+
+  }
+
+
+
 /*
   public int getMonthNumber(String month) {       // Is this just a homemade getMonthValue? It's not called?
     int monthNum = 0;

@@ -112,32 +112,32 @@ public abstract class Member implements Comparable<Member> {
     return butterflyResults;
   }
 
-  public void setButterflyResults(ArrayList<Achievement> butterflyResults) {
-    this.butterflyResults = butterflyResults;
+  public void setButterflyResults(Achievement butterflyResults) {
+    this.butterflyResults.add(butterflyResults);
   }
 
   public ArrayList<Achievement> getCrawlResults() {
     return crawlResults;
   }
 
-  public void setCrawlResults(ArrayList<Achievement> crawlResults) {
-    this.crawlResults = crawlResults;
+  public void setCrawlResults(Achievement crawlResults) {
+    this.crawlResults.add(crawlResults);
   }
 
   public ArrayList<Achievement> getBackcrawlResults() {
     return backstrokeResults;
   }
 
-  public void setBackstrokeResults(ArrayList<Achievement> backstrokeResults) {
-    this.backstrokeResults = backstrokeResults;
+  public void setBackstrokeResults(Achievement backstrokeResults) {
+    this.backstrokeResults.add(backstrokeResults);
   }
 
   public ArrayList<Achievement> getBreaststrokeResults() {
     return breaststrokeResults;
   }
 
-  public void setBreastStroke(ArrayList<Achievement> breaststrokeResults) {
-    this.breaststrokeResults = breaststrokeResults;
+  public void setBreastStroke(Achievement breaststrokeResults) {
+    this.breaststrokeResults.add(breaststrokeResults);
   }
 
   public ArrayList getProficiency() {       //Search Arrays and find the most recent Achievements, return their list
