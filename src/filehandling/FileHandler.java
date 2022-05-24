@@ -100,7 +100,6 @@ public class FileHandler {
 
 
       Achievement achievement;
-      Controller controller = new Controller();
 
       //if (memberID.equals(controller.findMember(memberID).getMemberID())) {
         LocalDateTime lc = LocalDateTime.of(2020, 10, 10, 0, minute, second);

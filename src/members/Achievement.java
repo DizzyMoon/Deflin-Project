@@ -51,4 +51,15 @@ public class Achievement {
     public String getMemberID() {
         return memberID;
     }
+
+    @Override
+    public String toString() {
+        return "Achievement{" +
+            "memberID='" + memberID + '\'' +
+            ", discipline='" + discipline + '\'' +
+            ", result=" + result +
+            ", distance=" + distance +
+            ", medal='" + medal + '\'' +
+            '}';
+    }
 }
