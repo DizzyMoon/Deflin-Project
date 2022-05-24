@@ -14,11 +14,12 @@ public abstract class Member implements Comparable<Member> {
   private boolean competitive;
   private boolean arrears;
   private boolean active;
-  private ArrayList<Achievement> butterflyResults;
-  private ArrayList<Achievement> crawlResults;
-  private ArrayList<Achievement> backstrokeResults;
-  private ArrayList<Achievement> breaststrokeResults;
-  private Achievement[] tempTop3 = new Achievement[3];
+  private ArrayList<Achievement> butterflyResults = new ArrayList<>();
+  private ArrayList<Achievement> crawlResults = new ArrayList<>();
+  private ArrayList<Achievement> backstrokeResults = new ArrayList<>();
+  private ArrayList<Achievement> breaststrokeResults = new ArrayList<>();
+  private ArrayList<Achievement> tempTop3 = new ArrayList<>();
+  //private Achievement[] tempTop3 = new Achievement[3];
 /*
   public Member(String name, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
     this.name = name;
@@ -113,32 +114,32 @@ public abstract class Member implements Comparable<Member> {
     return butterflyResults;
   }
 
-  public void setButterflyResults(ArrayList<Achievement> butterflyResults) {
-    this.butterflyResults = butterflyResults;
+  public void setButterflyResults(Achievement butterflyResults) {
+    this.butterflyResults.add(butterflyResults);
   }
 
   public ArrayList<Achievement> getCrawlResults() {
     return crawlResults;
   }
 
-  public void setCrawlResults(ArrayList<Achievement> crawlResults) {
-    this.crawlResults = crawlResults;
+  public void setCrawlResults(Achievement crawlResults) {
+    this.crawlResults.add(crawlResults);
   }
 
   public ArrayList<Achievement> getBackcrawlResults() {
     return backstrokeResults;
   }
 
-  public void setBackstrokeResults(ArrayList<Achievement> backstrokeResults) {
-    this.backstrokeResults = backstrokeResults;
+  public void setBackstrokeResults(Achievement backstrokeResults) {
+    this.backstrokeResults.add(backstrokeResults);
   }
 
   public ArrayList<Achievement> getBreaststrokeResults() {
     return breaststrokeResults;
   }
 
-  public void setBreastStroke(ArrayList<Achievement> breaststrokeResults) {
-    this.breaststrokeResults = breaststrokeResults;
+  public void setBreastStroke(Achievement breaststrokeResults) {
+    this.breaststrokeResults.add(breaststrokeResults);
   }
 
   public ArrayList getProficiency() {       //Search Arrays and find the most recent Achievements, return their list
@@ -147,11 +148,11 @@ public abstract class Member implements Comparable<Member> {
     return proficiency;
   }
 
-  public void setTempTop3(int i, Achievement achievement){
-    this.tempTop3[i] = achievement;
+  public void setTempTop3(Achievement achievement){
+    tempTop3.add(achievement);
   }
 
-  public Achievement[] getTempTop3() {
+  public ArrayList<Achievement> getTempTop3() {
     return tempTop3;
   }
 

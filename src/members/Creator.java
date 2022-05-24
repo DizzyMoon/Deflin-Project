@@ -23,6 +23,10 @@ public class Creator {
     return fileHandler.loadMemberList();
   }
 
+  public ArrayList<Achievement> loadAchivements() throws FileNotFoundException{
+    return fileHandler.achievementListLoad();
+  }
+
 
 /*  public void createNewMember(String name, String gender, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
     String tempID = " ";
@@ -99,10 +103,9 @@ public class Creator {
     return juniorList;
   }
   */
-  public void createNewEvent(String eventName, String category, boolean league, LocalDateTime eventTime) {
+  public Swimmeet createNewEvent(String eventName, String category, boolean league, LocalDateTime eventTime) {
     Swimmeet nextMeet = new Swimmeet(eventName, category, league, eventTime);
-    eventList.getList().add(nextMeet);
-    //fileHandler.saveEventsToCSV();
+    return nextMeet;
   }
 }
 

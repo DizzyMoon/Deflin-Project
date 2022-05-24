@@ -100,7 +100,7 @@ public class MemberManager {
   public ArrayList<Member> sortJunior(){
     //ArrayList<Member> juniorList = new ArrayList<Member>();
     for (int i = 0; i < memberList.getList().size(); i++) {
-      if (memberList.getList().get(i) instanceof Senior){
+      if (memberList.getList().get(i) instanceof Junior){
         juniorList.add(memberList.getList().get(i));
       }
     }
@@ -110,7 +110,7 @@ public class MemberManager {
   public void womensList(ArrayList<Member> member) {
     //ArrayList<Member> women = new ArrayList<>();
     for (int i = 0; i < member.size(); i++)
-      if (member.get(i).getGender().equalsIgnoreCase("H")) {
+      if (member.get(i).getGender().equalsIgnoreCase("D")) {
         women.add(member.get(i));
       }
   }
@@ -118,7 +118,7 @@ public class MemberManager {
   public void mensList(ArrayList<Member> member) {
     //ArrayList<Member> men = new ArrayList<>();
     for (int i = 0; i < member.size(); i++)
-      if (member.get(i).getGender().equalsIgnoreCase("D")) {
+      if (member.get(i).getGender().equalsIgnoreCase("H")) {
         men.add(member.get(i));
       }
   }
