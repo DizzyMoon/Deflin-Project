@@ -27,16 +27,35 @@ public class Swimmeet {
         return eventName;
     }
 
-    public LocalDateTime getEventTime() { return eventTime; }
+    public String getGenderCategory() {
+        return genderCategory;
+    }
 
-    public boolean isJuniorLeague() { return juniorLeague; }
+    public LocalDateTime getEventTime() {
+        return eventTime;
+    }
+
+    public String isJuniorLeague() {
+        return juniorLeague ? "Junior" : "Senior";
+    }
 
     /*  public ArrayList getBackstrokeComp() { return backstrokeComp; }
         public ArrayList getBreaststrokeComp() { return breaststrokeComp; }
         public ArrayList getButterflyComp() { return butterflyComp; }
         public ArrayList getCrawlComp() { return crawlComp; }
     */
-    public void addSwimmer(Member contender, ArrayList comp) {
+    public ArrayList chosenDiscipline(int choice) {
+        ArrayList<Member> returned;
+        switch (choice) {
+            case 1 -> returned = backstrokeComp;
+            case 2 -> returned = breaststrokeComp;
+            case 3 -> returned = butterflyComp;
+            default -> returned = crawlComp;
+        }
+        return returned;
+    }
+
+    public void assignCompetitor(Member contender, ArrayList comp) {
         comp.add(contender);
     }
 

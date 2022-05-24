@@ -99,10 +99,9 @@ public class Creator {
     return juniorList;
   }
   */
-  public void createNewEvent(String eventName, String category, boolean league, LocalDateTime eventTime) {
+  public Swimmeet createNewEvent(String eventName, String category, boolean league, LocalDateTime eventTime) {
     Swimmeet nextMeet = new Swimmeet(eventName, category, league, eventTime);
-    eventList.getList().add(nextMeet);
-    //fileHandler.saveEventsToCSV();
+    return nextMeet;
   }
 }
 

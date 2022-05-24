@@ -4,11 +4,9 @@ import UI.UserInterface;
 import members.*;
 
 import java.io.FileNotFoundException;
-import java.net.Inet4Address;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,9 +24,9 @@ public class Controller {
   UserInterface ui = new UserInterface();
   MemberManager memberManager = new MemberManager();
   Creator cr = new Creator();
+  EventList el = new EventList();
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
-
-  // seems legit!
+                                                                              // seems legit!
   public Controller() throws FileNotFoundException {
   }
 
@@ -139,12 +137,11 @@ public class Controller {
       int input = sc.nextInt();
       sc.nextLine(); //Scannerbug fix
       switch (input) {
-//        case 1 -> coachViewSchedule();
+//        case 1 -> coachViewSchedule();      Coming in version 2!
         case 2 -> coachNewEvent();
-        //case 3 -> ui.Events();
-//        case 4 -> coachAssignAthleteToComp();
-        case 5 -> createNewAchievement();
-
+        case 3 -> ui.printEventListTable(el.getList());
+        case 4 -> coachAssignAthleteToComp();
+        case 5 -> coachCreateNewAchievement();
 
         case 6 -> {
           ui.top5AgeUI();
@@ -162,8 +159,32 @@ public class Controller {
     }
   }
 
-  public void createNewAchievement() {
+  public void coachAssignAthleteToComp() {
+    ui.printEventListTable(el.getList());
+    ui.chooseComp();
+    int selection = sc.nextInt();
+    Swimmeet chosen = el.getList().get(selection-1);
+    ui.chooseDiscipline();
+    selection = sc.nextInt();
+    String discipline;
+    switch (selection) {
+      case 1 -> discipline = "Backcrawl";
+      case 2 -> discipline = "Brystsvømning";
+      case 3 -> discipline = "Butterfly";
+      default -> discipline = "Crawl";
+    }
+    //getTop5 (chosen.getGenderCategory(), chosen.getLeague())
+    ui.inputDistance();
+    int distance = sc.nextInt();
+    ui.addProspect();
+    ui.inputSwimmerID();
+    String competitor = sc.next();
+    Member swimmer = findMember(competitor);
+    chosen.assignCompetitor(swimmer, chosen.chosenDiscipline(selection));
+    ui.competitorReady(discipline, distance);
+  }
 
+  public void coachCreateNewAchievement() {
     Discipline discipline;
 
     ui.writeDiscipline();
@@ -175,7 +196,6 @@ public class Controller {
       case "bryst" -> discipline = Discipline.BREASTSTROKE;
     }
 
-
     ui.inputSwimmerID();
     String memberID = sc.next();
 //          ui.inputDicipline();
@@ -185,7 +205,6 @@ public class Controller {
 //          ui.inputDate();                 // Shouldn't be input, should come from System
 //          LocalDate somethingsomething;
     ui.inputTime();                   // Ideally, put in LocalDateTime, due to the close relationship
-
 
     String timeString = sc.next();
     int minutes = Integer.parseInt(timeString.substring(0, timeString.indexOf(":")));
@@ -208,12 +227,11 @@ public class Controller {
     } else {
       ui.badInput();
     }
-    //         ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
+    //  ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
 
     //  Achievement registered = cr.newAchievement(DateTime, discipline, distance, commendation);
     //  findMember(memberID, cr.getMemberList()).logResult(registered, proficiency);
   }
-
 
   public void top5Gender(ArrayList<Member> member) {
     boolean running = true;
@@ -397,7 +415,9 @@ public class Controller {
 
     LocalDateTime eventTime = LocalDateTime.of(year, month, day, hours, minutes);
 
-    cr.createNewEvent(eventName, category, league, eventTime);
+    Swimmeet next = cr.createNewEvent(eventName, category, league, eventTime);
+    el.getList().add(next);
+    //fileHandler.saveEventsToCSV();
   }
 
   public ArrayList<Member> sortBy(int sort, ArrayList<Member> member) {

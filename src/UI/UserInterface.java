@@ -2,6 +2,7 @@ package UI;
 
 import members.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class UserInterface {
@@ -171,9 +172,13 @@ public class UserInterface {
     System.out.println(schedule.toString());
   }
 
-  public void addSwimmerToMeet() {
-    System.out.println("");
+  public void chooseComp() {
+    System.out.println("\nVælg stævne: (f.eks. 1 for det næstkommende)");
   }
+
+  public void chooseDiscipline() { System.out.println("Vælg svømmedisciplin (1 - Backcrawl  2 - Bryst  3 - Butterfly  4 - Crawl:"); }
+
+  public void addProspect() { System.out.println("Vælg en ny konkurrence-deltager"); }
 
   public void inputSwimmerID() {
     System.out.println("Indtast svømmers medlemsnummer:");
@@ -186,6 +191,8 @@ public class UserInterface {
   public void inputTime() {
     System.out.println("Indtast opnået resultat: (mm:ss)");
   }
+
+  public void competitorReady(String discipline, int distance) { System.out.println("Svømmer tilføjet til " + distance + " m  " + discipline); }
 
   public void addCommendation() {
     System.out.println("Har svømmeren opnået en udmærkelse? (ja/nej)");
@@ -330,19 +337,21 @@ public class UserInterface {
       System.out.println(underLine.repeat(128));
     }
   }
-/*
-  public void printEventListTable(EventList meets) {
+  public void printEventListTable(ArrayList<Swimmeet> meets) {
     String line = "|";
     //String dot = ".";
+    System.out.println("Stævne                       | Division         | Dato   Tidspunkt |");
+    System.out.println("-----------------------------|------------------|------------------|");
 
-    System.out.printf("%10d %1s %-42s %1s %", eventName, line, eventDate, line, eventType);
-
-    for (int i = 0; i < meets.getList().size(); i++) {
-      Swimmeet print = meets.getList().get(i);
-
+    for (int i = 0; i < meets.size(); i++) {
+      String eventName = meets.get(i).getEventName();
+      String category = meets.get(i).getGenderCategory();
+      String league = meets.get(i).isJuniorLeague();
+      LocalDateTime eventTime = meets.get(i).getEventTime();
+      System.out.printf("%-28s %1s %-4s %-11s %1s %-16s %1s \n", eventName, line, category, league, line, eventTime, line);
     }
+    System.out.println();
   }
-*/
 }
 
 
