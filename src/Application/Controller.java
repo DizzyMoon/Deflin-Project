@@ -285,24 +285,48 @@ public class Controller {
 
   public void formandNewMember() throws FileNotFoundException {
     boolean competition = false;
+    boolean pass = true;
+    String gender = "";
+    String phoneNumber = "";
     ui.memberName();
     String name = sc.nextLine();
     ui.gender();
-    String gender = sc.next();
+    while(pass) {
+      gender = sc.next();
+      if (gender.equalsIgnoreCase("H") || gender.equalsIgnoreCase("D")){
+        pass = false;
+      }
+      else{
+        ui.badInput();
+      }
+    }
     ui.dateOfBirth();
     LocalDate newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
+    pass = true;
     ui.competitive();
-    String competitive = sc.next();
-    if (competitive.equalsIgnoreCase("ja")) {
-      competition = true;
-    } else if (competitive.equalsIgnoreCase("nej")) {
-      competition = false;
-    } else {
-      ui.badInput();
+    while(pass) {
+      String competitive = sc.next();
+      if (competitive.equalsIgnoreCase("ja")) {
+        competition = true;
+        pass = false;
+      } else if (competitive.equalsIgnoreCase("nej")) {
+        competition = false;
+        pass = false;
+      } else {
+        ui.badInput();
+      }
     }
+    pass = true;
     ui.phoneNumber();
-    String phoneNumber = sc.next();
-
+    while (pass) {
+      phoneNumber = sc.next();
+      if (phoneNumber.length() > 12 || phoneNumber.length() < 8){
+        ui.badInput();
+      }
+      else{
+        pass = false;
+      }
+    }
     ui.email();
     String email = sc.next();
 

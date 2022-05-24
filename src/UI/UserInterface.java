@@ -330,19 +330,6 @@ public class UserInterface {
       System.out.println(underLine.repeat(128));
     }
   }
-/*
-  public void printEventListTable(EventList meets) {
-    String line = "|";
-    //String dot = ".";
-
-    System.out.printf("%10d %1s %-42s %1s %", eventName, line, eventDate, line, eventType);
-
-    for (int i = 0; i < meets.getList().size(); i++) {
-      Swimmeet print = meets.getList().get(i);
-
-    }
-  }
-*/
 }
 
 
