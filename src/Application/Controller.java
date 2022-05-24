@@ -4,9 +4,12 @@ import UI.UserInterface;
 import members.*;
 
 import java.io.FileNotFoundException;
+import java.net.Inet4Address;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -242,10 +245,12 @@ public class Controller {
       if (genderChoice == 1) {
         memberManager.mensList(member);
         top5Style(memberManager.getMen());
-        System.out.println(memberManager.getMen());
       } else if (genderChoice == 2) {
         memberManager.womensList(member);
         top5Style(memberManager.getWomen());
+      }
+      else {
+        ui.badInput();
       }
     }
   }
@@ -303,27 +308,69 @@ public class Controller {
 
   public void formandNewMember() throws FileNotFoundException {
     boolean competition = false;
+    boolean pass = true;
+    String gender = "";
+    String phoneNumber = "";
+    LocalDate newDate = LocalDate.now();
+    String email = "";
     ui.memberName();
     String name = sc.nextLine();
     ui.gender();
-    String gender = sc.next();
-    ui.dateOfBirth();
-    LocalDate newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
-    ui.competitive();
-    String competitive = sc.next();
-    if (competitive.equalsIgnoreCase("ja")) {
-      competition = true;
-    } else if (competitive.equalsIgnoreCase("nej")) {
-      competition = false;
-    } else {
-      ui.badInput();
+    while(pass) {
+      gender = sc.next();
+      if (gender.equalsIgnoreCase("H") || gender.equalsIgnoreCase("D")){
+        pass = false;
+      }
+      else{
+        ui.badInput();
+      }
     }
+    pass = true;
+    ui.dateOfBirth();
+    while (pass) {
+      try {
+        newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
+        pass = false;
+      } catch (NumberFormatException | DateTimeException e) {
+        ui.badInput();
+      }
+    }
+    pass = true;
+    ui.competitive();
+    while(pass) {
+      String competitive = sc.next();
+      if (competitive.equalsIgnoreCase("ja")) {
+        competition = true;
+        pass = false;
+      } else if (competitive.equalsIgnoreCase("nej")) {
+        competition = false;
+        pass = false;
+      } else {
+        ui.badInput();
+      }
+    }
+    pass = true;
     ui.phoneNumber();
-    String phoneNumber = sc.next();
-
+    while (pass) {
+      phoneNumber = sc.next();
+      if (phoneNumber.length() > 12 || phoneNumber.length() < 8){
+        ui.badInput();
+      }
+      else{
+        pass = false;
+      }
+    }
+    pass = true;
     ui.email();
-    String email = sc.next();
-
+    while (pass) {
+      email = sc.next();
+      if (email.contains("@")){
+        pass = false;
+      }
+      else{
+        ui.badInput();
+      }
+    }
     String tempID = " ";
     double noArrears = 0;
     memberManager.createNewMember(name, tempID, gender, newDate, phoneNumber, email, competition, noArrears, true);
@@ -430,7 +477,6 @@ public class Controller {
       case 2 -> {
         //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
         for (int i = 0; i <= member.size(); i++) {
-
           //Sortering af backcrawl og indv. top 3
           Collections.sort((List<Achievement>) member.get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           //Indv. oprettelse af top3 for hver svømmer
@@ -512,26 +558,7 @@ public class Controller {
       for (int o = 0; o < 3; o++)
         member.get(i).setTempTop3(o, member.get(i).getBreaststrokeResults().get(o));
     }
-
-
   }
-  /*public ArrayList<Member> womensList(ArrayList<Member> member) {
-    ArrayList<Member> women = new ArrayList<>();
-    for (int i = 0; i < member.size(); i++)
-      if (member.get(i).getGender().equals("Kvinde")) {
-        women.add(member.get(i));
-      }
-    return women;
-  }
-
-  public ArrayList<Member> mensList(ArrayList<Member> member) {
-    ArrayList<Member> men = new ArrayList<>();
-    for (int i = 0; i < member.size(); i++)
-      if (member.get(i).getGender().equals("Mand")) {
-        men.add(member.get(i));
-      }
-    return men;
-  }*/
 }
 
 
