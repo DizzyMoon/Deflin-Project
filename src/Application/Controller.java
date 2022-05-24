@@ -410,7 +410,6 @@ public class Controller {
       case 2 -> {
         //Numerisk sortering af svømmeresultater (opdelt i discipliner) til hver svømmer - ikke testet
         for (int i = 0; i <= member.size(); i++) {
-
           //Sortering af backcrawl og indv. top 3
           Collections.sort((List<Achievement>) member.get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
           //Indv. oprettelse af top3 for hver svømmer
@@ -492,26 +491,7 @@ public class Controller {
       for (int o = 0; o < 3; o++)
         member.get(i).setTempTop3(o, member.get(i).getBreaststrokeResults().get(o));
     }
-
-
   }
-  /*public ArrayList<Member> womensList(ArrayList<Member> member) {
-    ArrayList<Member> women = new ArrayList<>();
-    for (int i = 0; i < member.size(); i++)
-      if (member.get(i).getGender().equals("Kvinde")) {
-        women.add(member.get(i));
-      }
-    return women;
-  }
-
-  public ArrayList<Member> mensList(ArrayList<Member> member) {
-    ArrayList<Member> men = new ArrayList<>();
-    for (int i = 0; i < member.size(); i++)
-      if (member.get(i).getGender().equals("Mand")) {
-        men.add(member.get(i));
-      }
-    return men;
-  }*/
 }
 
 
