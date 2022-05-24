@@ -569,7 +569,7 @@ public class Controller {
   public void sortAchievementList(ArrayList<Achievement> achievements) {
     for (int i = 0; i < achievements.size(); i++) {
       for (int o = 0; o < memberManager.getList().size(); o++) {
-        if (achievements.get(i).getMemberID() == memberManager.getList().get(o).getMemberID()) {
+        if (achievements.get(i).getMemberID().equalsIgnoreCase(memberManager.getList().get(o).getMemberID())) {
           switch (achievements.get(i).getDiscipline()) {
             case "backstroke" -> memberManager.getList().get(o).setBackstrokeResults(achievements.get(i));
             case "crawl" -> memberManager.getList().get(o).setCrawlResults(achievements.get(i));
