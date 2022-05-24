@@ -2,7 +2,6 @@ package members;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public abstract class Member implements Comparable<Member> {
 
@@ -13,7 +12,7 @@ public abstract class Member implements Comparable<Member> {
   private String phoneNumber;
   private String email;
   private boolean competitive;
-  private double arrears;
+  private boolean arrears;
   private boolean active;
   private ArrayList<Achievement> butterflyResults;
   private ArrayList<Achievement> crawlResults;
@@ -31,7 +30,7 @@ public abstract class Member implements Comparable<Member> {
     this.competitive = competitive;
   }
 */
-  public Member(String name, String memberID, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, double arrears, boolean active) {
+  public Member(String name, String memberID, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean arrears, boolean active) {
     this.name = name;
     this.memberID = memberID;
     this.gender = gender;
@@ -88,8 +87,14 @@ public abstract class Member implements Comparable<Member> {
 
   public void toggleStatus() { this.active = !active; }
 
-  public void setArrears(double arrears) {
-    this.arrears = arrears;
+  public String getArrears() {
+    return this.arrears ? "Betalt" : "Ikke betalt";
+  }
+
+  public void toggleArrears() { this.arrears = !arrears; }
+
+  public boolean getArrearsBool () {
+    return this.arrears;
   }
 
   public String getName() {
@@ -102,10 +107,6 @@ public abstract class Member implements Comparable<Member> {
 
   public String getCompetitive() {
     return competitive ? "Konkurrencesvømmer" : "Motionist";
-  }
-
-  public double getArrears() {
-    return arrears;
   }
 
   public ArrayList<Achievement> getButterflyResults() {
@@ -155,7 +156,7 @@ public abstract class Member implements Comparable<Member> {
   }
 
   public String toString() {
-    return name + ", " + birth + ", " + getCompetitive() + " - " + getActive();
+    return name + ", " + birth + ", " + getCompetitive() + " - " + getActive() + " - " + getArrears();
   }
 
   @Override

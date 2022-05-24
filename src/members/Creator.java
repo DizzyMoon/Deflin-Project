@@ -26,7 +26,7 @@ public class Creator {
 
 /*  public void createNewMember(String name, String gender, LocalDate date, String phoneNumber, String email, boolean competition, boolean active) throws FileNotFoundException {
     String tempID = " ";
-    double noArrears = 0;
+    boolean noArrears = true;
 
     LocalDate now = LocalDate.now();
     Period p = Period.between(date, now);

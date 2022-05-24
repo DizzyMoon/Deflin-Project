@@ -48,7 +48,7 @@ public class FileHandler {
       String phoneNumber = lineScanner.next();
       String email = lineScanner.next();
       String competitiveString = lineScanner.next();
-      double arrears = Double.parseDouble(lineScanner.next());
+      String arrearsString = lineScanner.next();
       String activeString = lineScanner.next();
 
       ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
@@ -56,6 +56,7 @@ public class FileHandler {
       LocalDate birth = LocalDate.parse(birthString);
       boolean competitive = competitiveString.equals("Konkurrencesvømmer");
       boolean active = activeString.equals("Aktiv");
+      boolean arrears = arrearsString.equals("Betalt");
 
       Member newMember;
 

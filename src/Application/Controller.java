@@ -27,7 +27,7 @@ public class Controller {
   Creator cr = new Creator();
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
 
-  // seems legit!
+  // leems segit!
   public Controller() throws FileNotFoundException {
   }
 
@@ -124,9 +124,17 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> subscriptionIncome();
-        case 2 -> System.out.println("Not done, son");
-        case 3 -> run();
-        case 4 -> exit();
+        case 2 -> ui.printArrearsListTable(memberManager.getMemberList());
+        case 3 -> {
+          ui.typeMemberIDForNameChange();
+          String memberID = sc.next();
+          findMember(memberID).toggleArrears();
+          String subscriptionPayment = findMember(memberID).getArrears();
+          ui.statusAltered(subscriptionPayment);
+          fileHandler.saveMembersToCSV(memberManager.getMemberList());
+        }
+        case 4 -> run();
+        case 5 -> exit();
       }
     }
   }
@@ -280,6 +288,7 @@ public class Controller {
 
   public void formandNewMember() throws FileNotFoundException {
     boolean competition = false;
+    boolean arrears = false;
     ui.memberName();
     String name = sc.nextLine();
     ui.gender();
@@ -295,6 +304,7 @@ public class Controller {
     } else {
       ui.badInput();
     }
+
     ui.phoneNumber();
     String phoneNumber = sc.next();
 
@@ -302,8 +312,8 @@ public class Controller {
     String email = sc.next();
 
     String tempID = " ";
-    double noArrears = 0;
-    memberManager.createNewMember(name, tempID, gender, newDate, phoneNumber, email, competition, noArrears, true);
+
+    memberManager.createNewMember(name, tempID, gender, newDate, phoneNumber, email, competition, arrears, true);
     sortBy(1, memberManager.getList());
   }
 

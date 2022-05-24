@@ -23,7 +23,7 @@ public class MemberManager {
   public MemberManager() throws FileNotFoundException {
   }
 
-  public void createNewMember(String name, String tempID, String gender, LocalDate date, String phoneNumber, String email, boolean competition, double arrears, boolean active) throws FileNotFoundException {
+  public void createNewMember(String name, String tempID, String gender, LocalDate date, String phoneNumber, String email, boolean competition, boolean arrears, boolean active) throws FileNotFoundException {
 
     LocalDate now = LocalDate.now();
     Period p = Period.between(date, now);

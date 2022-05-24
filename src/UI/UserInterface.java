@@ -32,8 +32,9 @@ public class UserInterface {
     System.out.println("""
         1 - Se samlet sum af medlemmers årskontingenter
         2 - Se liste over restancer
-        3 - Tilbage til hovedmenu
-        4 - Luk
+        3 - Ændre restance til betalt/ikke betalt
+        4 - Tilbage til hovedmenu
+        5 - Luk
         """);
   }
 
@@ -137,6 +138,12 @@ public class UserInterface {
   public void email() {
     System.out.println("Indtast mailadresse:");
   }
+
+  /*
+  public void arrears() {
+    System.out.println("Har medlemmet betalt kontingent? (ja/nej):");
+  }
+  */
 
   public void statusAltered(String newStatus) {
     System.out.println("Medlemsstatus er ændret til " + newStatus);
@@ -272,6 +279,45 @@ public class UserInterface {
 
       //Linjeadskillelse
       System.out.println(underLine.repeat(128));
+    }
+    //Ekstra linjeskift efter sidste linje i tabel
+    System.out.println();
+  }
+
+  public void printArrearsListTable(MemberList ml) {
+    String underLine = "-";
+    String line = "|";
+    String space = " ";
+    String dot = ".";
+
+    //Overskrifter
+    System.out.println("Medlemsnr. | Navn" + space.repeat(26) + "| Restance" + space.repeat(11) + "|");
+
+    //Linjeadskillelse
+    System.out.println(underLine.repeat(65));
+
+    for (int i = 0; i < ml.getList().size(); i++) {
+      Member print = ml.getList().get(i);
+
+      //Medlemsnummer
+      System.out.print(space + print.getMemberID() + space.repeat(6) + line);
+
+      //Navn
+      System.out.print(space + print.getName() + space.repeat(30 - print.getName().length()) + line);
+
+      //Restance
+      int rep = 0;
+      String age;
+      if (print.getArrearsBool()) {
+        rep = 12;
+      } else if (!print.getArrearsBool()) {
+        rep = 7;
+      }
+
+      System.out.print(space + print.getArrears() + space + space.repeat(rep) + line + "\n");
+
+      //Linjeadskillelse
+      System.out.println(underLine.repeat(65));
     }
     //Ekstra linjeskift efter sidste linje i tabel
     System.out.println();
