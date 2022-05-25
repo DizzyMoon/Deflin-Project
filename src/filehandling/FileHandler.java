@@ -100,8 +100,8 @@ public class FileHandler {
       switch (stringDiscipline){
         case "butterfly" -> discipline = Discipline.BUTTERFLY;
         case "crawl" -> discipline = Discipline.CRAWL;
-        case "ryg" -> discipline = Discipline.BACKSTROKE;
-        case "bryst" -> discipline = Discipline.BREASTSTROKE;
+        case "backstroke" -> discipline = Discipline.BACKSTROKE;
+        case "breaststroke" -> discipline = Discipline.BREASTSTROKE;
       }
 
       int minute = lineScanner.nextInt();

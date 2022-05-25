@@ -498,13 +498,12 @@ public class Controller {
         }
         //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i < member.size(); i++) {
-          //Sortering af backcrawl og indv. top 3
           Collections.sort((List<Achievement>) member.get(i).getBackstrokeResults(), Comparator.comparingInt(o -> o.getTime().getSecond()));
         }
         //Indv. oprettelse af top3 for hver svømmer
         top3backstroke(member);
         //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
-        Collections.sort(member, (o1, o2) -> o1.getTempTop3().get(0).compareTo(o2.getTempTop3().get(0)));
+        Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3().get(0).compareTo(o2.getTempTop3().get(0)));
       }
       case 2 -> {
         //Frasortering af medlemmer uden resultater indenfor kategorien
@@ -514,7 +513,7 @@ public class Controller {
           }
         }
         //Sortering af bedste tider indenfor kategori for hver svømmer
-        for (int i = 0; i <= member.size(); i++) {
+        for (int i = 0; i < member.size(); i++) {
           Collections.sort((List<Achievement>) member.get(i).getBreaststrokeResults(), Comparator.comparingInt(o -> o.getTime().getSecond()));
         }
         //Indv. oprettelse af top3 for hver svømmer
@@ -530,7 +529,7 @@ public class Controller {
           }
         }
         //Sortering af bedste tider indenfor kategori for hver svømmer
-        for (int i = 0; i <= member.size(); i++) {
+        for (int i = 0; i < member.size(); i++) {
           Collections.sort((List<Achievement>) member.get(i).getButterflyResults(), Comparator.comparingInt(o -> o.getTime().getSecond()));
         }
         //Indv. oprettelse af top3 for hver svømmer
@@ -546,9 +545,8 @@ public class Controller {
           }
         }
         //Sortering af bedste tider indenfor kategori for hver svømmer
-        for (int i = 0; i <= member.size(); i++) {
+        for (int i = 0; i < member.size(); i++) {
           Collections.sort((List<Achievement>) member.get(i).getCrawlResults(), Comparator.comparingInt(o -> o.getTime().getSecond()));
-          System.out.println(member.get(i).getCrawlResults());
         }
         //Indv. oprettelse af top3 for hver svømmer
         top3crawl(member);
@@ -599,7 +597,7 @@ public class Controller {
   public void top3backstroke(ArrayList<Member> member) {
     for (int i = 0; i < member.size(); i++) {
       for (int o = 0; o < 3; o++) {
-        member.get(i).setTempTop3(member.get(i).getBackstrokeResults().get(0));
+        member.get(i).setTempTop3(member.get(i).getBackstrokeResults().get(o));
       }
     }
   }
