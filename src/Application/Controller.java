@@ -60,18 +60,26 @@ public class Controller {
         case 1 -> formandNewMember();
         case 2 -> removeMember();
         case 3 -> {
+          try{
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
           findMember(memberID).toggleStatus();
           String activeMember = findMember(memberID).getActive();
-          ui.statusAltered(activeMember);
+          ui.statusAltered(activeMember);}
+          catch (NullPointerException e){
+            ui.badInput();
+          }
         }
         case 4 -> {
-          ui.typeMemberIDForNameChange();
-          String memberID = sc.next();
-          findMember(memberID).toggleCompetitive();
-          String competionSwimmer = findMember(memberID).getCompetitive();
-          ui.typeAltered(competionSwimmer);
+          try {
+            ui.typeMemberIDForNameChange();
+            String memberID = sc.next();
+            findMember(memberID).toggleCompetitive();
+            String competionSwimmer = findMember(memberID).getCompetitive();
+            ui.typeAltered(competionSwimmer);
+          }catch (NullPointerException e){
+            ui.badInput();
+          }
         }
         case 5 -> {
           ui.typeMemberIDForNameChange();
@@ -533,15 +541,22 @@ public class Controller {
     return member;
   }
 
-  public Member findMember(String userID) {
-    for (int i = 0; i < memberManager.getList().size(); i++) {
-      if (userID.equals(memberManager.getList().get(i).getMemberID())) {
-        return memberManager.getList().get(i);
-      } else {
-        return null;
+  public Member findMember(String userID) throws FileNotFoundException{
+    String memberID = userID;
+    boolean found = false;
+    int searchedElements = 0;
+
+    for (Member member : memberManager.getList()){
+      if (member.getMemberID().equals(memberID)){
+      return member;
+      }
+      searchedElements++;
+      if (searchedElements == memberManager.getList().size() && !found){
+        ui.elementDoesNotExist();
       }
     }
-    return memberManager.getList().get(0);
+
+    return null;
   }
 
   public void top3crawl(ArrayList<Member> member) {
