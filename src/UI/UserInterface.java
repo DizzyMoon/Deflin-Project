@@ -369,7 +369,7 @@ public class UserInterface {
       for (int i = 0; i < 5; i++) {
 
         //Placering
-        System.out.print("Nr. " + (i + 1) + space + line);
+        System.out.print("Nr. " + (i + 1) + space.repeat(2) + line);
 
         //Navn
         System.out.print(member.get(i).getName() + space.repeat(31 - member.get(i).getName().length()) + line);
@@ -378,13 +378,13 @@ public class UserInterface {
         System.out.print(member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(29 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
 
         //Svømmers bedste tid
-        System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(5) + line);
+        System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(6) + line);
 
         //Næstbedste tid
-        System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(9) + line);
+        System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(14) + line);
 
         //Tredjebedste tid
-        System.out.print(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(11) + line);
+        System.out.println(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(11) + line);
 
         //Linjeadskillelse
         System.out.println(underLine.repeat(128));
