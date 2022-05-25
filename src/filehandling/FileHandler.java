@@ -45,7 +45,6 @@ public class FileHandler {
     ArrayList<Member> newMemberList = new ArrayList<Member>();
 
     Scanner fileScanner = new Scanner(membersCSV);
-
     while (fileScanner.hasNextLine()) {
       String line = fileScanner.nextLine();
 
@@ -85,11 +84,12 @@ public class FileHandler {
 
 
   public ArrayList<Achievement> achievementListLoad() throws FileNotFoundException{
+    Scanner fileScanner = new Scanner(resultsCSV);
     ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
 
-    Scanner fileScanner = new Scanner(resultsCSV);
-
     while (fileScanner.hasNextLine()) {
+
+
       String line = fileScanner.nextLine();
 
       Scanner lineScanner = new Scanner(line).useDelimiter(";");

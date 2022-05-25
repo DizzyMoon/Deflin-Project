@@ -343,55 +343,56 @@ public class UserInterface {
     String space = " ";
     String dot = ".";
     String gender = "";
-    if (member.get(0) instanceof Junior){
-      if (member.get(0).getGender().equals("H")){
-        gender = "herrer";
+    //if (member.size() == 0) {
+      if (member.get(0) instanceof Junior) {
+        if (member.get(0).getGender().equals("H")) {
+          gender = "herrer";
+        } else if (member.get(0).getGender().equals("D")) {
+          gender = "damer";
+        }
+        System.out.println("Top 5 - JUNIOR " + gender);
+      } else if (member.get(0) instanceof Senior) {
+        if (member.get(0).getGender().equals("H")) {
+          gender = "herrer";
+        } else if (member.get(0).getGender().equals("D")) {
+          gender = "damer";
+        }
+        System.out.println("Top 5 - SENIOR " + gender);
       }
-      else if (member.get(0).getGender().equals("D")){
-        gender = "damer";
-      }
-      System.out.println("Top 5 - JUNIOR " + gender);
-    }
-    else if (member.get(0) instanceof Senior){
-      if (member.get(0).getGender().equals("H")){
-        gender = "herrer";
-      }
-      else if (member.get(0).getGender().equals("D")){
-        gender = "damer";
-      }
-      System.out.println("Top 5 - SENIOR " + gender);
-    }
 
-    //Overskrifter
-    System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
-
-    //Linjeadskillelse
-    System.out.println(underLine.repeat(128));
-
-    for (int i = 0; i < 5; i++){
-
-      //Placering
-      System.out.print("Nr. " + (i + 1) + space + line);
-
-      //Navn
-      System.out.print(member.get(i).getName() + space.repeat(31 - member.get(i).getName().length()) + line);
-
-      //Medlemsskabstype (ex. aktiv konkurrencesvømmer)
-      System.out.println(member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(29 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
-
-      //Svømmers bedste tid
-      System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(5) + line);
-
-      //Næstbedste tid
-      System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(9) + line);
-
-      //Tredjebedste tid
-      System.out.print(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(11) + line);
+      //Overskrifter
+      System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
 
       //Linjeadskillelse
       System.out.println(underLine.repeat(128));
-    }
-  }
+
+      for (int i = 0; i < 5; i++) {
+
+        //Placering
+        System.out.print("Nr. " + (i + 1) + space.repeat(2) + line);
+
+        //Navn
+        System.out.print(member.get(i).getName() + space.repeat(31 - member.get(i).getName().length()) + line);
+
+        //Medlemsskabstype (ex. aktiv konkurrencesvømmer)
+        System.out.print(member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(29 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
+
+        //Svømmers bedste tid
+        System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(6) + line);
+
+        //Næstbedste tid
+        System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(14) + line);
+
+        //Tredjebedste tid
+        System.out.println(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(11) + line);
+
+        //Linjeadskillelse
+        System.out.println(underLine.repeat(128));
+      }
+    }//else {
+      //System.out.println("Listen er tom\n");
+
+
   public void printEventListTable(ArrayList<Swimmeet> meets) {
     String line = "|";
     //String dot = ".";
