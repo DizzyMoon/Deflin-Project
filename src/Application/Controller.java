@@ -277,24 +277,29 @@ public class Controller {
       if (genderChoice == 1) {
         memberManager.mensList(member);
         top5Style(memberManager.getMen());
+        running = false;
       } else if (genderChoice == 2) {
         memberManager.womensList(member);
         top5Style(memberManager.getWomen());
+        running = false;
       } else {
         ui.badInput();
       }
     }
   }
 
-  public void top5Style(ArrayList<Member> member) throws FileNotFoundException {
-    try {
+  public void top5Style(ArrayList<Member> member) {
+    boolean running = true;
+    while (running) {
+      try {
         ui.top5StyleUI();
         int styleChoice = sc.nextInt();
         sc.nextLine(); //Scannerbug fix
         ui.printTop5(sortBy(styleChoice, member));
-
-    }catch (IndexOutOfBoundsException e){
-      ui.noResult();
+        running = false;
+      } catch (IndexOutOfBoundsException e) {
+        ui.noResult();
+      }
     }
     }
 
