@@ -19,7 +19,7 @@ public abstract class Member implements Comparable<Member> {
   private ArrayList<Achievement> backstrokeResults = new ArrayList<>();
   private ArrayList<Achievement> breaststrokeResults = new ArrayList<>();
   private ArrayList<Achievement> tempTop3 = new ArrayList<>();
-  //private Achievement[] tempTop3 = new Achievement[3];
+
 /*
   public Member(String name, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
     this.name = name;
@@ -126,7 +126,7 @@ public abstract class Member implements Comparable<Member> {
     this.crawlResults.add(crawlResults);
   }
 
-  public ArrayList<Achievement> getBackcrawlResults() {
+  public ArrayList<Achievement> getBackstrokeResults() {
     return backstrokeResults;
   }
 
