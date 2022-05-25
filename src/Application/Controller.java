@@ -296,7 +296,7 @@ public class Controller {
       ui.printTop5(sortBy(styleChoice, member));
       }
     }
-  }
+
 
   public void exit() {
     running = false;
