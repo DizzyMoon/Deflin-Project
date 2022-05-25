@@ -173,7 +173,6 @@ public class Controller {
           sc.nextLine(); //Scannerbug fix
           if (ageChoice == 1) {
             top5Gender(memberManager.sortSenior());
-            System.out.print(memberManager.getList().get(2).getBackstrokeResults());
           } else if (ageChoice == 2) {
             top5Gender(memberManager.sortJunior());
           }
@@ -288,13 +287,15 @@ public class Controller {
   }
 
   public void top5Style(ArrayList<Member> member) throws FileNotFoundException {
-    boolean running = true;
-    while (running) {
-      ui.top5StyleUI();
-      int styleChoice = sc.nextInt();
-      sc.nextLine(); //Scannerbug fix
-      ui.printTop5(sortBy(styleChoice, member));
-      }
+    try {
+        ui.top5StyleUI();
+        int styleChoice = sc.nextInt();
+        sc.nextLine(); //Scannerbug fix
+        ui.printTop5(sortBy(styleChoice, member));
+
+    }catch (IndexOutOfBoundsException e){
+      ui.noResult();
+    }
     }
 
 

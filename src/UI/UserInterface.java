@@ -372,7 +372,7 @@ public class UserInterface {
         System.out.print("Nr. " + (i + 1) + space.repeat(2) + line);
 
         //Navn
-        System.out.print(member.get(i).getName() + space.repeat(31 - member.get(i).getName().length()) + line);
+        System.out.print(space + member.get(i).getName() + space.repeat(30 - member.get(i).getName().length()) + line);
 
         //Medlemsskabstype (ex. aktiv konkurrencesvømmer)
         System.out.print(member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(29 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
