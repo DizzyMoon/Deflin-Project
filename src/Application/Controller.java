@@ -16,6 +16,7 @@ import Achievement.*;
 import filehandling.FileHandler;
 
 public class Controller {
+  AchievementList achievementList = new AchievementList();
   private boolean running = true;
   private FileHandler fileHandler = new FileHandler();          // Maybe/maybe-not remove from cr?
   Scanner sc = new Scanner(System.in);
@@ -32,10 +33,11 @@ public class Controller {
     if (fileHandler.hasSavedData())
       memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
 
-    sortTempAchievementList(cr.loadAchivements());
 
-    System.out.println(memberManager.getList().get(2).getBackstrokeResults());
+    sortTempAchievementList(cr.loadAchievements());
 
+
+    System.out.println(memberManager.getList().get(1).getBackstrokeResults());
     while (running) {
       ui.startupMenu();
       int input = sc.nextInt();
@@ -182,12 +184,26 @@ public class Controller {
     }
   }
 
-  public void createNewAchievement() {
+  public void createNewAchievement() throws FileNotFoundException {
 
-    Discipline discipline;
+    Discipline discipline = Discipline.BUTTERFLY;
+
+    ui.writeDateForAchievement();
+
+    LocalDate newDate = null;
+
+    boolean pass = true;
+    while (pass) {
+      try {
+        newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
+        pass = false;
+      } catch (NumberFormatException | DateTimeException e) {
+        ui.badInput();
+      }
+    }
 
     ui.writeDiscipline();
-    String disciplineString = sc.nextLine();
+    String disciplineString = sc.next();
     switch (disciplineString) {
       case "butterfly" -> discipline = Discipline.BUTTERFLY;
       case "crawl" -> discipline = Discipline.CRAWL;
@@ -210,24 +226,42 @@ public class Controller {
     String timeString = sc.next();
     int minutes = Integer.parseInt(timeString.substring(0, timeString.indexOf(":")));
     int seconds = Integer.parseInt(timeString.substring(timeString.indexOf(":") + 1), timeString.length());
-    LocalDateTime today = LocalDateTime.now();
-    int year = today.getYear();
-    int month = today.getMonthValue();
-    int day = today.getDayOfMonth();
-    int hours = today.getHour();
+    int year = newDate.getYear();
+    int month = newDate.getMonthValue();
+    int day = newDate.getDayOfMonth();
+    int hours = 0;
 
     LocalDateTime time = LocalDateTime.of(year, month, day, hours, minutes, seconds);
     ui.addCommendation();
     String commendation = sc.next();
+
+    Medal medal = null;
+
+    String awardedComm = null;
+
     if (commendation.equalsIgnoreCase("ja")) {
       ui.commDescr();
+      String medalString = sc.next();
+      switch (medalString){
+        case "guld" -> medal = Medal.GOLD;
+        case "sølv" -> medal = Medal.SILVER;
+        case "bronze" -> medal = Medal.BRONZE;
+      }
+
       //selectMedal();
     } else if (commendation.equalsIgnoreCase("nej")) {
       ui.specialCommDescr();
-      String awardedComm = sc.nextLine();
+      awardedComm = sc.next();
     } else {
       ui.badInput();
     }
+
+    Achievement achievement = new Achievement(memberID, discipline, time, distance, medal, awardedComm);
+    achievementList.getAchievements().add(achievement);
+    fileHandler.saveAchievementsToCSV(achievementList);
+
+
+
     //         ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
 
     //  Achievement registered = cr.newAchievement(DateTime, discipline, distance, commendation);
@@ -262,7 +296,7 @@ public class Controller {
       ui.printTop5(sortBy(styleChoice, member));
       }
     }
-
+  }
 
   public void exit() {
     running = false;
@@ -462,7 +496,6 @@ public class Controller {
             member.remove(member.get(i));
           }
         }
-        System.out.println(member);
         //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i < member.size(); i++) {
           //Sortering af backcrawl og indv. top 3
@@ -515,6 +548,7 @@ public class Controller {
         //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i <= member.size(); i++) {
           Collections.sort((List<Achievement>) member.get(i).getCrawlResults(), Comparator.comparingInt(o -> o.getTime().getSecond()));
+          System.out.println(member.get(i).getCrawlResults());
         }
         //Indv. oprettelse af top3 for hver svømmer
         top3crawl(member);
@@ -548,9 +582,8 @@ public class Controller {
   }
 
   public void top3crawl(ArrayList<Member> member) {
-    System.out.println(member);
     for (int i = 0; i < member.size(); i++) {
-      for (int o = 3; o > 0; o--) {
+      for (int o = 0; o < 3; o++) {
         member.get(i).setTempTop3(member.get(i).getCrawlResults().get(o));
       }
     }
@@ -583,10 +616,10 @@ public class Controller {
       for (int o = 0; o < memberManager.getList().size(); o++) {
         if (achievements.get(i).getMemberID().equalsIgnoreCase(memberManager.getList().get(o).getMemberID())) {
           switch (achievements.get(i).getDiscipline()) {
-            case "backstroke" -> memberManager.getList().get(o).setBackstrokeResults(achievements.get(i));
-            case "crawl" -> memberManager.getList().get(o).setCrawlResults(achievements.get(i));
-            case "breaststroke" -> memberManager.getList().get(o).setBreastStroke(achievements.get(i));
-            case "butterfly" -> memberManager.getList().get(o).setButterflyResults(achievements.get(i));
+            case BACKSTROKE -> memberManager.getList().get(o).setBackstrokeResults(achievements.get(i));
+            case CRAWL -> memberManager.getList().get(o).setCrawlResults(achievements.get(i));
+            case BREASTSTROKE -> memberManager.getList().get(o).setBreastStroke(achievements.get(i));
+            case BUTTERFLY -> memberManager.getList().get(o).setButterflyResults(achievements.get(i));
           }
         }
       }

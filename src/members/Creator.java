@@ -1,11 +1,9 @@
 package members;
 
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.Random;
+
 import UI.UserInterface;
 
 import filehandling.FileHandler;
@@ -23,7 +21,7 @@ public class Creator {
     return fileHandler.loadMemberList();
   }
 
-  public ArrayList<Achievement> loadAchivements() throws FileNotFoundException{
+  public ArrayList<Achievement> loadAchievements() throws FileNotFoundException{
     return fileHandler.achievementListLoad();
   }
 

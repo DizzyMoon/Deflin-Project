@@ -13,6 +13,7 @@ import java.time.Period;
 import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import Achievement.*;
 
 import UI.UserInterface;
 
@@ -93,11 +94,27 @@ public class FileHandler {
 
       Scanner lineScanner = new Scanner(line).useDelimiter(";");
       String memberID = lineScanner.next();
-      String discipline = lineScanner.next();
+      String stringDiscipline = lineScanner.next();
+      Discipline discipline = Discipline.BUTTERFLY;
+
+      switch (stringDiscipline){
+        case "butterfly" -> discipline = Discipline.BUTTERFLY;
+        case "crawl" -> discipline = Discipline.CRAWL;
+        case "ryg" -> discipline = Discipline.BACKSTROKE;
+        case "bryst" -> discipline = Discipline.BREASTSTROKE;
+      }
+
       int minute = lineScanner.nextInt();
       int second = lineScanner.nextInt();
       int distance = lineScanner.nextInt();
-      String medal = lineScanner.next();
+      String medalString = lineScanner.next();
+      Medal medal = Medal.GOLD;
+
+      switch (medalString){
+        case "GOLD" -> medal = Medal.GOLD;
+        case "SILVER" -> medal = Medal.SILVER;
+        case "BRONZE" -> medal = Medal.BRONZE;
+      }
 
 
       Achievement achievement;
@@ -176,6 +193,33 @@ public class FileHandler {
     return !(p.getYears() >= 18);
   }
 
+  public void saveAchievementsToCSV(AchievementList achievementList) throws FileNotFoundException {
+    PrintStream out = new PrintStream(membersCSV);
+    saveAchievementsMethod(out, achievementList.getAchievements());
+  }
+
+  public void saveAchievementsMethod(PrintStream printStream, ArrayList<Achievement> achievements){
+
+    UserInterface ui = new UserInterface();
+
+    ui.savingMessage();
+    for (Achievement achievement : achievements){
+      printStream.print(achievement.getMemberID());
+      printStream.print(";");
+      printStream.print(achievement.getDiscipline());
+      printStream.print(";");
+      printStream.print(achievement.getResult());
+      printStream.print(";");
+      printStream.print(achievement.getDistance());
+      printStream.print(";");
+      printStream.print(achievement.getMedal());
+      printStream.print(";");
+      printStream.print(achievement.getComment());
+      printStream.print(";");
+      printStream.print("\n");
+    }
+    ui.savedMessage();
+  }
 
   public void saveMembersMethod(PrintStream printStream, ArrayList<Member> memberArrayList) {
 

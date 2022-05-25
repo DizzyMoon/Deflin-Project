@@ -3,21 +3,44 @@ package members;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Date;
+import Achievement.*;
 
 public class Achievement {
     private String memberID;
-    private String discipline;
+    private Discipline discipline;
     private LocalDateTime result;                  // use time field, to store the finish time
     private int distance;
-    private String medal;
+    private Medal medal;
+    private String comment;
 
-    public Achievement(String dicipline, LocalDateTime result, int distance){
-        this.discipline = dicipline;
+    public Achievement(Discipline discipline, LocalDateTime result, int distance){
+        this.discipline = discipline;
         this.result = result;
         this.distance = distance;
     }
 
-    public String getDiscipline(){
+    public Achievement(String memberID, Discipline discipline, LocalDateTime result, int distance, Medal medal, String comment){
+        this.memberID = memberID;
+        this.discipline = discipline;
+        this.result = result;
+        this.distance = distance;
+        this.medal = medal;
+        this.comment = comment;
+    }
+
+    public LocalDateTime getResult(){
+        return result;
+    }
+
+    public String getComment(){
+        return comment;
+    }
+
+    public Medal getMedal(){
+        return medal;
+    }
+
+    public Discipline getDiscipline(){
         return discipline;
     }
 
@@ -27,10 +50,10 @@ public class Achievement {
 
     public int getDistance() { return distance; }
 
-    public void setMedal(String medal) { this.medal = medal; }
+    public void setMedal(Medal medal) { this.medal = medal; }
 
 // maybe other setters too, need for... later edit/addition to meet?
-    public void setDiscipline(String discipline){
+    public void setDiscipline(Discipline discipline){
         this.discipline = discipline;
     }
 

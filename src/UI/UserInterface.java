@@ -221,6 +221,9 @@ public class UserInterface {
     System.out.println("Der er ingen resultater at vise inden for kategorien");
   }
 
+  public void writeDateForAchievement(){
+    System.out.println("Indtast dato for præstation");
+  }
 
   public void printMemberList(MemberList ml) {
 
