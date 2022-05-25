@@ -76,7 +76,7 @@ public class MemberManager {
   }
 
   public void loadMembersFromCSV () throws FileNotFoundException {
-    memberList.setList(cr.loadMembers());
+      memberList.setList(cr.loadMembers());
   }
 
   public MemberList getMemberList() {

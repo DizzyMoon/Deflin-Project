@@ -45,6 +45,7 @@ public class FileHandler {
     ArrayList<Member> newMemberList = new ArrayList<Member>();
 
     Scanner fileScanner = new Scanner(membersCSV);
+
     while (fileScanner.hasNextLine()) {
       String line = fileScanner.nextLine();
 
@@ -84,12 +85,11 @@ public class FileHandler {
 
 
   public ArrayList<Achievement> achievementListLoad() throws FileNotFoundException{
-    Scanner fileScanner = new Scanner(resultsCSV);
     ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
 
+    Scanner fileScanner = new Scanner(resultsCSV);
+
     while (fileScanner.hasNextLine()) {
-
-
       String line = fileScanner.nextLine();
 
       Scanner lineScanner = new Scanner(line).useDelimiter(";");
@@ -104,11 +104,12 @@ public class FileHandler {
         case "bryst" -> discipline = Discipline.BREASTSTROKE;
       }
 
-      int minute = lineScanner.nextInt();
-      int second = lineScanner.nextInt();
+      String resultString = lineScanner.next();
+      LocalDateTime result = LocalDateTime.parse(resultString);
+
       int distance = lineScanner.nextInt();
       String medalString = lineScanner.next();
-      Medal medal = Medal.GOLD;
+      Medal medal = null;
 
       switch (medalString){
         case "GOLD" -> medal = Medal.GOLD;
@@ -116,14 +117,12 @@ public class FileHandler {
         case "BRONZE" -> medal = Medal.BRONZE;
       }
 
+      String comment = lineScanner.next();
 
       Achievement achievement;
 
       //if (memberID.equals(controller.findMember(memberID).getMemberID())) {
-        LocalDateTime lc = LocalDateTime.of(2020, 10, 10, 0, minute, second);
-        achievement = new Achievement(discipline, lc, distance);
-        achievement.setMemberID(memberID);
-        achievement.setMedal(medal);
+        achievement = new Achievement(memberID, discipline, result, distance, medal, comment);
         /*switch (discipline){
           case "backstroke" -> controller.findMember(memberID).setBackstrokeResults(achievement);
           case "crawl" -> controller.findMember(memberID).setCrawlResults(achievement);
@@ -194,7 +193,7 @@ public class FileHandler {
   }
 
   public void saveAchievementsToCSV(AchievementList achievementList) throws FileNotFoundException {
-    PrintStream out = new PrintStream(membersCSV);
+    PrintStream out = new PrintStream(resultsCSV);
     saveAchievementsMethod(out, achievementList.getAchievements());
   }
 

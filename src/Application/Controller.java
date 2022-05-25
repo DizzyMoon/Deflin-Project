@@ -30,11 +30,10 @@ public class Controller {
   }
 
   public void run() throws FileNotFoundException {
-    if (fileHandler.hasSavedData())
-      memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
-
-
+    memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
+    cr.loadAchievements();
     sortTempAchievementList(cr.loadAchievements());
+
 
 
     System.out.println(memberManager.getList().get(1).getBackstrokeResults());
