@@ -299,6 +299,7 @@ public class Controller {
         running = false;
       } catch (IndexOutOfBoundsException e) {
         ui.noResult();
+        running = false;
       }
     }
     }

@@ -218,7 +218,7 @@ public class UserInterface {
   }
 
   public void noResult(){
-    System.out.println("Der er ingen resultater at vise inden for kategorien");
+    System.out.println("Der er ingen resultater at vise inden for den valgte kategori\n");
   }
 
   public void writeDateForAchievement(){
@@ -343,7 +343,7 @@ public class UserInterface {
     String space = " ";
     String dot = ".";
     String gender = "";
-    //if (member.size() == 0) {
+
       if (member.get(0) instanceof Junior) {
         if (member.get(0).getGender().equals("H")) {
           gender = "herrer";
@@ -375,7 +375,7 @@ public class UserInterface {
         System.out.print(space + member.get(i).getName() + space.repeat(30 - member.get(i).getName().length()) + line);
 
         //Medlemsskabstype (ex. aktiv konkurrencesvømmer)
-        System.out.print(member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(29 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
+        System.out.print(space + member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(28 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
 
         //Svømmers bedste tid
         System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(6) + line);
@@ -387,10 +387,9 @@ public class UserInterface {
         System.out.println(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(11) + line);
 
         //Linjeadskillelse
-        System.out.println(underLine.repeat(128));
+        System.out.println(underLine.repeat(122));
       }
-    }//else {
-      //System.out.println("Listen er tom\n");
+    }
 
 
   public void printEventListTable(ArrayList<Swimmeet> meets) {
