@@ -31,8 +31,7 @@ public class Controller {
 
   public void run() throws FileNotFoundException {
     memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
-    cr.loadAchievements();
-    sortTempAchievementList(cr.loadAchievements());
+    sortTempAchievementList((cr.loadAchievements()));
 
 
 

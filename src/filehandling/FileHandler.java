@@ -98,10 +98,10 @@ public class FileHandler {
       Discipline discipline = Discipline.BUTTERFLY;
 
       switch (stringDiscipline){
-        case "butterfly" -> discipline = Discipline.BUTTERFLY;
-        case "crawl" -> discipline = Discipline.CRAWL;
-        case "ryg" -> discipline = Discipline.BACKSTROKE;
-        case "bryst" -> discipline = Discipline.BREASTSTROKE;
+        case "BUTTERFLY" -> discipline = Discipline.BUTTERFLY;
+        case "CRAWL" -> discipline = Discipline.CRAWL;
+        case "BACKSTROKE" -> discipline = Discipline.BACKSTROKE;
+        case "BREASTSTROKE" -> discipline = Discipline.BREASTSTROKE;
       }
 
       String resultString = lineScanner.next();
