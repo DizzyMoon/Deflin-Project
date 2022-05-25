@@ -28,11 +28,12 @@ public class FileHandler {
   public FileHandler() throws FileNotFoundException {
   }
 
-  public boolean hasSavedData() {
-    if (membersCSV.isFile()) {
-      return true;
-    }
-    return false;
+  public boolean membersHasSavedData() {
+    return membersCSV.isFile();
+  }
+
+  public boolean resultsHasSavedData() {
+    return resultsCSV.isFile();
   }
 
   public void saveMembersToCSV(MemberList memberList) throws FileNotFoundException {
