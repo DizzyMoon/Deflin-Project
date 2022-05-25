@@ -131,7 +131,7 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> subscriptionIncome();
-        case 2 -> ui.printArrearsListTable(memberManager.getMemberList());
+        case 2 -> ui.printArrearsListTable(Collections.sort(memberManager.getMemberList()));
         case 3 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
