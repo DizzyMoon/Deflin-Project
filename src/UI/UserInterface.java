@@ -357,14 +357,14 @@ public class UserInterface {
         } else if (member.get(0).getGender().equals("D")) {
           gender = "damer";
         }
-        System.out.println("Top 5 - SENIOR " + gender);
+        System.out.println("Top 5 - SENIOR " + gender + "\n");
       }
 
       //Overskrifter
       System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
 
       //Linjeadskillelse
-      System.out.println(underLine.repeat(128));
+      System.out.println(underLine.repeat(120));
 
       for (int i = 0; i < 5; i++) {
 
@@ -378,16 +378,16 @@ public class UserInterface {
         System.out.print(space + member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(28 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
 
         //Svømmers bedste tid
-        System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(6) + line);
+        System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(7) + line);
 
         //Næstbedste tid
-        System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(14) + line);
+        System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(11) + line);
 
         //Tredjebedste tid
-        System.out.println(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(11) + line);
+        System.out.println(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(13) + line);
 
         //Linjeadskillelse
-        System.out.println(underLine.repeat(122));
+        System.out.println(underLine.repeat(120));
       }
     }
 

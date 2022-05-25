@@ -301,6 +301,7 @@ public class Controller {
         ui.noResult();
         running = false;
       }
+      sortByName();
     }
     }
 
