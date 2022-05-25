@@ -39,7 +39,7 @@ public class Controller {
     sortTempAchievementList(cr.loadAchivements());
 
 
-    System.out.println(memberManager.getList().get(1).getBackcrawlResults());
+    System.out.println(memberManager.getList().get(1).getBackstrokeResults());
     while (running) {
       ui.startupMenu();
       int input = sc.nextInt();
@@ -164,7 +164,7 @@ public class Controller {
           sc.nextLine(); //Scannerbug fix
           if (ageChoice == 1) {
             top5Gender(memberManager.sortSenior());
-            System.out.print(memberManager.getList().get(2).getBackcrawlResults());
+            System.out.print(memberManager.getList().get(2).getBackstrokeResults());
           } else if (ageChoice == 2) {
             top5Gender(memberManager.sortJunior());
           }
@@ -465,14 +465,14 @@ public class Controller {
       case 2 -> {
         //Frasortering af medlemmer uden resultater indenfor kategorien
         for (int i = 0; i < member.size(); i++) {
-          if (member.get(i).getBackcrawlResults() == null) {
+          if (member.get(i).getBackstrokeResults() == null) {
             member.remove(member.get(i));
           }
         }
         //Sortering af bedste tider indenfor kategori for hver svømmer
-        for (int i = 0; i <= member.size(); i++) {
+        for (int i = 0; i < member.size(); i++) {
           //Sortering af backcrawl og indv. top 3
-          Collections.sort((List<Achievement>) member.get(i).getBackcrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          Collections.sort((List<Achievement>) member.get(i).getBackstrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
         }
         //Indv. oprettelse af top3 for hver svømmer
         top3backstroke(member);
@@ -557,11 +557,10 @@ public class Controller {
     }
   }
 
-
   public void top3backstroke(ArrayList<Member> member) {
     for (int i = 0; i < member.size(); i++) {
       for (int o = 0; o < 3; o++) {
-        member.get(i).setTempTop3(member.get(i).getBackcrawlResults().get(o));
+        member.get(i).setTempTop3(member.get(i).getBackstrokeResults().get(0));
       }
     }
   }
