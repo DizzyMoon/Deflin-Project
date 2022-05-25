@@ -129,7 +129,10 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
         case 1 -> subscriptionIncome();
-        case 2 -> ui.printArrearsListTable(memberManager.getMemberList());
+        case 2 -> {
+          sortBy(6, memberManager.getList());
+          ui.printArrearsListTable(memberManager.getMemberList());
+        }
         case 3 -> {
           ui.typeMemberIDForNameChange();
           String memberID = sc.next();
@@ -472,7 +475,7 @@ public class Controller {
         //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i < member.size(); i++) {
           //Sortering af backcrawl og indv. top 3
-          Collections.sort((List<Achievement>) member.get(i).getBackstrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          Collections.sort((List<Achievement>) member.get(i).getBackstrokeResults(), (o1, o2) -> o2.getTime().getSecond() - (o1.getTime().getSecond()));
         }
         //Indv. oprettelse af top3 for hver svømmer
         top3backstroke(member);
@@ -488,7 +491,7 @@ public class Controller {
         }
         //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i <= member.size(); i++) {
-          Collections.sort((List<Achievement>) member.get(i).getBreaststrokeResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          Collections.sort((List<Achievement>) member.get(i).getBreaststrokeResults(), (o1, o2) -> o2.getTime().getSecond() - (o1.getTime().getSecond()));
         }
         //Indv. oprettelse af top3 for hver svømmer
         top3breaststroke(member);
@@ -504,7 +507,7 @@ public class Controller {
         }
         //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i <= member.size(); i++) {
-          Collections.sort((List<Achievement>) member.get(i).getButterflyResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          Collections.sort((List<Achievement>) member.get(i).getButterflyResults(), (o1, o2) -> o2.getTime().getSecond() - (o1.getTime().getSecond()));
         }
         //Indv. oprettelse af top3 for hver svømmer
         top3butterfly(member);
@@ -520,13 +523,14 @@ public class Controller {
         }
         //Sortering af bedste tider indenfor kategori for hver svømmer
         for (int i = 0; i <= member.size(); i++) {
-          Collections.sort((List<Achievement>) member.get(i).getCrawlResults(), (o1, o2) -> o1.getTime().compareTo(o2.getTime()));
+          Collections.sort((List<Achievement>) member.get(i).getCrawlResults(), (o1, o2) -> o2.getTime().getSecond() - (o1.getTime().getSecond()));
         }
         //Indv. oprettelse af top3 for hver svømmer
         top3crawl(member);
         //Medlemsliste sorteres efter hvem der har den hurtigste tid på indv. top3
         Collections.sort((List<Member>) member, (o1, o2) -> o1.getTempTop3().get(0).compareTo(o2.getTempTop3().get(0)));
       }
+      case 6 -> Collections.sort((List<Member>) member, ((o1, o2) -> o2.getArrears().compareTo(o1.getArrears())));
     }
     return member;
   }
