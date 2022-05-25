@@ -69,8 +69,8 @@ public class UserInterface {
     System.out.println("""
         1 - Rygsvømning
         2 - Brystsvømning
-        3 - Crawl
-        4 - Butterfly""");
+        3 - Butterfly
+        4 - Crawl""");
   }
   /*
   public void infoConsoleUI() {
