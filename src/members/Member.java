@@ -149,7 +149,7 @@ public abstract class Member implements Comparable<Member> {
   }
 
   public void setTempTop3(Achievement achievement){
-    tempTop3.add(achievement);
+    this.tempTop3.add(achievement);
   }
 
   public ArrayList<Achievement> getTempTop3() {
