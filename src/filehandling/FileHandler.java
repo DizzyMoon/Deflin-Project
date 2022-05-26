@@ -95,7 +95,7 @@ public class FileHandler {
       printStream.print(";");
       printStream.print(achievement.getDistance());
       printStream.print(";");
-      printStream.print(achievement.getMedal());
+      printStream.print(achievement.getPlacement());
       printStream.print(";");
       printStream.print(achievement.getComment());
       printStream.print(";");
@@ -143,14 +143,17 @@ public class FileHandler {
       int year = time.getYear();
 
       int distance = lineScanner.nextInt();
-      String medalString = lineScanner.next();
+      //String medalString = lineScanner.next();
+
+      int placement = lineScanner.nextInt();
+
       Medal medal = null;
 
-      switch (medalString){
-        case "GOLD" -> medal = Medal.GOLD;
-        case "SILVER" -> medal = Medal.SILVER;
-        case "BRONZE" -> medal = Medal.BRONZE;
-        case "null" -> medal = null;
+      switch (placement){
+        case 1 -> medal = Medal.GOLD;
+        case 2 -> medal = Medal.SILVER;
+        case 3 -> medal = Medal.BRONZE;
+        default -> medal = null;
       }
 
       String comment = lineScanner.next();
@@ -163,7 +166,7 @@ public class FileHandler {
         LocalDateTime lc = LocalDateTime.of(year, month, day, hour, minute, second);
         achievement = new Achievement(discipline, lc, distance);
         achievement.setMemberID(memberID);
-        achievement.setMedal(medal);
+        achievement.setPlacement(placement);
         achievement.setComment(comment);
         achievement.setEvent(event);
         /*switch (discipline){
