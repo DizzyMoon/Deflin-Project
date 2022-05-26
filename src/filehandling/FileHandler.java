@@ -194,7 +194,7 @@ public class FileHandler {
   }
 
   public void saveAchievementsToCSV(AchievementList achievementList) throws FileNotFoundException {
-    PrintStream out = new PrintStream(membersCSV);
+    PrintStream out = new PrintStream(resultsCSV);
     saveAchievementsMethod(out, achievementList.getAchievements());
   }
 
