@@ -514,7 +514,9 @@ public class Controller {
         Collections.sort(memberManager.getList(), (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
     }
 
-    public ArrayList<Member> sortBy(int sort, ArrayList<Member> member) {
+    public ArrayList<Member> sortBy(int sort, ArrayList<Member> memberIn) {
+
+        ArrayList<Member> member = memberIn;
 
         switch (sort) {
             case 1 -> {
@@ -570,6 +572,7 @@ public class Controller {
                 for (int i = 0; i < member.size(); i++) {
                     if (member.get(i).getCrawlResults().size() == 0) {
                         member.remove(member.get(i));
+                        i--;
                     }
                 }
                 //Sortering af bedste tider indenfor kategori for hver svømmer
