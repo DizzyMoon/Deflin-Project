@@ -355,9 +355,10 @@ public class UserInterface {
     String underLine = "-";
     String line = "|";
     String space = " ";
-    String dot = ".";
     String gender = "";
     String noMeet = "Ingen tid";
+    String event = "";
+    int placement = 0;
 
     if (member.get(0) instanceof Junior) {
       if (member.get(0).getGender().equals("H")) {
@@ -376,10 +377,10 @@ public class UserInterface {
     }
 
     //Overskrifter
-    System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid" + space.repeat(21) + line + " Næstbedste tid" + space.repeat(21) + line + " Tredjebedste tid " + space.repeat(21) + line);
+    System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(14) + line + " Sted  /  Bedste tid  /  Plac." + space.repeat(2) + line + " Sted  /  Næstbedste tid /  Plac." + space.repeat(3) + line + " Sted  /  Tredjebedste tid  /  Plac." + space.repeat(3) + line);
 
     //Linjeadskillelse
-    System.out.println(underLine.repeat(170));
+    System.out.println(underLine.repeat(177));
 
     int repeat = 0;
     if (member.size() < 5) {
@@ -390,48 +391,54 @@ public class UserInterface {
 
     for (int i = 0; i < repeat; i++) {
 
-      //Placering
+      //Placering på top5
       System.out.print("Nr. " + (i + 1) + space.repeat(2) + line);
 
       //Navn
       System.out.print(space + member.get(i).getName() + space.repeat(30 - member.get(i).getName().length()) + line);
 
       //Medlemsskabstype (ex. aktiv konkurrencesvømmer)
-      System.out.print(space + member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(28 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
+      System.out.print(space + member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(23 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
 
       //Svømmers bedste tid
       String time = Integer.toString(member.get(i).getTempTop3().get(0).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(0).getTime().getSecond());
-      String stævne = "Test stævne";
+      event = member.get(i).getTempTop3().get(0).getEvent();
+      //placement = member.get(i).getTempTop3().get(0).getPlacement;
 
-      System.out.print(space + member.get(i).getTempTop3().get(0).getEvent() + ": " + time + space.repeat(29 - (time.length() + member.get(i).getTempTop3().get(0).getEvent().length())) + line);
+      System.out.print(space + event + ": " + time + "   #" + placement + space.repeat(24 - (time.length() + event.length())) + line);
 
       //Næstbedste tid
-      /*if (member.get(i).getTempTop3().size() < 2)*/ try {
+      try {
         String zero = "";
         if (member.get(i).getTempTop3().get(1).getTime().getSecond() < 10) {
           zero = "0";
         }
         if (member.get(i).getTempTop3().get(1) != null) {
-
           time = Integer.toString(member.get(i).getTempTop3().get(1).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(1).getTime().getSecond());
-          System.out.print(space + member.get(i).getTempTop3().get(1).getEvent() + ": " + time + space.repeat(35 - (time.length() + member.get(i).getTempTop3().get(1).getEvent().length())) + line);
+          event = member.get(i).getTempTop3().get(1).getEvent();
+          //placement = member.get(i).getTempTop3().get(1).getPlacement;
+
+          System.out.print(space + event + ": " + time + "   #" + placement + space.repeat(30 - (time.length() + event.length())) + line);
         }
       }catch (IndexOutOfBoundsException e){
-          System.out.print(space + noMeet + ": " + "00:00" + space.repeat(19) + line);
+          System.out.print(space + noMeet + ": " + "00:00" + "   #-" + space.repeat(14) + line);
         }
         //Tredjebedste tid
-        if (member.get(i).getTempTop3().size() < 3) try{
+        try{
           String zero = "";
           if (member.get(i).getTempTop3().get(2).getTime().getSecond() < 10) {
             zero = "0";
           }
           time = Integer.toString(member.get(i).getTempTop3().get(2).getTime().getMinute()) + ":" + zero + Integer.toString(member.get(i).getTempTop3().get(2).getTime().getSecond());
-          System.out.println(space + member.get(i).getTempTop3().get(2).getEvent() + time + space.repeat(27 - (time.length()) + member.get(i).getTempTop3().get(0).getEvent().length()) + line);
+          event = member.get(i).getTempTop3().get(2).getEvent();
+          //placement = member.get(i).getTempTop3().get(2).getPlacement;
+
+          System.out.println(space + event + time + "   #" + placement + space.repeat(22 - (time.length()) + event.length()) + line);
         } catch (IndexOutOfBoundsException e){
-          System.out.println(space + noMeet + ": " + "00:00" + space.repeat(19) + line);
+          System.out.println(space + noMeet + ": " + "00:00" + "   #-" + space.repeat(17) + line);
         }
         //Linjeadskillelse
-        System.out.println(underLine.repeat(170));
+        System.out.println(underLine.repeat(177));
       }
     }
 
