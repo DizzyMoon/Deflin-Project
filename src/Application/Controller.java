@@ -37,7 +37,6 @@ public class Controller {
         sortTempAchievementList(cr.loadAchievements());
 
 
-        System.out.println(memberManager.getList().get(1).getBackstrokeResults());
         while (running) {
             ui.startupMenu();
             String input = sc.nextLine();
@@ -139,12 +138,16 @@ public class Controller {
                     ui.printArrearsListTable(memberManager.getMemberList());
                 }
                 case "3" -> {
-                    ui.typeMemberIDForNameChange();
-                    String memberID = sc.next();
-                    findMember(memberID).toggleArrears();
-                    String subscriptionPayment = findMember(memberID).getArrears();
-                    ui.statusAltered(subscriptionPayment);
-                    fileHandler.saveMembersToCSV(memberManager.getMemberList());
+                    try {
+                        ui.typeMemberIDForNameChange();
+                        String memberID = sc.next();
+                        findMember(memberID).toggleArrears();
+                        String subscriptionPayment = findMember(memberID).getArrears();
+                        ui.statusAltered(subscriptionPayment);
+                        fileHandler.saveMembersToCSV(memberManager.getMemberList());
+                    } catch (NullPointerException e) {
+                        ui.badInput();
+                    }
                 }
                 case "4" -> run();
                 case "5" -> exit();
@@ -304,22 +307,22 @@ public class Controller {
         }
     }
 
-    public void top5Style(ArrayList<Member> member) {
-        boolean running = true;
-        while (running) {
-            try {
-                ui.top5StyleUI();
-                int styleChoice = sc.nextInt();
-                sc.nextLine(); //Scannerbug fix
-                ui.printTop5(sortBy(styleChoice, member));
-                running = false;
-            } catch (IndexOutOfBoundsException e) {
-                ui.noResult();
-                running = false;
-            }
-            sortByName();
-        }
+  public void top5Style(ArrayList<Member> member) {
+    boolean running = true;
+    while (running) {
+      try {
+        ui.top5StyleUI();
+        int styleChoice = sc.nextInt();
+        sc.nextLine(); //Scannerbug fix
+        ui.printTop5(sortBy(styleChoice, member));
+        running = false;
+      } catch (IndexOutOfBoundsException e) {
+        ui.noResult();
+        running = false;
+      }
+      sortByName();
     }
+  }
 
 
     public void exit() {
@@ -582,24 +585,24 @@ public class Controller {
         return member;
     }
 
-    public void sortByArrears() {
-        Collections.sort((List<Member>) memberManager.getList(), ((o1, o2) -> o2.getArrears().compareTo(o1.getArrears())));
+  public void sortByArrears() {
+    Collections.sort((List<Member>) memberManager.getList(), ((o1, o2) -> o2.getArrears().compareTo(o1.getArrears())));
+  }
+
+  public Member findMember(String userID) throws FileNotFoundException {
+    String memberID = userID;
+    boolean found = false;
+    int searchedElements = 0;
+
+    for (Member member : memberManager.getList()) {
+      if (member.getMemberID().equals(memberID)) {
+        return member;
+      }
+      searchedElements++;
+      if (searchedElements == memberManager.getList().size() && !found) {
+        ui.elementDoesNotExist();
+      }
     }
-
-    public Member findMember(String userID) throws FileNotFoundException {
-        String memberID = userID;
-        boolean found = false;
-        int searchedElements = 0;
-
-        for (Member member : memberManager.getList()) {
-            if (member.getMemberID().equals(memberID)) {
-                return member;
-            }
-            searchedElements++;
-            if (searchedElements == memberManager.getList().size() && !found) {
-                ui.elementDoesNotExist();
-            }
-        }
 
         return null;
     }
