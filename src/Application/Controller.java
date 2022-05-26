@@ -293,6 +293,7 @@ public class Controller {
         running = false;
       } else {
         ui.badInput();
+        running = false;
       }
     }
   }
@@ -300,16 +301,16 @@ public class Controller {
   public void top5Style(ArrayList<Member> member) {
     boolean running = true;
     while (running) {
-      try {
+/*      try {*/
         ui.top5StyleUI();
         int styleChoice = sc.nextInt();
         sc.nextLine(); //Scannerbug fix
         ui.printTop5(sortBy(styleChoice, member));
         running = false;
-      } catch (IndexOutOfBoundsException e) {
+/*      } catch (IndexOutOfBoundsException e) {
         ui.noResult();
-        running = false;
-      }
+
+      }*/
       sortByName();
     }
   }
