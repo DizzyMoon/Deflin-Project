@@ -380,7 +380,7 @@ public class UserInterface {
     System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(14) + line + " Sted  /  Bedste tid  /  Plac." + space.repeat(2) + line + " Sted  /  Næstbedste tid /  Plac." + space.repeat(3) + line + " Sted  /  Tredjebedste tid  /  Plac." + space.repeat(3) + line);
 
     //Linjeadskillelse
-    System.out.println(underLine.repeat(177));
+    System.out.println(underLine.repeat(176));
 
     int repeat = 0;
     if (member.size() < 5) {
@@ -438,7 +438,7 @@ public class UserInterface {
           System.out.println(space + noMeet + ": " + "00:00" + "   #-" + space.repeat(17) + line);
         }
         //Linjeadskillelse
-        System.out.println(underLine.repeat(177));
+        System.out.println(underLine.repeat(176));
       }
     }
 
