@@ -113,6 +113,7 @@ public class FileHandler {
 
 
       String line = fileScanner.nextLine();
+
       Scanner lineScanner = new Scanner(line).useDelimiter(";");
 
 

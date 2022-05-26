@@ -366,7 +366,15 @@ public class UserInterface {
       //Linjeadskillelse
       System.out.println(underLine.repeat(120));
 
-      for (int i = 0; i < 5; i++) {
+      int repeat = 0;
+      if (member.size() < 5){
+        repeat = member.size();
+      }
+      else{
+        repeat = 5;
+      }
+
+      for (int i = 0; i < repeat; i++) {
 
         //Placering
         System.out.print("Nr. " + (i + 1) + space.repeat(2) + line);
@@ -381,11 +389,17 @@ public class UserInterface {
         System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(7) + line);
 
         //Næstbedste tid
-        System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(11) + line);
-
+        if (member.get(i).getTempTop3().get(1) != null) {
+          System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(11) + line);
+        }else {
+          System.out.print(space + 00 + ":" + 00 + space.repeat(11) + line);
+        }
         //Tredjebedste tid
-        System.out.println(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(13) + line);
-
+        if (member.get(i).getTempTop3().get(2) != null) {
+          System.out.println(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(13) + line);
+        }else{
+          System.out.print(space + 00 + ":" + 00 + space.repeat(11) + line);
+        }
         //Linjeadskillelse
         System.out.println(underLine.repeat(120));
       }
