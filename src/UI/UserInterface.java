@@ -371,10 +371,10 @@ public class UserInterface {
     }
 
     //Overskrifter
-    System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
+    System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid" + space.repeat(21) + line + " Næstbedste tid" + space.repeat(21) + line + " Tredjebedste tid " + space.repeat(21) + line);
 
     //Linjeadskillelse
-    System.out.println(underLine.repeat(120));
+    System.out.println(underLine.repeat(170));
 
     int repeat = 0;
     if (member.size() < 5) {
@@ -395,7 +395,10 @@ public class UserInterface {
       System.out.print(space + member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(28 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
 
       //Svømmers bedste tid
-      System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(7) + line);
+      String time = Integer.toString(member.get(i).getTempTop3().get(0).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(0).getTime().getSecond());
+      String stævne = "Test stævne";
+      String noMeet = "Ingen tid";
+      System.out.print(space + stævne + ": " + time + space.repeat(29 - (time.length() + stævne.length())) + line);
 
       //Næstbedste tid
       /*if (member.get(i).getTempTop3().size() < 2)*/ try {
@@ -404,11 +407,12 @@ public class UserInterface {
           zero = "0";
         }
         if (member.get(i).getTempTop3().get(1) != null) {
-          String time = Integer.toString(member.get(i).getTempTop3().get(1).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(1).getTime().getSecond());
-          System.out.print(space + time + space.repeat(15 - time.length()) + line);
+
+          time = Integer.toString(member.get(i).getTempTop3().get(1).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(1).getTime().getSecond());
+          System.out.print(space + stævne + ": " + time + space.repeat(35 - (time.length() + stævne.length())) + line);
         }
       }catch (IndexOutOfBoundsException e){
-          System.out.print(space + "00:00" + space.repeat(10) + line);
+          System.out.print(space + noMeet + ": " + "00:00" + space.repeat(19) + line);
         }
         //Tredjebedste tid
         if (member.get(i).getTempTop3().size() < 3) try{
@@ -416,13 +420,13 @@ public class UserInterface {
           if (member.get(i).getTempTop3().get(2).getTime().getSecond() < 10) {
             zero = "0";
           }
-          String time = Integer.toString(member.get(i).getTempTop3().get(2).getTime().getMinute()) + ":" + zero + Integer.toString(member.get(i).getTempTop3().get(2).getTime().getSecond());
+          time = Integer.toString(member.get(i).getTempTop3().get(2).getTime().getMinute()) + ":" + zero + Integer.toString(member.get(i).getTempTop3().get(2).getTime().getSecond());
           System.out.println(space + time + space.repeat(17 - time.length()) + line);
         } catch (IndexOutOfBoundsException e){
-          System.out.println(space + "00:00" + space.repeat(12) + line);
+          System.out.println(space + noMeet + ": " + "00:00" + space.repeat(19) + line);
         }
         //Linjeadskillelse
-        System.out.println(underLine.repeat(120));
+        System.out.println(underLine.repeat(170));
       }
     }
 
