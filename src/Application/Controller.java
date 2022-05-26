@@ -16,18 +16,18 @@ import Achievement.*;
 import filehandling.FileHandler;
 
 public class Controller {
-  AchievementList achievementList = new AchievementList();
-  private boolean running = true;
-  private FileHandler fileHandler = new FileHandler();          // Maybe/maybe-not remove from cr?
-  Scanner sc = new Scanner(System.in);
-  UserInterface ui = new UserInterface();
-  MemberManager memberManager = new MemberManager();
-  Creator cr = new Creator();
-  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
+    AchievementList achievementList = new AchievementList();
+    private boolean running = true;
+    private FileHandler fileHandler = new FileHandler();          // Maybe/maybe-not remove from cr?
+    Scanner sc = new Scanner(System.in);
+    UserInterface ui = new UserInterface();
+    MemberManager memberManager = new MemberManager();
+    Creator cr = new Creator();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
 
-  // leems segit!
-  public Controller() throws FileNotFoundException {
-  }
+    // leems segit!
+    public Controller() throws FileNotFoundException {
+    }
 
     public void run() throws FileNotFoundException {
         if (fileHandler.hasSavedData()) {
@@ -50,8 +50,8 @@ public class Controller {
         }
     }
 
-  public void formand() throws FileNotFoundException {
-    while (running) {
+    public void formand() throws FileNotFoundException {
+        while (running) {
 
             ui.formandUI();
             String input = sc.nextLine();
@@ -126,8 +126,8 @@ public class Controller {
         }
     }
 
-  public void kasserer() throws FileNotFoundException {
-    while (running) {
+    public void kasserer() throws FileNotFoundException {
+        while (running) {
 
             ui.kassererUI();
             String input = sc.nextLine();
@@ -156,8 +156,8 @@ public class Controller {
         }
     }
 
-  public void træner() throws FileNotFoundException {
-    while (running) {
+    public void træner() throws FileNotFoundException {
+        while (running) {
 
             ui.traenerUI();
             String input = sc.nextLine();
@@ -186,23 +186,23 @@ public class Controller {
         }
     }
 
-  public void createNewAchievement() throws FileNotFoundException {
+    public void createNewAchievement() throws FileNotFoundException {
 
-    Discipline discipline = Discipline.BUTTERFLY;
+        Discipline discipline = Discipline.BUTTERFLY;
 
-    ui.writeDateForAchievement();
+        ui.writeDateForAchievement();
 
-    LocalDate newDate = null;
+        LocalDate newDate = null;
 
-    boolean pass = true;
-    while (pass) {
-      try {
-        newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
-        pass = false;
-      } catch (NumberFormatException | DateTimeException e) {
-        ui.badInput();
-      }
-    }
+        boolean pass = true;
+        while (pass) {
+            try {
+                newDate = truncateToDate(transformToDate(sc.useDelimiter("\n").next()));
+                pass = false;
+            } catch (NumberFormatException | DateTimeException e) {
+                ui.badInput();
+            }
+        }
 
         pass = true;
 
@@ -231,15 +231,15 @@ public class Controller {
         }
 
 
-    ui.inputSwimmerID();
-    String memberID = sc.next();
+        ui.inputSwimmerID();
+        String memberID = sc.next();
 //          ui.inputDicipline();
 //          int option = sc.nextInt();      // 1-4, but actually, we should get this value from recent Achievement
-    ui.inputDistance();
-    int distance = sc.nextInt();
+        ui.inputDistance();
+        int distance = sc.nextInt();
 //          ui.inputDate();                 // Shouldn't be input, should come from System
 //          LocalDate somethingsomething;
-    ui.inputTime();                   // Ideally, put in LocalDateTime, due to the close relationship
+        ui.inputTime();                   // Ideally, put in LocalDateTime, due to the close relationship
 
 
         String timeString = sc.next();
@@ -287,40 +287,39 @@ public class Controller {
     }
 
 
-  public void top5Gender(ArrayList<Member> member) throws FileNotFoundException {
-    boolean running = true;
-    while (running) {
-      ui.top5GenderUI();
-      int genderChoice = sc.nextInt();
-      sc.nextLine(); //Scannerbug fix
-      if (genderChoice == 1) {
-        memberManager.mensList(member);
-        top5Style(memberManager.getMen());
-        running = false;
-      } else if (genderChoice == 2) {
-        memberManager.womensList(member);
-        top5Style(memberManager.getWomen());
-        running = false;
-      } else {
-        ui.badInput();
-        running = false;
-      }
+    public void top5Gender(ArrayList<Member> member) throws FileNotFoundException {
+        boolean running = true;
+        while (running) {
+            ui.top5GenderUI();
+            int genderChoice = sc.nextInt();
+            sc.nextLine(); //Scannerbug fix
+            if (genderChoice == 1) {
+                memberManager.mensList(member);
+                top5Style(memberManager.getMen());
+                running = false;
+            } else if (genderChoice == 2) {
+                memberManager.womensList(member);
+                top5Style(memberManager.getWomen());
+                running = false;
+            } else {
+                ui.badInput();
+                running = false;
+            }
+        }
     }
-  }
 
     public void top5Style(ArrayList<Member> member) {
         boolean running = true;
         while (running) {
-      /*      try {*/
+            try {
                 ui.top5StyleUI();
                 int styleChoice = sc.nextInt();
                 sc.nextLine(); //Scannerbug fix
                 ui.printTop5(sortBy(styleChoice, member));
                 running = false;
-      /*      } catch (IndexOutOfBoundsException e) {
-        ui.noResult();
-
-            }*/
+            } catch (IndexOutOfBoundsException e) {
+                ui.noResult();
+            }
             sortByName();
         }
     }
@@ -642,6 +641,7 @@ public class Controller {
     }
 
     public void top3backstroke(ArrayList<Member> member) {
+
         for (int i = 0; i < member.size(); i++) {
             if (member.get(i).getBackstrokeResults().size() < 3) {
                 for (int o = 0; o < member.get(i).getBackstrokeResults().size(); o++) {
