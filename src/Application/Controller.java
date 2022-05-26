@@ -33,11 +33,8 @@ public class Controller {
     if (fileHandler.hasSavedData())
       memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
 
-
     sortTempAchievementList(cr.loadAchievements());
 
-
-    System.out.println(memberManager.getList().get(1).getBackstrokeResults());
     while (running) {
       ui.startupMenu();
       int input = sc.nextInt();
@@ -61,13 +58,13 @@ public class Controller {
         case 1 -> formandNewMember();
         case 2 -> removeMember();
         case 3 -> {
-          try{
-          ui.typeMemberIDForNameChange();
-          String memberID = sc.next();
-          findMember(memberID).toggleStatus();
-          String activeMember = findMember(memberID).getActive();
-          ui.statusAltered(activeMember);}
-          catch (NullPointerException e){
+          try {
+            ui.typeMemberIDForNameChange();
+            String memberID = sc.next();
+            findMember(memberID).toggleStatus();
+            String activeMember = findMember(memberID).getActive();
+            ui.statusAltered(activeMember);
+          } catch (NullPointerException e) {
             ui.badInput();
           }
         }
@@ -78,7 +75,7 @@ public class Controller {
             findMember(memberID).toggleCompetitive();
             String competionSwimmer = findMember(memberID).getCompetitive();
             ui.typeAltered(competionSwimmer);
-          }catch (NullPointerException e){
+          } catch (NullPointerException e) {
             ui.badInput();
           }
         }
@@ -241,7 +238,7 @@ public class Controller {
     if (commendation.equalsIgnoreCase("ja")) {
       ui.commDescr();
       String medalString = sc.next();
-      switch (medalString){
+      switch (medalString) {
         case "guld" -> medal = Medal.GOLD;
         case "sølv" -> medal = Medal.SILVER;
         case "bronze" -> medal = Medal.BRONZE;
@@ -258,7 +255,6 @@ public class Controller {
     Achievement achievement = new Achievement(memberID, discipline, time, distance, medal, awardedComm);
     achievementList.getAchievements().add(achievement);
     fileHandler.saveAchievementsToCSV(achievementList);
-
 
 
     //         ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
@@ -303,7 +299,7 @@ public class Controller {
       }
       sortByName();
     }
-    }
+  }
 
 
   public void exit() {
@@ -490,7 +486,8 @@ public class Controller {
 
     cr.createNewEvent(eventName, category, league, eventTime);
   }
-  public void sortByName(){
+
+  public void sortByName() {
     Collections.sort(memberManager.getList(), (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
   }
 
@@ -565,21 +562,21 @@ public class Controller {
     return member;
   }
 
-  public void sortByArrears(){
+  public void sortByArrears() {
     Collections.sort((List<Member>) memberManager.getList(), ((o1, o2) -> o2.getArrears().compareTo(o1.getArrears())));
   }
 
-  public Member findMember(String userID) throws FileNotFoundException{
+  public Member findMember(String userID) throws FileNotFoundException {
     String memberID = userID;
     boolean found = false;
     int searchedElements = 0;
 
-    for (Member member : memberManager.getList()){
-      if (member.getMemberID().equals(memberID)){
-      return member;
+    for (Member member : memberManager.getList()) {
+      if (member.getMemberID().equals(memberID)) {
+        return member;
       }
       searchedElements++;
-      if (searchedElements == memberManager.getList().size() && !found){
+      if (searchedElements == memberManager.getList().size() && !found) {
         ui.elementDoesNotExist();
       }
     }
