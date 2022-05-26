@@ -52,20 +52,20 @@ public class UserInterface {
         """);
   }
 
-  public void top5AgeUI(){
+  public void top5AgeUI() {
     System.out.println("""
         1 - Se top5 SENIOR
         2 - Se top5 JUNIOR
         """);
   }
 
-  public void top5GenderUI(){
+  public void top5GenderUI() {
     System.out.println("""
         1. Se top5 herrer
         2. Se top5 kvinder""");
   }
 
-  public void top5StyleUI(){
+  public void top5StyleUI() {
     System.out.println("""
         1 - Rygsvømning
         2 - Brystsvømning
@@ -94,7 +94,9 @@ public class UserInterface {
     System.out.println("Opretter nyt medlem...\nNavn:");
   }
 
-  public void gender() { System.out.println("Køn: (H/D)"); }
+  public void gender() {
+    System.out.println("Køn: (H/D)");
+  }
 
   public void dateOfBirth() {
     System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.yyyy)");
@@ -171,9 +173,13 @@ public class UserInterface {
     System.out.println("Division: (HJ / HS / DJ / DS)");
   }
 
-  public void promptEventDate() { System.out.println("Dato: (dd.mm.yy)"); }
+  public void promptEventDate() {
+    System.out.println("Dato: (dd.mm.yy)");
+  }
 
-  public void promptEventTime() { System.out.println("Tidspunkt for træffet: (tt:mm)"); }
+  public void promptEventTime() {
+    System.out.println("Tidspunkt for træffet: (tt:mm)");
+  }
 
   public void listSwimmeets(ArrayList<Swimmeet> schedule) {
     System.out.println(schedule.toString());
@@ -183,9 +189,13 @@ public class UserInterface {
     System.out.println("\nVælg stævne: (f.eks. 1 for det næstkommende)");
   }
 
-  public void chooseDiscipline() { System.out.println("Vælg svømmedisciplin (1 - Backcrawl  2 - Bryst  3 - Butterfly  4 - Crawl:"); }
+  public void chooseDiscipline() {
+    System.out.println("Vælg svømmedisciplin (1 - Backcrawl  2 - Bryst  3 - Butterfly  4 - Crawl:");
+  }
 
-  public void addProspect() { System.out.println("Vælg en ny konkurrence-deltager"); }
+  public void addProspect() {
+    System.out.println("Vælg en ny konkurrence-deltager");
+  }
 
   public void inputSwimmerID() {
     System.out.println("Indtast svømmers medlemsnummer:");
@@ -199,7 +209,9 @@ public class UserInterface {
     System.out.println("Indtast opnået resultat: (mm:ss)");
   }
 
-  public void competitorReady(String discipline, int distance) { System.out.println("Svømmer tilføjet til " + distance + " m  " + discipline); }
+  public void competitorReady(String discipline, int distance) {
+    System.out.println("Svømmer tilføjet til " + distance + " m  " + discipline);
+  }
 
   public void addCommendation() {
     System.out.println("Har svømmeren opnået en udmærkelse? (ja/nej)");
@@ -209,7 +221,7 @@ public class UserInterface {
     System.out.println("1. Guld\t\t2. Sølv\t\t3.Bronze\t\t4.Andet");
   }
 
-  public void writeDiscipline(){
+  public void writeDiscipline() {
     System.out.println("Indtast disciplin (butterfly, crawl, ryg, bryst)");
   }
 
@@ -217,11 +229,11 @@ public class UserInterface {
     System.out.println("Indtast navn på udmærkelse:");
   }
 
-  public void noResult(){
+  public void noResult() {
     System.out.println("Der er ingen resultater at vise inden for den valgte kategori\n");
   }
 
-  public void writeDateForAchievement(){
+  public void writeDateForAchievement() {
     System.out.println("Indtast dato for præstation");
   }
 
@@ -270,13 +282,11 @@ public class UserInterface {
       } else if (!print.getActiveBool()) {
         rep = 8;
       }
-      if (ml.getList().get(i) instanceof Junior){
+      if (ml.getList().get(i) instanceof Junior) {
         age = "junior";
-      }
-      else if (ml.getList().get(i) instanceof Senior){
+      } else if (ml.getList().get(i) instanceof Senior) {
         age = "senior";
-      }
-      else{
+      } else {
         age = "fejl";
       }
       System.out.print(space + print.getActive() + space + age + space.repeat(rep) + line);
@@ -344,61 +354,72 @@ public class UserInterface {
     String dot = ".";
     String gender = "";
 
-      if (member.get(0) instanceof Junior) {
-        if (member.get(0).getGender().equals("H")) {
-          gender = "herrer";
-        } else if (member.get(0).getGender().equals("D")) {
-          gender = "damer";
+    if (member.get(0) instanceof Junior) {
+      if (member.get(0).getGender().equals("H")) {
+        gender = "herrer";
+      } else if (member.get(0).getGender().equals("D")) {
+        gender = "damer";
+      }
+      System.out.println("Top 5 - JUNIOR " + gender);
+    } else if (member.get(0) instanceof Senior) {
+      if (member.get(0).getGender().equals("H")) {
+        gender = "herrer";
+      } else if (member.get(0).getGender().equals("D")) {
+        gender = "damer";
+      }
+      System.out.println("Top 5 - SENIOR " + gender + "\n");
+    }
+
+    //Overskrifter
+    System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
+
+    //Linjeadskillelse
+    System.out.println(underLine.repeat(120));
+
+    int repeat = 0;
+    if (member.size() < 5) {
+      repeat = member.size();
+    } else {
+      repeat = 5;
+    }
+
+    for (int i = 0; i < repeat; i++) {
+
+      //Placering
+      System.out.print("Nr. " + (i + 1) + space.repeat(2) + line);
+
+      //Navn
+      System.out.print(space + member.get(i).getName() + space.repeat(30 - member.get(i).getName().length()) + line);
+
+      //Medlemsskabstype (ex. aktiv konkurrencesvømmer)
+      System.out.print(space + member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(28 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
+
+      //Svømmers bedste tid
+      System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(7) + line);
+
+      //Næstbedste tid
+      /*if (member.get(i).getTempTop3().size() < 2)*/ try {
+        String zero = "";
+        if (member.get(i).getTempTop3().get(1).getTime().getSecond() < 10) {
+          zero = "0";
         }
-        System.out.println("Top 5 - JUNIOR " + gender);
-      } else if (member.get(0) instanceof Senior) {
-        if (member.get(0).getGender().equals("H")) {
-          gender = "herrer";
-        } else if (member.get(0).getGender().equals("D")) {
-          gender = "damer";
-        }
-        System.out.println("Top 5 - SENIOR " + gender + "\n");
-      }
-
-      //Overskrifter
-      System.out.println(" #     | Navn" + space.repeat(26) + line + " Medlemskab" + space.repeat(19) + line + " Bedste tid " + line + " Næstbedste tid " + line + " Tredjebedste tid " + line);
-
-      //Linjeadskillelse
-      System.out.println(underLine.repeat(120));
-
-      int repeat = 0;
-      if (member.size() < 5){
-        repeat = member.size();
-      }
-      else{
-        repeat = 5;
-      }
-
-      for (int i = 0; i < repeat; i++) {
-
-        //Placering
-        System.out.print("Nr. " + (i + 1) + space.repeat(2) + line);
-
-        //Navn
-        System.out.print(space + member.get(i).getName() + space.repeat(30 - member.get(i).getName().length()) + line);
-
-        //Medlemsskabstype (ex. aktiv konkurrencesvømmer)
-        System.out.print(space + member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(28 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
-
-        //Svømmers bedste tid
-        System.out.print(space + member.get(i).getTempTop3().get(0).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(0).getTime().getSecond() + space.repeat(7) + line);
-
-        //Næstbedste tid
         if (member.get(i).getTempTop3().get(1) != null) {
-          System.out.print(space + member.get(i).getTempTop3().get(1).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(1).getTime().getSecond() + space.repeat(11) + line);
-        }else {
-          System.out.print(space + 00 + ":" + 00 + space.repeat(11) + line);
+          String time = Integer.toString(member.get(i).getTempTop3().get(1).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(1).getTime().getSecond());
+          System.out.print(space + time + space.repeat(15 - time.length()) + line);
+        }
+      }catch (IndexOutOfBoundsException e){
+          System.out.print(space + "00:00" + space.repeat(10) + line);
         }
         //Tredjebedste tid
-        if (member.get(i).getTempTop3().get(2) != null) {
-          System.out.println(space + member.get(i).getTempTop3().get(2).getTime().getMinute() + ":" + member.get(i).getTempTop3().get(2).getTime().getSecond() + space.repeat(13) + line);
-        }else{
-          System.out.print(space + 00 + ":" + 00 + space.repeat(11) + line);
+        if (member.get(i).getTempTop3().size() < 3) try{
+          String zero = "";
+          if (member.get(i).getTempTop3().get(2).getTime().getSecond() < 10) {
+            zero = "0";
+          }
+          String time = Integer.toString(member.get(i).getTempTop3().get(2).getTime().getMinute()) + ":" + zero + Integer.toString(member.get(i).getTempTop3().get(2).getTime().getSecond());
+          System.out.println(space + time + space.repeat(17 - time.length()) + line);
+        } catch (IndexOutOfBoundsException e){
+          System.out.println(space + "00:00" + space.repeat(12) + line);
         }
         //Linjeadskillelse
         System.out.println(underLine.repeat(120));
@@ -406,7 +427,7 @@ public class UserInterface {
     }
 
 
-  public void printEventListTable(ArrayList<Swimmeet> meets) {
+/*  public void printEventListTable(ArrayList<Swimmeet> meets) {
     String line = "|";
     //String dot = ".";
     System.out.println("Stævne                       | Division         | Dato   Tidspunkt |");
@@ -420,8 +441,9 @@ public class UserInterface {
       System.out.printf("%-28s %1s %-4s %-11s %1s %-16s %1s \n", eventName, line, category, league, line, eventTime, line);
     }
     System.out.println();
+  }*/
   }
-}
+
 
 
 

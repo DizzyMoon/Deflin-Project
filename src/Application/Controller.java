@@ -175,6 +175,7 @@ public class Controller {
                     sc.nextLine(); //Scannerbug fix
                     if (ageChoice == 1) {
                         top5Gender(memberManager.sortSenior());
+                        memberManager.getSeniorList().removeAll(memberManager.getSeniorList());
                     } else if (ageChoice == 2) {
                         top5Gender(memberManager.sortJunior());
                     }
@@ -296,6 +297,7 @@ public class Controller {
       if (genderChoice == 1) {
         memberManager.mensList(member);
         top5Style(memberManager.getMen());
+        memberManager.getMen().removeAll(memberManager.getMen());
         running = false;
       } else if (genderChoice == 2) {
         memberManager.womensList(member);
