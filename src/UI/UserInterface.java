@@ -357,6 +357,7 @@ public class UserInterface {
     String space = " ";
     String dot = ".";
     String gender = "";
+    String noMeet = "Ingen tid";
 
     if (member.get(0) instanceof Junior) {
       if (member.get(0).getGender().equals("H")) {
@@ -401,8 +402,8 @@ public class UserInterface {
       //Svømmers bedste tid
       String time = Integer.toString(member.get(i).getTempTop3().get(0).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(0).getTime().getSecond());
       String stævne = "Test stævne";
-      String noMeet = "Ingen tid";
-      System.out.print(space + stævne + ": " + time + space.repeat(29 - (time.length() + stævne.length())) + line);
+
+      System.out.print(space + member.get(i).getTempTop3().get(0).getEvent() + ": " + time + space.repeat(29 - (time.length() + member.get(i).getTempTop3().get(0).getEvent().length())) + line);
 
       //Næstbedste tid
       /*if (member.get(i).getTempTop3().size() < 2)*/ try {
@@ -413,7 +414,7 @@ public class UserInterface {
         if (member.get(i).getTempTop3().get(1) != null) {
 
           time = Integer.toString(member.get(i).getTempTop3().get(1).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(1).getTime().getSecond());
-          System.out.print(space + stævne + ": " + time + space.repeat(35 - (time.length() + stævne.length())) + line);
+          System.out.print(space + member.get(i).getTempTop3().get(1).getEvent() + ": " + time + space.repeat(35 - (time.length() + member.get(i).getTempTop3().get(1).getEvent().length())) + line);
         }
       }catch (IndexOutOfBoundsException e){
           System.out.print(space + noMeet + ": " + "00:00" + space.repeat(19) + line);
@@ -425,7 +426,7 @@ public class UserInterface {
             zero = "0";
           }
           time = Integer.toString(member.get(i).getTempTop3().get(2).getTime().getMinute()) + ":" + zero + Integer.toString(member.get(i).getTempTop3().get(2).getTime().getSecond());
-          System.out.println(space + time + space.repeat(17 - time.length()) + line);
+          System.out.println(space + member.get(i).getTempTop3().get(2).getEvent() + time + space.repeat(27 - (time.length()) + member.get(i).getTempTop3().get(0).getEvent().length()) + line);
         } catch (IndexOutOfBoundsException e){
           System.out.println(space + noMeet + ": " + "00:00" + space.repeat(19) + line);
         }
