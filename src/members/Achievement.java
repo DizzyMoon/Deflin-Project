@@ -28,6 +28,10 @@ public class Achievement {
         this.comment = comment;
     }
 
+    public void setComment(String comment){
+        this.comment = comment;
+    }
+
     public LocalDateTime getResult(){
         return result;
     }

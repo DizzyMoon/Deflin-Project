@@ -30,11 +30,11 @@ public class Controller {
     }
 
     public void run() throws FileNotFoundException {
-        if (fileHandler.hasSavedData())
+        if (fileHandler.hasSavedData()) {
             memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
-
-
-        sortTempAchievementList(cr.loadAchievements());
+            achievementList.setList(cr.loadAchievements());
+            sortTempAchievementList(cr.loadAchievements());
+        }
 
 
         while (running) {
@@ -307,22 +307,22 @@ public class Controller {
         }
     }
 
-  public void top5Style(ArrayList<Member> member) {
-    boolean running = true;
-    while (running) {
-      try {
-        ui.top5StyleUI();
-        int styleChoice = sc.nextInt();
-        sc.nextLine(); //Scannerbug fix
-        ui.printTop5(sortBy(styleChoice, member));
-        running = false;
-      } catch (IndexOutOfBoundsException e) {
-        ui.noResult();
-        running = false;
-      }
-      sortByName();
+    public void top5Style(ArrayList<Member> member) {
+        boolean running = true;
+        while (running) {
+            try {
+                ui.top5StyleUI();
+                int styleChoice = sc.nextInt();
+                sc.nextLine(); //Scannerbug fix
+                ui.printTop5(sortBy(styleChoice, member));
+                running = false;
+            } catch (IndexOutOfBoundsException e) {
+                ui.noResult();
+                running = false;
+            }
+            sortByName();
+        }
     }
-  }
 
 
     public void exit() {
@@ -585,55 +585,78 @@ public class Controller {
         return member;
     }
 
-  public void sortByArrears() {
-    Collections.sort((List<Member>) memberManager.getList(), ((o1, o2) -> o2.getArrears().compareTo(o1.getArrears())));
-  }
-
-  public Member findMember(String userID) throws FileNotFoundException {
-    String memberID = userID;
-    boolean found = false;
-    int searchedElements = 0;
-
-    for (Member member : memberManager.getList()) {
-      if (member.getMemberID().equals(memberID)) {
-        return member;
-      }
-      searchedElements++;
-      if (searchedElements == memberManager.getList().size() && !found) {
-        ui.elementDoesNotExist();
-      }
+    public void sortByArrears() {
+        Collections.sort((List<Member>) memberManager.getList(), ((o1, o2) -> o2.getArrears().compareTo(o1.getArrears())));
     }
+
+    public Member findMember(String userID) throws FileNotFoundException {
+        String memberID = userID;
+        boolean found = false;
+        int searchedElements = 0;
+
+        for (Member member : memberManager.getList()) {
+            if (member.getMemberID().equals(memberID)) {
+                return member;
+            }
+            searchedElements++;
+            if (searchedElements == memberManager.getList().size() && !found) {
+                ui.elementDoesNotExist();
+            }
+        }
 
         return null;
     }
 
     public void top3crawl(ArrayList<Member> member) {
         for (int i = 0; i < member.size(); i++) {
-            for (int o = 0; o < 3; o++) {
-                member.get(i).setTempTop3(member.get(i).getCrawlResults().get(o));
+            if (member.get(i).getCrawlResults().size() < 3) {
+                for (int o = 0; o < member.get(i).getCrawlResults().size(); o++) {
+                    member.get(i).setTempTop3(member.get(i).getCrawlResults().get(o));
+                }
+            } else {
+                for (int o = 0; o < 3; o++) {
+                    member.get(i).setTempTop3(member.get(i).getCrawlResults().get(o));
+                }
             }
+
         }
     }
 
     public void top3butterfly(ArrayList<Member> member) {
         for (int i = 0; i < member.size(); i++) {
-            for (int o = 0; o < 3; o++)
-                member.get(i).setTempTop3(member.get(i).getButterflyResults().get(o));
+            if (member.get(i).getButterflyResults().size() < 3) {
+                for (int o = 0; o < member.get(i).getButterflyResults().size(); o++)
+                    member.get(i).setTempTop3(member.get(i).getButterflyResults().get(o));
+            } else {
+                for (int o = 0; o < 3; o++)
+                    member.get(i).setTempTop3(member.get(i).getButterflyResults().get(o));
+            }
         }
     }
 
     public void top3backstroke(ArrayList<Member> member) {
         for (int i = 0; i < member.size(); i++) {
-            for (int o = 0; o < 3; o++) {
-                member.get(i).setTempTop3(member.get(i).getBackstrokeResults().get(o));
+            if (member.get(i).getBackstrokeResults().size() < 3) {
+                for (int o = 0; o < member.get(i).getBackstrokeResults().size(); o++) {
+                    member.get(i).setTempTop3(member.get(i).getBackstrokeResults().get(o));
+                }
+            } else {
+                for (int o = 0; o < 3; o++) {
+                    member.get(i).setTempTop3(member.get(i).getBackstrokeResults().get(o));
+                }
             }
         }
     }
 
     public void top3breaststroke(ArrayList<Member> member) {
         for (int i = 0; i < member.size(); i++) {
-            for (int o = 0; o < 3; o++)
-                member.get(i).setTempTop3(member.get(i).getBreaststrokeResults().get(o));
+            if (member.get(i).getBreaststrokeResults().size() < 3) {
+                for (int o = 0; o < member.get(i).getBreaststrokeResults().size(); o++)
+                    member.get(i).setTempTop3(member.get(i).getBreaststrokeResults().get(o));
+            } else {
+                for (int o = 0; o < 3; o++)
+                    member.get(i).setTempTop3(member.get(i).getBreaststrokeResults().get(o));
+            }
         }
     }
 
