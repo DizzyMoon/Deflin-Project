@@ -217,6 +217,14 @@ public class UserInterface {
     System.out.println("Svømmer tilføjet til " + distance + " m  " + discipline);
   }
 
+  public void writePlacement(){
+    System.out.println("Indtast placering:");
+  }
+
+  public void writeComment(){
+    System.out.println("Tilføj kommentar:");
+  }
+
   public void addCommendation() {
     System.out.println("Har svømmeren opnået en udmærkelse? (ja/nej)");
   }

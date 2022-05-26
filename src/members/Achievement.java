@@ -11,6 +11,7 @@ public class Achievement {
     private LocalDateTime result;                  // use time field, to store the finish time
     private int distance;
     private Medal medal;
+    private int placement;
     private String comment;
     private String event;
 
@@ -20,14 +21,22 @@ public class Achievement {
         this.distance = distance;
     }
 
-    public Achievement(String memberID, Discipline discipline, LocalDateTime result, int distance, Medal medal, String comment, String event){
+    public Achievement(String memberID, Discipline discipline, LocalDateTime result, int distance, int placement, String comment, String event){
         this.memberID = memberID;
         this.discipline = discipline;
         this.result = result;
         this.distance = distance;
-        this.medal = medal;
+        this.placement = placement;
         this.comment = comment;
         this.event = event;
+    }
+
+    public int getPlacement(){
+        return placement;
+    }
+
+    public void setPlacement(int placement){
+        this.placement = placement;
     }
 
     public String getEvent(){

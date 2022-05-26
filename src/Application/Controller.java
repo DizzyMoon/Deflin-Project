@@ -158,7 +158,6 @@ public class Controller {
 
     public void træner() throws FileNotFoundException {
         while (running) {
-
             ui.traenerUI();
             String input = sc.nextLine();
             switch (input) {
@@ -252,16 +251,17 @@ public class Controller {
         int hours = 0;
 
         LocalDateTime time = LocalDateTime.of(year, month, day, hours, minutes, seconds);
-        ui.addCommendation();
-        String commendation = sc.next();
+        // ui.addCommendation();
+        // String commendation = sc.next();
 
-        Medal medal = null;
+        //Medal medal = null;
 
         String awardedComm = null;
 
         ui.writeEvent();
         String event = sc.next();
 
+        /*
         if (commendation.equalsIgnoreCase("ja")) {
             ui.commDescr();
             String medalString = sc.next();
@@ -270,8 +270,6 @@ public class Controller {
                 case "sølv" -> medal = Medal.SILVER;
                 case "bronze" -> medal = Medal.BRONZE;
             }
-
-
             //selectMedal();
         } else if (commendation.equalsIgnoreCase("nej")) {
             ui.specialCommDescr();
@@ -279,9 +277,16 @@ public class Controller {
         } else {
             ui.badInput();
         }
+         */
+
+        ui.writePlacement();
+        int placement = sc.nextInt();
+
+        ui.writeComment();
+        String comment = sc.next();
 
 
-        Achievement achievement = new Achievement(memberID, discipline, time, distance, medal, awardedComm, event);
+        Achievement achievement = new Achievement(memberID, discipline, time, distance, placement, comment, event);
         achievementList.getAchievements().add(achievement);
         fileHandler.saveAchievementsToCSV(achievementList);
 
@@ -302,7 +307,8 @@ public class Controller {
             if (genderChoice == 1) {
                 memberManager.mensList(member);
                 top5Style(memberManager.getMen());
-                memberManager.getMen().removeAll(memberManager.getMen());running = false;
+                memberManager.getMen().removeAll(memberManager.getMen());
+                running = false;
             } else if (genderChoice == 2) {
                 memberManager.womensList(member);
                 top5Style(memberManager.getWomen());
@@ -325,8 +331,8 @@ public class Controller {
                 emptyTop3();
                 running = false;
             } catch (IndexOutOfBoundsException e) {
-        ui.noResult();
-        running = false;
+                ui.noResult();
+                running = false;
             }
             sortByName();
         }
@@ -689,10 +695,10 @@ public class Controller {
         }
     }
 
-    public void emptyTop3(){
-    for(int i= 0; i < memberManager.getList().size(); i++){
-      memberManager.getList().get(i).getTempTop3().removeAll(memberManager.getList().get(i).getTempTop3());
-    }
+    public void emptyTop3() {
+        for (int i = 0; i < memberManager.getList().size(); i++) {
+            memberManager.getList().get(i).getTempTop3().removeAll(memberManager.getList().get(i).getTempTop3());
+        }
     }
 }
 
