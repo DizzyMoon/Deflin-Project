@@ -12,6 +12,7 @@ public class Achievement {
     private int distance;
     private Medal medal;
     private String comment;
+    private String event;
 
     public Achievement(Discipline discipline, LocalDateTime result, int distance){
         this.discipline = discipline;
@@ -19,13 +20,22 @@ public class Achievement {
         this.distance = distance;
     }
 
-    public Achievement(String memberID, Discipline discipline, LocalDateTime result, int distance, Medal medal, String comment){
+    public Achievement(String memberID, Discipline discipline, LocalDateTime result, int distance, Medal medal, String comment, String event){
         this.memberID = memberID;
         this.discipline = discipline;
         this.result = result;
         this.distance = distance;
         this.medal = medal;
         this.comment = comment;
+        this.event = event;
+    }
+
+    public String getEvent(){
+        return event;
+    }
+
+    public void setEvent(String event){
+        this.event = event;
     }
 
     public void setComment(String comment){

@@ -86,6 +86,10 @@ public class UserInterface {
   }
   */
 
+  public void writeEvent(){
+    System.out.println("Indtast stævne: ");
+  }
+
   public void badInput() {
     System.out.println("Forkert indtastning!");
   }

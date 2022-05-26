@@ -259,6 +259,9 @@ public class Controller {
 
         String awardedComm = null;
 
+        ui.writeEvent();
+        String event = sc.next();
+
         if (commendation.equalsIgnoreCase("ja")) {
             ui.commDescr();
             String medalString = sc.next();
@@ -268,6 +271,7 @@ public class Controller {
                 case "bronze" -> medal = Medal.BRONZE;
             }
 
+
             //selectMedal();
         } else if (commendation.equalsIgnoreCase("nej")) {
             ui.specialCommDescr();
@@ -276,7 +280,8 @@ public class Controller {
             ui.badInput();
         }
 
-        Achievement achievement = new Achievement(memberID, discipline, time, distance, medal, awardedComm);
+
+        Achievement achievement = new Achievement(memberID, discipline, time, distance, medal, awardedComm, event);
         achievementList.getAchievements().add(achievement);
         fileHandler.saveAchievementsToCSV(achievementList);
 

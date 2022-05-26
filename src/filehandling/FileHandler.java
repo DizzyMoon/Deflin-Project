@@ -99,6 +99,8 @@ public class FileHandler {
       printStream.print(";");
       printStream.print(achievement.getComment());
       printStream.print(";");
+      printStream.print(achievement.getEvent());
+      printStream.print(";");
       printStream.print("\n");
     }
     ui.savedMessage();
@@ -153,6 +155,8 @@ public class FileHandler {
 
       String comment = lineScanner.next();
 
+      String event = lineScanner.next();
+
       Achievement achievement;
 
       //if (memberID.equals(controller.findMember(memberID).getMemberID())) {
@@ -161,6 +165,7 @@ public class FileHandler {
         achievement.setMemberID(memberID);
         achievement.setMedal(medal);
         achievement.setComment(comment);
+        achievement.setEvent(event);
         /*switch (discipline){
           case "backstroke" -> controller.findMember(memberID).setBackstrokeResults(achievement);
           case "crawl" -> controller.findMember(memberID).setCrawlResults(achievement);
