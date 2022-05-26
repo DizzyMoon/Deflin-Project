@@ -137,12 +137,16 @@ public class Controller {
           ui.printArrearsListTable(memberManager.getMemberList());
         }
         case 3 -> {
-          ui.typeMemberIDForNameChange();
-          String memberID = sc.next();
-          findMember(memberID).toggleArrears();
-          String subscriptionPayment = findMember(memberID).getArrears();
-          ui.statusAltered(subscriptionPayment);
-          fileHandler.saveMembersToCSV(memberManager.getMemberList());
+          try {
+            ui.typeMemberIDForNameChange();
+            String memberID = sc.next();
+            findMember(memberID).toggleArrears();
+            String subscriptionPayment = findMember(memberID).getArrears();
+            ui.statusAltered(subscriptionPayment);
+            fileHandler.saveMembersToCSV(memberManager.getMemberList());
+          } catch (NullPointerException e) {
+            ui.badInput();
+          }
         }
         case 4 -> run();
         case 5 -> exit();
@@ -158,12 +162,21 @@ public class Controller {
       sc.nextLine(); //Scannerbug fix
       switch (input) {
 //        case 1 -> coachViewSchedule();
-        case 2 -> coachNewEvent();
+        case 2 -> {try {
+          coachNewEvent();
+        }catch (StringIndexOutOfBoundsException e){
+          ui.badInput();
+        }
+        }
         //case 3 -> ui.Events();
 //        case 4 -> coachAssignAthleteToComp();
-        case 5 -> createNewAchievement();
-
-
+        case 5 -> {
+          try {
+            createNewAchievement();
+          } catch (StringIndexOutOfBoundsException e) {
+            ui.badInput();
+          }
+        }
         case 6 -> {
           ui.top5AgeUI();
           int ageChoice = sc.nextInt();
