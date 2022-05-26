@@ -525,6 +525,7 @@ public class Controller {
                 for (int i = 0; i < member.size(); i++) {
                     if (member.get(i).getBackstrokeResults().size() == 0) {
                         member.remove(member.get(i));
+                        i--;
                     }
                 }
                 //Sortering af bedste tider indenfor kategori for hver svømmer
@@ -541,6 +542,7 @@ public class Controller {
                 for (int i = 0; i < member.size(); i++) {
                     if (member.get(i).getBreaststrokeResults().size() == 0) {
                         member.remove(member.get(i));
+                        i--;
                     }
                 }
                 //Sortering af bedste tider indenfor kategori for hver svømmer
@@ -557,6 +559,7 @@ public class Controller {
                 for (int i = 0; i < member.size(); i++) {
                     if (member.get(i).getButterflyResults().size() == 0) {
                         member.remove(member.get(i));
+                        i--;
                     }
                 }
                 //Sortering af bedste tider indenfor kategori for hver svømmer
