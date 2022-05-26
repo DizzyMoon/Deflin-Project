@@ -81,123 +81,6 @@ public class FileHandler {
     return newMemberList;
   }
 
-
-
-  public ArrayList<Achievement> achievementListLoad() throws FileNotFoundException{
-    Scanner fileScanner = new Scanner(resultsCSV);
-    ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
-
-    while (fileScanner.hasNextLine()) {
-
-
-      String line = fileScanner.nextLine();
-
-      Scanner lineScanner = new Scanner(line).useDelimiter(";");
-      String memberID = lineScanner.next();
-      String stringDiscipline = lineScanner.next();
-      Discipline discipline = Discipline.BUTTERFLY;
-
-      switch (stringDiscipline){
-        case "butterfly" -> discipline = Discipline.BUTTERFLY;
-        case "crawl" -> discipline = Discipline.CRAWL;
-        case "backstroke" -> discipline = Discipline.BACKSTROKE;
-        case "breaststroke" -> discipline = Discipline.BREASTSTROKE;
-      }
-
-      int minute = lineScanner.nextInt();
-      int second = lineScanner.nextInt();
-      int distance = lineScanner.nextInt();
-      String medalString = lineScanner.next();
-      Medal medal = Medal.GOLD;
-
-      switch (medalString){
-        case "GOLD" -> medal = Medal.GOLD;
-        case "SILVER" -> medal = Medal.SILVER;
-        case "BRONZE" -> medal = Medal.BRONZE;
-      }
-
-
-      Achievement achievement;
-
-      //if (memberID.equals(controller.findMember(memberID).getMemberID())) {
-        LocalDateTime lc = LocalDateTime.of(2020, 10, 10, 0, minute, second);
-        achievement = new Achievement(discipline, lc, distance);
-        achievement.setMemberID(memberID);
-        achievement.setMedal(medal);
-        /*switch (discipline){
-          case "backstroke" -> controller.findMember(memberID).setBackstrokeResults(achievement);
-          case "crawl" -> controller.findMember(memberID).setCrawlResults(achievement);
-          case "breaststroke" -> controller.findMember(memberID).setBreastStroke(achievement);
-          case "butterfly" -> controller.findMember(memberID).setButterflyResults(achievement);
-        }*/
-        tempAchievementList.add(achievement);
-      }
-    return tempAchievementList;
-    }
-
-
-
-
-
-/*
-  public int getMonthNumber(String month) {       // Is this just a homemade getMonthValue? It's not called?
-    int monthNum = 0;
-    switch (month) {
-      case "Jan" -> {
-        monthNum = 1;
-      }
-      case "Feb" -> {
-        monthNum = 2;
-      }
-      case "Mar" -> {
-        monthNum = 3;
-      }
-      case "Apr" -> {
-        monthNum = 4;
-      }
-      case "May" -> {
-        monthNum = 5;
-      }
-      case "Jun" -> {
-        monthNum = 6;
-      }
-      case "Jul" -> {
-        monthNum = 7;
-      }
-      case "Aug" -> {
-        monthNum = 8;
-      }
-      case "Sep" -> {
-        monthNum = 9;
-      }
-      case "Oct" -> {
-        monthNum = 10;
-      }
-      case "Nov" -> {
-        monthNum = 11;
-      }
-      case "Dec" -> {
-        monthNum = 12;
-      }
-    }
-    return monthNum;
-  }
-*/
-
-  public boolean calculateIfJunior(LocalDate dateIn) {
-    LocalDate now = LocalDate.now();
-    LocalDate birthDate = LocalDate.of(dateIn.getYear(), dateIn.getMonth(), dateIn.getDayOfMonth());
-
-    Period p = Period.between(birthDate, now);
-
-    return !(p.getYears() >= 18);
-  }
-
-  public void saveAchievementsToCSV(AchievementList achievementList) throws FileNotFoundException {
-    PrintStream out = new PrintStream(resultsCSV);
-    saveAchievementsMethod(out, achievementList.getAchievements());
-  }
-
   public void saveAchievementsMethod(PrintStream printStream, ArrayList<Achievement> achievements){
 
     UserInterface ui = new UserInterface();
@@ -220,6 +103,90 @@ public class FileHandler {
     }
     ui.savedMessage();
   }
+
+
+  public ArrayList<Achievement> achievementListLoad() throws FileNotFoundException{
+    Scanner fileScanner = new Scanner(resultsCSV);
+    ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
+
+    while (fileScanner.hasNextLine()) {
+
+
+      String line = fileScanner.nextLine();
+
+      Scanner lineScanner = new Scanner(line).useDelimiter(";");
+
+
+
+      String memberID = lineScanner.next();
+      String stringDiscipline = lineScanner.next();
+
+      Discipline discipline = Discipline.BUTTERFLY;
+
+      switch (stringDiscipline){
+        case "BUTTERFLY" -> discipline = Discipline.BUTTERFLY;
+        case "CRAWL" -> discipline = Discipline.CRAWL;
+        case "BACKSTROKE" -> discipline = Discipline.BACKSTROKE;
+        case "BREASTSTROKE" -> discipline = Discipline.BREASTSTROKE;
+      }
+
+      String dateString = lineScanner.next();
+      LocalDateTime time = LocalDateTime.parse(dateString);
+
+      int minute = time.getMinute();
+      int second = time.getSecond();
+      int hour = time.getHour();
+      int day = time.getDayOfMonth();
+      int month = time.getMonthValue();
+      int year = time.getYear();
+
+      int distance = lineScanner.nextInt();
+      String medalString = lineScanner.next();
+      Medal medal = null;
+
+      switch (medalString){
+        case "GOLD" -> medal = Medal.GOLD;
+        case "SILVER" -> medal = Medal.SILVER;
+        case "BRONZE" -> medal = Medal.BRONZE;
+        case "null" -> medal = null;
+      }
+
+      String comment = lineScanner.next();
+
+      Achievement achievement;
+
+      //if (memberID.equals(controller.findMember(memberID).getMemberID())) {
+        LocalDateTime lc = LocalDateTime.of(year, month, day, hour, minute, second);
+        achievement = new Achievement(discipline, lc, distance);
+        achievement.setMemberID(memberID);
+        achievement.setMedal(medal);
+        achievement.setComment(comment);
+        /*switch (discipline){
+          case "backstroke" -> controller.findMember(memberID).setBackstrokeResults(achievement);
+          case "crawl" -> controller.findMember(memberID).setCrawlResults(achievement);
+          case "breaststroke" -> controller.findMember(memberID).setBreastStroke(achievement);
+          case "butterfly" -> controller.findMember(memberID).setButterflyResults(achievement);
+        }*/
+        tempAchievementList.add(achievement);
+      }
+    return tempAchievementList;
+    }
+
+  public void saveAchievementsToCSV(AchievementList achievementList) throws FileNotFoundException {
+    PrintStream out = new PrintStream(resultsCSV);
+    saveAchievementsMethod(out, achievementList.getAchievements());
+  }
+
+  public boolean calculateIfJunior(LocalDate dateIn) {
+    LocalDate now = LocalDate.now();
+    LocalDate birthDate = LocalDate.of(dateIn.getYear(), dateIn.getMonth(), dateIn.getDayOfMonth());
+
+    Period p = Period.between(birthDate, now);
+
+    return !(p.getYears() >= 18);
+  }
+
+
 
   public void saveMembersMethod(PrintStream printStream, ArrayList<Member> memberArrayList) {
 

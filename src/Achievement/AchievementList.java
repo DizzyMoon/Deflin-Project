@@ -10,4 +10,12 @@ public class AchievementList {
   public ArrayList<Achievement> getAchievements(){
     return achievements;
   }
+
+  public String toString(){
+    return String.valueOf(achievements);
+  }
+
+  public void setList(ArrayList<Achievement> achievements){
+    this.achievements = achievements;
+  }
 }
