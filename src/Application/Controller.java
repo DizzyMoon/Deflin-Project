@@ -175,6 +175,7 @@ public class Controller {
                     sc.nextLine(); //Scannerbug fix
                     if (ageChoice == 1) {
                         top5Gender(memberManager.sortSenior());
+                        memberManager.getSeniorList().removeAll(memberManager.getSeniorList());
                     } else if (ageChoice == 2) {
                         top5Gender(memberManager.sortJunior());
                     }
@@ -296,7 +297,7 @@ public class Controller {
             if (genderChoice == 1) {
                 memberManager.mensList(member);
                 top5Style(memberManager.getMen());
-                running = false;
+                memberManager.getMen().removeAll(memberManager.getMen());running = false;
             } else if (genderChoice == 2) {
                 memberManager.womensList(member);
                 top5Style(memberManager.getWomen());
@@ -316,9 +317,11 @@ public class Controller {
                 int styleChoice = sc.nextInt();
                 sc.nextLine(); //Scannerbug fix
                 ui.printTop5(sortBy(styleChoice, member));
+                emptyTop3();
                 running = false;
             } catch (IndexOutOfBoundsException e) {
-                ui.noResult();
+        ui.noResult();
+        running = false;
             }
             sortByName();
         }
@@ -641,7 +644,6 @@ public class Controller {
     }
 
     public void top3backstroke(ArrayList<Member> member) {
-
         for (int i = 0; i < member.size(); i++) {
             if (member.get(i).getBackstrokeResults().size() < 3) {
                 for (int o = 0; o < member.get(i).getBackstrokeResults().size(); o++) {
@@ -680,6 +682,12 @@ public class Controller {
                 }
             }
         }
+    }
+
+    public void emptyTop3(){
+    for(int i= 0; i < memberManager.getList().size(); i++){
+      memberManager.getList().get(i).getTempTop3().removeAll(memberManager.getList().get(i).getTempTop3());
+    }
     }
 }
 
