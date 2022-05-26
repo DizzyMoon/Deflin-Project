@@ -411,7 +411,7 @@ public class UserInterface {
       //Svømmers bedste tid
       String time = Integer.toString(member.get(i).getTempTop3().get(0).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(0).getTime().getSecond());
       event = member.get(i).getTempTop3().get(0).getEvent();
-      //placement = member.get(i).getTempTop3().get(0).getPlacement;
+      placement = member.get(i).getTempTop3().get(0).getPlacement();
 
       System.out.print(space + event + ": " + time + "   #" + placement + space.repeat(24 - (time.length() + event.length())) + line);
 
@@ -424,7 +424,7 @@ public class UserInterface {
         if (member.get(i).getTempTop3().get(1) != null) {
           time = Integer.toString(member.get(i).getTempTop3().get(1).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(1).getTime().getSecond());
           event = member.get(i).getTempTop3().get(1).getEvent();
-          //placement = member.get(i).getTempTop3().get(1).getPlacement;
+          placement = member.get(i).getTempTop3().get(1).getPlacement();
 
           System.out.print(space + event + ": " + time + "   #" + placement + space.repeat(30 - (time.length() + event.length())) + line);
         }
@@ -439,7 +439,7 @@ public class UserInterface {
           }
           time = Integer.toString(member.get(i).getTempTop3().get(2).getTime().getMinute()) + ":" + zero + Integer.toString(member.get(i).getTempTop3().get(2).getTime().getSecond());
           event = member.get(i).getTempTop3().get(2).getEvent();
-          //placement = member.get(i).getTempTop3().get(2).getPlacement;
+          placement = member.get(i).getTempTop3().get(2).getPlacement();
 
           System.out.println(space + event + time + "   #" + placement + space.repeat(22 - (time.length()) + event.length()) + line);
         } catch (IndexOutOfBoundsException e){
