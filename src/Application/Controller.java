@@ -313,16 +313,17 @@ public class Controller {
     public void top5Style(ArrayList<Member> member) {
         boolean running = true;
         while (running) {
-      /*      try {*/
+            try {
                 ui.top5StyleUI();
                 int styleChoice = sc.nextInt();
                 sc.nextLine(); //Scannerbug fix
                 ui.printTop5(sortBy(styleChoice, member));
+                emptyTop3();
                 running = false;
-      /*      } catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
         ui.noResult();
-
-            }*/
+        running = false;
+            }
             sortByName();
         }
     }
@@ -682,6 +683,12 @@ public class Controller {
                 }
             }
         }
+    }
+
+    public void emptyTop3(){
+    for(int i= 0; i < memberManager.getList().size(); i++){
+      memberManager.getList().get(i).getTempTop3().removeAll(memberManager.getList().get(i).getTempTop3());
+    }
     }
 }
 
