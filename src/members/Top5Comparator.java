@@ -18,6 +18,6 @@ public class Top5Comparator implements Comparator<Member> {
     }
   }
 
-    //return o1.getTempTop3().get(0).compareTo(o2.getTempTop3().get(0));
+
   }
 

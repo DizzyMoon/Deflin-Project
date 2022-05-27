@@ -75,7 +75,7 @@ public class Achievement {
 
     public void setMedal(Medal medal) { this.medal = medal; }
 
-// maybe other setters too, need for... later edit/addition to meet?
+
     public void setDiscipline(Discipline discipline){
         this.discipline = discipline;
     }

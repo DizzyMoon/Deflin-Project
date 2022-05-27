@@ -142,12 +142,6 @@ public abstract class Member implements Comparable<Member> {
     this.breaststrokeResults.add(breaststrokeResults);
   }
 
-  public ArrayList getProficiency() {       //Search Arrays and find the most recent Achievements, return their list
-    ///?????????
-    ArrayList<Achievement> proficiency = new ArrayList(); //temporarily, new, should be this.xResults
-    return proficiency;
-  }
-
   public void setTempTop3(Achievement achievement){
     this.tempTop3.add(achievement);
   }

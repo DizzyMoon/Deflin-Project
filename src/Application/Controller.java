@@ -18,12 +18,12 @@ import filehandling.FileHandler;
 public class Controller {
     AchievementList achievementList = new AchievementList();
     private boolean running = true;
-    private FileHandler fileHandler = new FileHandler();          // Maybe/maybe-not remove from cr?
+    private FileHandler fileHandler = new FileHandler();
     Scanner sc = new Scanner(System.in);
     UserInterface ui = new UserInterface();
     MemberManager memberManager = new MemberManager();
     Creator cr = new Creator();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");    // minutes?? Hmm, let's test...
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");
 
     // leems segit!
     public Controller() throws FileNotFoundException {
@@ -85,32 +85,6 @@ public class Controller {
                     String memberID = sc.next();                                  // nextLine crasher i runtime 1
                     ui.nameChange();
 
-/*    I'm tired of trying to do it the hard way:
-
-          String keybdINput = sc.useDelimiter("\n").next();
-          int firstSpace = keybdINput.indexOf(" ");
-          int secondSpace = keybdINput.substring(firstSpace + 1).indexOf(" ");
-          //String newName = sc.next();                                   // nextLine indsætter tomt felt
-          String firstName = keybdINput.substring(0,firstSpace);
-          String middleName = "blank";
-          String surname = sc.next();
-
-          if (secondSpace == -1) {
-            secondSpace = firstSpace;
-          } else {
-            middleName = keybdINput.substring(firstSpace + 1, secondSpace);
-          }
-
-          String newName;
-          String builtName;
-          if (middleName != "blank") {
-            builtName = (firstName + " " + middleName + " " + surname);
-          } else {
-            builtName = (firstName + " " + surname);
-          }
-          newName = builtName;
-
-          // so for the time being, we'll just use the simple version*/
                     String newName = sc.useDelimiter("\n").next();
                     findMember(memberID).setName(newName);
                     fileHandler.saveMembersToCSV(memberManager.getMemberList());
@@ -229,13 +203,11 @@ public class Controller {
 
         ui.inputSwimmerID();
         String memberID = sc.next();
-//          ui.inputDicipline();
-//          int option = sc.nextInt();      // 1-4, but actually, we should get this value from recent Achievement
+
         ui.inputDistance();
         int distance = sc.nextInt();
-//          ui.inputDate();                 // Shouldn't be input, should come from System
-//          LocalDate somethingsomething;
-        ui.inputTime();                   // Ideally, put in LocalDateTime, due to the close relationship
+
+        ui.inputTime();
 
 
         String timeString = sc.next();
@@ -247,33 +219,10 @@ public class Controller {
         int hours = 0;
 
         LocalDateTime time = LocalDateTime.of(year, month, day, hours, minutes, seconds);
-        // ui.addCommendation();
-        // String commendation = sc.next();
 
-        //Medal medal = null;
-
-        String awardedComm = null;
 
         ui.writeEvent();
         String event = sc.next();
-
-        /*
-        if (commendation.equalsIgnoreCase("ja")) {
-            ui.commDescr();
-            String medalString = sc.next();
-            switch (medalString) {
-                case "guld" -> medal = Medal.GOLD;
-                case "sølv" -> medal = Medal.SILVER;
-                case "bronze" -> medal = Medal.BRONZE;
-            }
-            //selectMedal();
-        } else if (commendation.equalsIgnoreCase("nej")) {
-            ui.specialCommDescr();
-            awardedComm = sc.next();
-        } else {
-            ui.badInput();
-        }
-         */
 
         ui.writePlacement();
         int placement = sc.nextInt();
@@ -286,11 +235,6 @@ public class Controller {
         achievementList.getAchievements().add(achievement);
         fileHandler.saveAchievementsToCSV(achievementList);
 
-
-        //         ArrayList<Achievement> proficiency = findMember(memberID, cr.getMemberList()).getProficiency();
-
-        //  Achievement registered = cr.newAchievement(DateTime, discipline, distance, commendation);
-        //  findMember(memberID, cr.getMemberList()).logResult(registered, proficiency);
     }
 
 

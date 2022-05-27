@@ -8,9 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Period;
-import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import Achievement.*;
@@ -169,12 +167,7 @@ public class FileHandler {
         achievement.setPlacement(placement);
         achievement.setComment(comment);
         achievement.setEvent(event);
-        /*switch (discipline){
-          case "backstroke" -> controller.findMember(memberID).setBackstrokeResults(achievement);
-          case "crawl" -> controller.findMember(memberID).setCrawlResults(achievement);
-          case "breaststroke" -> controller.findMember(memberID).setBreastStroke(achievement);
-          case "butterfly" -> controller.findMember(memberID).setButterflyResults(achievement);
-        }*/
+
         tempAchievementList.add(achievement);
       }
     return tempAchievementList;
