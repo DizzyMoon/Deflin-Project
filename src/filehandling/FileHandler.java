@@ -94,7 +94,7 @@ public class FileHandler {
       printStream.print(";");
       printStream.print(achievement.getPlacement());
       printStream.print(";");
-      printStream.print(achievement.getComment());
+      printStream.print(achievement.getMedal());
       printStream.print(";");
       printStream.print(achievement.getEvent());
       printStream.print(";");
@@ -164,7 +164,6 @@ public class FileHandler {
         achievement = new Achievement(discipline, lc, distance);
         achievement.setMemberID(memberID);
         achievement.setPlacement(placement);
-        achievement.setComment(comment);
         achievement.setEvent(event);
 
         tempAchievementList.add(achievement);

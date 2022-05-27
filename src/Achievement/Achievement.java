@@ -7,9 +7,8 @@ public class Achievement {
     private Discipline discipline;
     private LocalDateTime result;                  // use time field, to store the finish time
     private int distance;
-    private Medal medal;
+    private String medal;
     private int placement;
-    private String comment;
     private String event;
 
     public Achievement(Discipline discipline, LocalDateTime result, int distance){
@@ -18,13 +17,13 @@ public class Achievement {
         this.distance = distance;
     }
 
-    public Achievement(String memberID, Discipline discipline, LocalDateTime result, int distance, int placement, String comment, String event){
+    public Achievement(String memberID, Discipline discipline, LocalDateTime result, int distance, int placement, String medal, String event){
         this.memberID = memberID;
         this.discipline = discipline;
         this.result = result;
         this.distance = distance;
         this.placement = placement;
-        this.comment = comment;
+        this.medal = medal;
         this.event = event;
     }
 
@@ -44,19 +43,11 @@ public class Achievement {
         this.event = event;
     }
 
-    public void setComment(String comment){
-        this.comment = comment;
-    }
-
     public LocalDateTime getResult(){
         return result;
     }
 
-    public String getComment(){
-        return comment;
-    }
-
-    public Medal getMedal(){
+    public String getMedal(){
         return medal;
     }
 
@@ -70,7 +61,7 @@ public class Achievement {
 
     public int getDistance() { return distance; }
 
-    public void setMedal(Medal medal) { this.medal = medal; }
+    public void setMedal(String medal) { this.medal = medal; }
 
 
     public void setDiscipline(Discipline discipline){

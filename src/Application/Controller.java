@@ -1,6 +1,8 @@
 package Application;
 
 import UI.UserInterface;
+import event.EventList;
+import event.Swimmeet;
 import members.*;
 
 import java.io.FileNotFoundException;
@@ -23,6 +25,7 @@ public class Controller {
     Scanner sc = new Scanner(System.in);
     UserInterface ui = new UserInterface();
     MemberManager memberManager = new MemberManager();
+    EventList el = new EventList();
     Creator cr = new Creator();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");
 
@@ -39,26 +42,26 @@ public class Controller {
         boolean badLogin = true;
 
 
-        while (badLogin){
-        switch (login.loginScreen()) {
-            case -1 -> ui.badLogin();
-            case 1 -> {
-                run();
-                badLogin = false;
+        while (badLogin) {
+            switch (login.loginScreen()) {
+                case -1 -> ui.badLogin();
+                case 1 -> {
+                    run();
+                    badLogin = false;
+                }
+                case 2 -> {
+                    træner();
+                    badLogin = false;
+                }
+                case 3 -> {
+                    kasserer();
+                    badLogin = false;
+                }
+                case 4 -> {
+                    formand();
+                    badLogin = false;
+                }
             }
-            case 2 -> {
-                træner();
-                badLogin = false;
-            }
-            case 3 -> {
-                kasserer();
-                badLogin = false;
-            }
-            case 4 -> {
-                formand();
-                badLogin = false;
-            }
-        }
         }
     }
 
@@ -166,10 +169,10 @@ public class Controller {
             ui.traenerUI();
             String input = sc.nextLine();
             switch (input) {
-                case "1" -> createNewAchievement();
-
-
-                case "2" -> {
+                case "1" -> coachCreateNewAchievement();
+                case "2" -> coachNewEvent();
+                case "3" -> ui.printEventListTable(el.getList());
+                case "4" -> {
                     ui.top5AgeUI();
                     int ageChoice = sc.nextInt();
                     sc.nextLine(); //Scannerbug fix
@@ -180,17 +183,44 @@ public class Controller {
                         top5Gender(memberManager.sortJunior());
                     }
                 }
-                case "3" -> login();
-                case "4" -> login.changePassword("træner");
-                case "5" -> exit();
+                case "5" -> coachAssignAthleteToComp();
+                case "6" -> login();
+                case "7" -> login.changePassword("træner");
+                case "8" -> exit();
                 default -> ui.badInput();
             }
         }
     }
 
-    public void createNewAchievement() throws FileNotFoundException {
+    public void coachAssignAthleteToComp() throws FileNotFoundException {
+        ui.printEventListTable(el.getList());
+        ui.chooseComp();
+        int selection = sc.nextInt();
+        Swimmeet chosen = el.getList().get(selection - 1);
+        ui.chooseDiscipline();
+        selection = sc.nextInt();
+        String discipline;
+        switch (selection) {
+            case 1 -> discipline = "Backcrawl";
+            case 2 -> discipline = "Brystsvømning";
+            case 3 -> discipline = "Butterfly";
+            default -> discipline = "Crawl";
+        }
+        //getTop5 (chosen.getGenderCategory(), chosen.getLeague())
+        ui.inputDistance();
+        int distance = sc.nextInt();
+        ui.addProspect();
+        ui.inputSwimmerID();
+        String competitor = sc.next();
+        Member swimmer = findMember(competitor);
+        chosen.assignCompetitor(swimmer, chosen.chosenDiscipline(selection));
+        ui.competitorReady(discipline, distance);
+    }
+
+    public void coachCreateNewAchievement() throws FileNotFoundException {
 
         Discipline discipline = Discipline.BUTTERFLY;
+        boolean competition = false;
 
         ui.writeDateForAchievement();
 
@@ -240,11 +270,9 @@ public class Controller {
         int distance = sc.nextInt();
 
         ui.inputTime();
-
-
         String timeString = sc.next();
         int minutes = Integer.parseInt(timeString.substring(0, timeString.indexOf(":")));
-        int seconds = Integer.parseInt(timeString.substring(timeString.indexOf(":") + 1), timeString.length());
+        int seconds = Integer.parseInt(timeString.substring(timeString.indexOf(":") + 1));
         int year = newDate.getYear();
         int month = newDate.getMonthValue();
         int day = newDate.getDayOfMonth();
@@ -252,23 +280,47 @@ public class Controller {
 
         LocalDateTime time = LocalDateTime.of(year, month, day, hours, minutes, seconds);
 
+        String event;
+        int placement;
+        String medal = "";
 
-        ui.writeEvent();
-        String event = sc.next();
+        ui.achievementFromEvent();
+        String addEvent = sc.next();
 
-        ui.writePlacement();
-        int placement = sc.nextInt();
+        if (addEvent.equalsIgnoreCase("ja")) {
+            competition = true;
+        }
+        if (competition) {
+            ui.writeEvent();
+            event = sc.useDelimiter("\n").next();
 
-        ui.writeComment();
-        String comment = sc.next();
+            ui.writePlacement();
+            placement = sc.nextInt();
 
-
-        Achievement achievement = new Achievement(memberID, discipline, time, distance, placement, comment, event);
-        achievementList.getAchievements().add(achievement);
-        fileHandler.saveAchievementsToCSV(achievementList);
-
-    }
-
+            ui.addCommendation();
+            String choice = sc.useDelimiter("\n").next();
+            if (choice.equalsIgnoreCase("ja")) {
+                ui.commDescr();
+                int medalChoice = sc.nextInt();
+                switch (medalChoice) {
+                    case 1 -> medal = "Guld";
+                    case 2 -> medal = "Sølv";
+                    case 3 -> medal = "Bronze";
+                    default -> {
+                        ui.specialCommDescr();
+                        medal = sc.useDelimiter("\n").next();
+                    }
+                }
+            }
+        } else {
+            event = "træning";
+            placement = -1;
+            medal = "ingen";
+        }
+            Achievement achievement = new Achievement(memberID, discipline, time, distance, placement, medal, event);
+            achievementList.getAchievements().add(achievement);
+            fileHandler.saveAchievementsToCSV(achievementList);
+        }
 
     public void top5Gender(ArrayList<Member> member) throws FileNotFoundException {
         boolean running = true;
@@ -309,7 +361,6 @@ public class Controller {
             sortByName();
         }
     }
-
 
     public void exit() {
         running = false;
@@ -501,7 +552,7 @@ public class Controller {
 
         LocalDateTime eventTime = LocalDateTime.of(year, month, day, hours, minutes);
 
-        cr.createNewEvent(eventName, category, league, eventTime);
+        el.getList().add(cr.createNewEvent(eventName, category, league, eventTime));
     }
 
     public void sortByName() {
@@ -681,5 +732,6 @@ public class Controller {
         }
     }
 }
+
 
 

@@ -3,6 +3,7 @@ package UI;
 import event.Swimmeet;
 import members.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class UserInterface {
@@ -46,10 +47,13 @@ public class UserInterface {
   public void traenerUI() {
     System.out.println("""
         1 - Bogfør præstation
-        2 - Se top 5-liste
-        3 - Log ud
-        4 - Ændre kodeord
-        5 - Luk
+        2 - Opret stævne
+        3 - Se kommende stævner
+        4 - Se top 5-liste
+        5 - Tilknyt atlet til konkurrence
+        6 - Log ud
+        7 - Ændre kodeord
+        8 - Luk
         """);
   }
 
@@ -194,6 +198,27 @@ public class UserInterface {
   public void writeDateForAchievement() {
     System.out.println("Indtast dato for præstation (dd.mm.åååå)");
   }
+
+  public void chooseComp() { System.out.println("\nVælg stævne: (f.eks. 1 for det næstkommende)"); }
+
+  public void chooseDiscipline() { System.out.println("Vælg svømmedisciplin (1 - Backcrawl  2 - Bryst  3 - Butterfly  4 - Crawl:"); }
+
+  public void addProspect() { System.out.println("Vælg en ny konkurrence-deltager"); }
+
+  public void competitorReady(String discipline, int distance) { System.out.println("Svømmer tilføjet til " + distance + " m  " + discipline); }
+
+  public void achievementFromEvent() { System.out.println("Er resultat opnået ved konkurrence? (ja/nej)"); }
+
+  public void addCommendation() { System.out.println("Har svømmeren opnået en udmærkelse? (ja/nej)"); }
+
+  public void commDescr() {
+    System.out.println("1. \u001B[38m\u001B[43mGuld\t\t\u001B[49m\u001B[30m" +
+            "2.\u001B[38m\u001B[46mSølv\t\t\u001B[49m\u001B[30m" +
+            "3.\u001B[41mBronze\t\u001B[49m" +
+            "4.Andet\u001B[39m\u001B[49m");
+  }
+
+  public void specialCommDescr() { System.out.println("Indtast navn på udmærkelse:"); }
 
   public void printMemberList(MemberList ml) {
 
@@ -432,7 +457,22 @@ public class UserInterface {
         System.out.println(underLine.repeat(176));
       }
     }
+  public void printEventListTable(ArrayList<Swimmeet> meets) {
+    String line = "|";
+    //String dot = ".";
+    System.out.println("Stævne                       | Division         | Dato   Tidspunkt |");
+    System.out.println("-----------------------------|------------------|------------------|");
+
+    for (int i = 0; i < meets.size(); i++) {
+      String eventName = meets.get(i).getEventName();
+      String category = meets.get(i).getGenderCategory();
+      String league = meets.get(i).isJuniorLeague();
+      LocalDateTime eventTime = meets.get(i).getEventTime();
+      System.out.printf("%-28s %1s %-4s %-11s %1s %-16s %1s \n", eventName, line, category, league, line, eventTime, line);
+    }
+    System.out.println();
   }
+}
 
 
 
