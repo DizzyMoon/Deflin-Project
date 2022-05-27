@@ -85,7 +85,7 @@ public class Controller {
             ui.formandUI();
             String input = sc.nextLine();
             switch (input) {
-                case "1" -> formandNewMember();
+                case "1" -> chairmanNewMember();
                 case "2" -> removeMember();
                 case "3" -> {
                     try {
@@ -339,7 +339,7 @@ public class Controller {
         return newDate;
     }
 
-    public void formandNewMember() throws FileNotFoundException {
+    public void chairmanNewMember() throws FileNotFoundException {
         boolean competition = false;
         boolean arrears = true;
         boolean pass = true;
@@ -396,10 +396,19 @@ public class Controller {
         ui.email();
         while (pass) {
             email = sc.next();
-            if (email.contains("@")) {
-                pass = false;
-            } else {
+            int atFound = email.indexOf("@");
+            int domainDot = email.lastIndexOf(".");
+            String domain = email.substring(domainDot + 1);
+            if (atFound == -1) {
                 ui.badInput();
+            } else {
+                if (domainDot > atFound + 1) {
+                    if ((domain.length() > 1) && (domain.length() < 5)) {
+                        pass = false;
+                    } else {
+                        ui.badInput();
+                    }
+                }
             }
         }
         String tempID = " ";
