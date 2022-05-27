@@ -36,12 +36,29 @@ public class Controller {
             sortTempAchievementList(cr.loadAchievements());
         }
 
-        switch (login.loginScreen()){
+        boolean badLogin = true;
+
+
+        while (badLogin){
+        switch (login.loginScreen()) {
             case -1 -> ui.badLogin();
-            case 1 -> run();
-            case 2 -> træner();
-            case 3 -> kasserer();
-            case 4 -> formand();
+            case 1 -> {
+                run();
+                badLogin = false;
+            }
+            case 2 -> {
+                træner();
+                badLogin = false;
+            }
+            case 3 -> {
+                kasserer();
+                badLogin = false;
+            }
+            case 4 -> {
+                formand();
+                badLogin = false;
+            }
+        }
         }
     }
 
@@ -54,7 +71,9 @@ public class Controller {
                 case "1" -> formand();
                 case "2" -> kasserer();
                 case "3" -> træner();
-                case "4" -> exit();
+                case "4" -> login.changePassword("admin");
+                case "5" -> login();
+                case "6" -> exit();
                 default -> ui.badInput();
             }
         }
@@ -102,9 +121,10 @@ public class Controller {
                 case "6" -> ui.printMemberListTable(memberManager.getMemberList());
                 case "7" -> {
                     fileHandler.saveMembersToCSV(memberManager.getMemberList());
-                    run();
+                    login();
                 }
-                case "8" -> exit();
+                case "8" -> login.changePassword("formand");
+                case "9" -> exit();
                 default -> ui.badInput();
             }
         }
@@ -133,8 +153,9 @@ public class Controller {
                         ui.badInput();
                     }
                 }
-                case "4" -> run();
-                case "5" -> exit();
+                case "4" -> login();
+                case "5" -> login.changePassword("kasserer");
+                case "6" -> exit();
                 default -> ui.badInput();
             }
         }
@@ -159,7 +180,8 @@ public class Controller {
                         top5Gender(memberManager.sortJunior());
                     }
                 }
-                case "3" -> run();
+                case "3" -> login();
+                case "4" -> login.changePassword("træner");
                 case "5" -> exit();
                 default -> ui.badInput();
             }

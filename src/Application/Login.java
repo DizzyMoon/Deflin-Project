@@ -6,76 +6,87 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Login {
-        UserList userList = new UserList();
-        ArrayList<String> userNameList = new ArrayList<String>();
-        ArrayList<String> passwordList = new ArrayList<String>();
+
+    private UserList userList = new UserList();
+    private UserInterface ui = new UserInterface();
+
+
     public int loginScreen(){
         Scanner sc = new Scanner(System.in);
-        UserInterface ui = new UserInterface();
+
+        //Add all users to UserList
         userList.getList().add(new Admin());
         userList.getList().add(new Coach());
         userList.getList().add(new Cashier());
         userList.getList().add(new Manager());
 
-        getUserNames();
-        getPasswords();
 
-
+        //User inputs username and password
         ui.writeUserName();
         String username = sc.next();
         ui.writePassword();
         String password = sc.next();
 
+        //Initializing variables
         String currentUserString = "";
         User currentUser = null;
-
         boolean found = false;
+        boolean wrongUsername = true;
 
+        //Check if inputted username matches any usernames in UserList
         for (int i = 0; i < userList.getList().size(); i++){
             if (username.equals(userList.getList().get(i).getUsername())){
                 currentUserString = userList.getList().get(i).getUser();
                 currentUser = userList.getList().get(i);
-                found = true;
+                wrongUsername = false;
                 break;
             }
         }
 
-        if (!found){
-            return -1;
-        }
 
-        found = false;
-
-        for (int i = 0; i < userList.getList().size(); i++){
-            if (password.equals(currentUser.getPassword())){
-                found = true;
-                break;
+        //Only check password if username is correct (This is to keep the method running, making it harder for the user to now if the inputted username is correct)
+        if (!wrongUsername){
+            if (!(password.equals(currentUser.getPassword()))){
+                return -1;
             }
         }
 
-        if (!found) {return -1;}
-
-
+        //Return integer value dependent on what user was found (if no user was found, return -1)
         switch (currentUserString){
             case "admin" -> {return 1;}
             case "træner" -> {return 2;}
             case "kasserer" -> {return 3;}
             case "formand" -> {return 4;}
-        }
-
-        return -1;
-    }
-
-    private void getUserNames(){
-        for (int i = 0; i < userList.getList().size(); i++){
-            userNameList.add(userList.getList().get(i).getUsername());
+            default -> {return -1;}
         }
     }
 
+    public void changePassword(String user){
+        Scanner sc = new Scanner(System.in);
 
-    private void getPasswords(){
+        ui.inputOldPassword();
+        String passwordInput = sc.next();
+        User currentUser = null;
+
         for (int i = 0; i < userList.getList().size(); i++){
-            userNameList.add(userList.getList().get(i).getPassword());
+            if (user.equals(userList.getList().get(i).getUser())){
+                currentUser = userList.getList().get(i);
+                break;
+            }
+        }
+
+        if (currentUser.getPassword().equals(passwordInput)){
+            ui.inputNewPassword();
+            String newPassword = sc.next();
+            ui.inputNewPasswordAgain();
+            String newPasswordAgain = sc.next();
+            if (newPassword.equals(newPasswordAgain)){
+                currentUser.setPassword(newPassword);
+            } else {
+                ui.newPasswordDoesNotMatch();
+            }
+        } else {
+            ui.badLogin();
         }
     }
 }

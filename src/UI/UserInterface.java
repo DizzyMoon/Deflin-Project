@@ -12,7 +12,9 @@ public class UserInterface {
         1 - Formand
         2 - Kasserer
         3 - Træner
-        4 - Luk
+        4 - Ændre kodeord
+        5 - Log ud
+        6 - Luk
         \n""");
   }
 
@@ -24,8 +26,9 @@ public class UserInterface {
         4 - Ændre type for konkurrence/motionist
         5 - Ændre navn på medlem
         6 - Se medlemsliste
-        7 - Tilbage til hovedmenu
-        8 - Luk
+        7 - Log ud
+        8 - Ændre kodeord
+        9 - Luk
         \n""");
   }
 
@@ -34,8 +37,9 @@ public class UserInterface {
         1 - Se samlet sum af medlemmers årskontingenter
         2 - Se liste over restancer
         3 - Ændre restance til betalt/ikke betalt
-        4 - Tilbage til hovedmenu
-        5 - Luk
+        4 - Log ud
+        5 - Ændre kodeord
+        6 - Luk
         """);
   }
 
@@ -43,8 +47,9 @@ public class UserInterface {
     System.out.println("""
         1 - Bogfør præstation
         2 - Se top 5-liste
-        3 - Tilbage til hovedmenu
-        4 - Luk
+        3 - Log ud
+        4 - Ændre kodeord
+        5 - Luk
         """);
   }
 
@@ -300,8 +305,24 @@ public class UserInterface {
     System.out.println();
   }
 
+  public void newPasswordDoesNotMatch(){
+    System.out.println("Kodeord matcher ikke");
+  }
+
   public void writeUserName(){
     System.out.print("Indtast brugernavn: ");
+  }
+
+  public void inputOldPassword(){
+    System.out.print("Skriv nuværende kodeord: ");
+  }
+
+  public void inputNewPassword(){
+    System.out.print("Skriv nyt kodeord: ");
+  }
+
+  public void inputNewPasswordAgain(){
+    System.out.print("Gentag nyt kodeord: ");
   }
 
   public void badLogin(){
