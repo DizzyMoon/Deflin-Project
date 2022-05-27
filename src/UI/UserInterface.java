@@ -1,8 +1,8 @@
 package UI;
 
+import event.Swimmeet;
 import members.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class UserInterface {
@@ -103,7 +103,7 @@ public class UserInterface {
   }
 
   public void dateOfBirth() {
-    System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.yyyy)");
+    System.out.println("Indtast fødselsdato på nyt medlem (indtastes dd.mm.åååå)");
   }
 
   public void savingMessage() {
@@ -178,7 +178,7 @@ public class UserInterface {
   }
 
   public void promptEventDate() {
-    System.out.println("Dato: (dd.mm.yy)");
+    System.out.println("Dato: (dd.mm.åååå)");
   }
 
   public void promptEventTime() {
@@ -246,7 +246,7 @@ public class UserInterface {
   }
 
   public void writeDateForAchievement() {
-    System.out.println("Indtast dato for præstation");
+    System.out.println("Indtast dato for præstation (dd.mm.åååå)");
   }
 
   public void printMemberList(MemberList ml) {
@@ -357,6 +357,18 @@ public class UserInterface {
     }
     //Ekstra linjeskift efter sidste linje i tabel
     System.out.println();
+  }
+
+  public void writeUserName(){
+    System.out.print("Indtast brugernavn: ");
+  }
+
+  public void badLogin(){
+    System.out.println("Forkert brugernavn eller kodeord");
+  }
+
+  public void writePassword(){
+    System.out.print("Indtast kodeord: ");
   }
 
   public void printTop5(ArrayList<Member> member) {

@@ -16,6 +16,7 @@ import Achievement.*;
 import filehandling.FileHandler;
 
 public class Controller {
+    Login login = new Login();
     AchievementList achievementList = new AchievementList();
     private boolean running = true;
     private FileHandler fileHandler = new FileHandler();          // Maybe/maybe-not remove from cr?
@@ -29,13 +30,23 @@ public class Controller {
     public Controller() throws FileNotFoundException {
     }
 
-    public void run() throws FileNotFoundException {
+    public void login() throws FileNotFoundException {
         if (fileHandler.hasSavedData()) {
             memberManager.loadMembersFromCSV(); //Loads members from /src/data/members.csv
             achievementList.setList(cr.loadAchievements());
             sortTempAchievementList(cr.loadAchievements());
         }
 
+        switch (login.loginScreen()){
+            case -1 -> ui.badLogin();
+            case 1 -> run();
+            case 2 -> træner();
+            case 3 -> kasserer();
+            case 4 -> formand();
+        }
+    }
+
+    public void run() throws FileNotFoundException {
 
         while (running) {
             ui.startupMenu();
@@ -312,10 +323,10 @@ public class Controller {
             } else if (genderChoice == 2) {
                 memberManager.womensList(member);
                 top5Style(memberManager.getWomen());
+                memberManager.getWomen().removeAll(memberManager.getWomen());
                 running = false;
             } else {
                 ui.badInput();
-                running = false;
             }
         }
     }
@@ -462,7 +473,6 @@ public class Controller {
                 subscription += subscriptionPassive;
             }
         }
-
         return subscription;
     }
 

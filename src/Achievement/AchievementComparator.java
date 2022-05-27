@@ -1,7 +1,4 @@
-package members;
-
-import members.Achievement;
-import members.Member;
+package Achievement;
 
 import java.util.Comparator;
 

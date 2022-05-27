@@ -1,12 +1,18 @@
-package members;
+package Application;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import Achievement.Achievement;
 import UI.UserInterface;
+import users.*;
 
+import event.EventList;
+import event.Swimmeet;
 import filehandling.FileHandler;
+import members.Member;
+import members.MemberList;
 
 public class Creator {
   private MemberList memberList = new MemberList();

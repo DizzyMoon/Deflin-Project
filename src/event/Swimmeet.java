@@ -1,4 +1,6 @@
-package members;
+package event;
+
+import members.Member;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;

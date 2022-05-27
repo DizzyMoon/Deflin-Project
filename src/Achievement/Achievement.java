@@ -1,9 +1,6 @@
-package members;
+package Achievement;
 
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.util.Date;
-import Achievement.*;
 
 public class Achievement {
     private String memberID;

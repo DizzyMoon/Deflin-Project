@@ -1,7 +1,5 @@
 package Achievement;
 
-import members.Achievement;
-
 import java.util.ArrayList;
 
 public class AchievementList {
