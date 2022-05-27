@@ -310,6 +310,7 @@ public class UserInterface {
   }
 
   public void writeUserName(){
+    System.out.println("(Tekst til testing) brugernavnene er: admin, formand, kasserer, træner");
     System.out.print("Indtast brugernavn: ");
   }
 
@@ -330,6 +331,8 @@ public class UserInterface {
   }
 
   public void writePassword(){
+    System.out.println("(Tekst til testing) alle kodeord starter med at være det samme som brugernavnet (dvs. admin, formand, kasserer. træner");
+    System.out.println("indtil kodeordet ændres af brugeren");
     System.out.print("Indtast kodeord: ");
   }
 
