@@ -161,14 +161,10 @@ public class Controller {
             ui.traenerUI();
             String input = sc.nextLine();
             switch (input) {
-//        case 1 -> coachViewSchedule();
-                case "2" -> coachNewEvent();
-                //case 3 -> ui.Events();
-//        case 4 -> coachAssignAthleteToComp();
-                case "5" -> createNewAchievement();
+                case "1" -> createNewAchievement();
 
 
-                case "6" -> {
+                case "2" -> {
                     ui.top5AgeUI();
                     int ageChoice = sc.nextInt();
                     sc.nextLine(); //Scannerbug fix
@@ -179,8 +175,8 @@ public class Controller {
                         top5Gender(memberManager.sortJunior());
                     }
                 }
-                case "7" -> run();
-                case "8" -> exit();
+                case "3" -> run();
+                case "5" -> exit();
                 default -> ui.badInput();
             }
         }
