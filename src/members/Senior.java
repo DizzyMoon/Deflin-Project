@@ -4,10 +4,7 @@ import java.time.LocalDate;
 
 public class Senior extends Member {
   boolean retired = false;
-/*  public Senior(String name, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean active) {
-    super(name, gender, birth, phoneNumber, email, competitive, active);
-  }
-*/
+
   public Senior(String name, String memberID, String gender, LocalDate birth, String phoneNumber, String email, boolean competitive, boolean arrears, boolean active) {
     super(name, memberID, gender, birth, phoneNumber, email, competitive, arrears, active);
   }

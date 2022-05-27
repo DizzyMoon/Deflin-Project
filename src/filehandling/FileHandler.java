@@ -166,12 +166,7 @@ public class FileHandler {
         achievement.setPlacement(placement);
         achievement.setComment(comment);
         achievement.setEvent(event);
-        /*switch (discipline){
-          case "backstroke" -> controller.findMember(memberID).setBackstrokeResults(achievement);
-          case "crawl" -> controller.findMember(memberID).setCrawlResults(achievement);
-          case "breaststroke" -> controller.findMember(memberID).setBreastStroke(achievement);
-          case "butterfly" -> controller.findMember(memberID).setButterflyResults(achievement);
-        }*/
+
         tempAchievementList.add(achievement);
       }
     return tempAchievementList;

@@ -41,14 +41,10 @@ public class UserInterface {
 
   public void traenerUI() {
     System.out.println("""
-        1 - Se ugeskema
-        2 - Opret stævne
-        3 - Se stævner
-        4 - Udtag svømmere til stævne
-        5 - Bogfør præstation
-        6 - Se top 5-liste
-        7 - Tilbage til hovedmenu
-        8 - Luk
+        1 - Bogfør præstation
+        2 - Se top 5-liste
+        3 - Tilbage til hovedmenu
+        4 - Luk
         """);
   }
 
@@ -72,19 +68,6 @@ public class UserInterface {
         3 - Butterfly
         4 - Crawl""");
   }
-  /*
-  public void infoConsoleUI() {
-    System.out.println("""
-        1 - Klub Info
-        2 - Se ugeskema
-        3 - Se Event kalender og stævner
-        4 - Rygcrawl      TOP 5 bedste svømmere
-        5 - Brystsvømning TOP 5 bedste svømmere
-        6 - Butterfly     TOP 5 bedste svømmere
-        7 - Crawl         TOP 5 bedste svømmere
-        """);
-  }
-  */
 
   public void writeEvent(){
     System.out.println("Indtast stævne: ");
@@ -146,12 +129,6 @@ public class UserInterface {
     System.out.println("Indtast mailadresse:");
   }
 
-  /*
-  public void arrears() {
-    System.out.println("Har medlemmet betalt kontingent? (ja/nej):");
-  }
-  */
-
   public void statusAltered(String newStatus) {
     System.out.println("Medlemsstatus er ændret til " + newStatus);
   }
@@ -163,10 +140,6 @@ public class UserInterface {
 
   public void elementDoesNotExist() {
     System.out.println("Element findes ikke");
-  }
-
-  public void coachSchedule() {
-    System.out.println("Feature kommer i næste udgave!");
   }
 
   public void promptEventName() {
@@ -185,22 +158,6 @@ public class UserInterface {
     System.out.println("Tidspunkt for træffet: (tt:mm)");
   }
 
-  public void listSwimmeets(ArrayList<Swimmeet> schedule) {
-    System.out.println(schedule.toString());
-  }
-
-  public void chooseComp() {
-    System.out.println("\nVælg stævne: (f.eks. 1 for det næstkommende)");
-  }
-
-  public void chooseDiscipline() {
-    System.out.println("Vælg svømmedisciplin (1 - Backcrawl  2 - Bryst  3 - Butterfly  4 - Crawl:");
-  }
-
-  public void addProspect() {
-    System.out.println("Vælg en ny konkurrence-deltager");
-  }
-
   public void inputSwimmerID() {
     System.out.println("Indtast svømmers medlemsnummer:");
   }
@@ -213,10 +170,6 @@ public class UserInterface {
     System.out.println("Indtast opnået resultat: (mm:ss)");
   }
 
-  public void competitorReady(String discipline, int distance) {
-    System.out.println("Svømmer tilføjet til " + distance + " m  " + discipline);
-  }
-
   public void writePlacement(){
     System.out.println("Indtast placering:");
   }
@@ -225,20 +178,8 @@ public class UserInterface {
     System.out.println("Tilføj kommentar:");
   }
 
-  public void addCommendation() {
-    System.out.println("Har svømmeren opnået en udmærkelse? (ja/nej)");
-  }
-
-  public void commDescr() {
-    System.out.println("1. Guld\t\t2. Sølv\t\t3.Bronze\t\t4.Andet");
-  }
-
   public void writeDiscipline() {
     System.out.println("Indtast disciplin (butterfly, crawl, ryg, bryst)");
-  }
-
-  public void specialCommDescr() {
-    System.out.println("Indtast navn på udmærkelse:");
   }
 
   public void noResult() {
@@ -379,6 +320,7 @@ public class UserInterface {
     String noMeet = "Ingen tid";
     String event = "";
     int placement = 0;
+    String zero = "";
 
     if (member.get(0) instanceof Junior) {
       if (member.get(0).getGender().equals("H")) {
@@ -410,6 +352,9 @@ public class UserInterface {
     }
 
     for (int i = 0; i < repeat; i++) {
+      if (member.get(i).getTempTop3().get(0).getTime().getSecond() < 10) {
+        zero = "0";
+      }
 
       //Placering på top5
       System.out.print("Nr. " + (i + 1) + space.repeat(2) + line);
@@ -421,7 +366,7 @@ public class UserInterface {
       System.out.print(space + member.get(i).getActive() + space + member.get(i).getCompetitive() + space.repeat(23 - (member.get(i).getActive().length() + member.get(i).getCompetitive().length())) + line);
 
       //Svømmers bedste tid
-      String time = Integer.toString(member.get(i).getTempTop3().get(0).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(0).getTime().getSecond());
+      String time = Integer.toString(member.get(i).getTempTop3().get(0).getTime().getMinute()) + ":" + zero + Integer.toString(member.get(i).getTempTop3().get(0).getTime().getSecond());
       event = member.get(i).getTempTop3().get(0).getEvent();
       placement = member.get(i).getTempTop3().get(0).getPlacement();
 
@@ -429,23 +374,25 @@ public class UserInterface {
 
       //Næstbedste tid
       try {
-        String zero = "";
         if (member.get(i).getTempTop3().get(1).getTime().getSecond() < 10) {
           zero = "0";
         }
+        else {
+          zero = "";
+        }
         if (member.get(i).getTempTop3().get(1) != null) {
-          time = Integer.toString(member.get(i).getTempTop3().get(1).getTime().getMinute()) + ":" + Integer.toString(member.get(i).getTempTop3().get(1).getTime().getSecond());
+          time = Integer.toString(member.get(i).getTempTop3().get(1).getTime().getMinute()) + ":" + zero + Integer.toString(member.get(i).getTempTop3().get(1).getTime().getSecond());
           event = member.get(i).getTempTop3().get(1).getEvent();
           placement = member.get(i).getTempTop3().get(1).getPlacement();
 
-          System.out.print(space + event + ": " + time + "   #" + placement + space.repeat(30 - (time.length() + event.length())) + line);
+          System.out.print(space + event + ": " + time + "   #" + placement + space.repeat(28 - (time.length() + event.length())) + line);
         }
       }catch (IndexOutOfBoundsException e){
           System.out.print(space + noMeet + ": " + "00:00" + "   #-" + space.repeat(14) + line);
         }
         //Tredjebedste tid
         try{
-          String zero = "";
+          zero = "";
           if (member.get(i).getTempTop3().get(2).getTime().getSecond() < 10) {
             zero = "0";
           }
@@ -453,7 +400,7 @@ public class UserInterface {
           event = member.get(i).getTempTop3().get(2).getEvent();
           placement = member.get(i).getTempTop3().get(2).getPlacement();
 
-          System.out.println(space + event + time + "   #" + placement + space.repeat(22 - (time.length()) + event.length()) + line);
+          System.out.println(space + event + ": " + time + "   #" + placement + space.repeat(22 - (time.length()) + event.length()) + line);
         } catch (IndexOutOfBoundsException e){
           System.out.println(space + noMeet + ": " + "00:00" + "   #-" + space.repeat(17) + line);
         }
@@ -461,23 +408,6 @@ public class UserInterface {
         System.out.println(underLine.repeat(176));
       }
     }
-
-
-/*  public void printEventListTable(ArrayList<Swimmeet> meets) {
-    String line = "|";
-    //String dot = ".";
-    System.out.println("Stævne                       | Division         | Dato   Tidspunkt |");
-    System.out.println("-----------------------------|------------------|------------------|");
-
-    for (int i = 0; i < meets.size(); i++) {
-      String eventName = meets.get(i).getEventName();
-      String category = meets.get(i).getGenderCategory();
-      String league = meets.get(i).isJuniorLeague();
-      LocalDateTime eventTime = meets.get(i).getEventTime();
-      System.out.printf("%-28s %1s %-4s %-11s %1s %-16s %1s \n", eventName, line, category, league, line, eventTime, line);
-    }
-    System.out.println();
-  }*/
   }
 
 
