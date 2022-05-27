@@ -25,7 +25,6 @@ public class Controller {
     Creator cr = new Creator();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm-dd-yyyy");
 
-    // leems segit!
     public Controller() throws FileNotFoundException {
     }
 
